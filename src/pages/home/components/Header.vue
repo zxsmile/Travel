@@ -20,10 +20,8 @@ export default {
 }
 </script>
 
-<style>
-   
-    
-    *{
+<style scoped>
+   *{
         margin:0;
         font-size:14px;
     }
@@ -35,7 +33,6 @@ export default {
        display: flex;
         color:white;
    }
-  
    .header-left{
        width:32px;
        float:left;
@@ -43,8 +40,7 @@ export default {
    .back-icon{
        text-align:center;
        font-size: 20px;
-       
-   }
+    }
    .header-middle{
       height:31px;
       line-height: 31px;
@@ -66,4 +62,5 @@ export default {
        font-size:12px;
        margin-left:-2px;
     }
+
 </style>
