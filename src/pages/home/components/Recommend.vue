@@ -17,38 +17,11 @@ export default{
    name:'HomeRecommend',
    data:function(){
        return {
-           recommandList:[{
-               id:'001',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'002',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'003',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'004',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'005',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'006',
-               recommandImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               recommandTitle:'大唐芙蓉园',
-               recommendDescribe:'进入中国盛唐文化之旅'
-           }]
+          
     }
+   },
+   props:{
+       recommandList:Array
    }
 }
 </script>

@@ -22,47 +22,15 @@
   data:function(){
       return{
          swiperOption: {
-                  setWrapperSize:false,
+                 
                   autoplay:false
               } ,
-         IconsList:[{
-                  id:'001',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'景点门票'
-              },{
-                  id:'002',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1711/df/86cbcfc533330d02.png',
-                  name:'滑雪季'
-              },{
-                  id:'003',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1710/a6/83f636bd75ae6302.png',
-                  name:'泡温泉'
-              },{
-                  id:'004',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/35/2640cab202c41b02.png',
-                  name:'动植物园'
-              },{
-                  id:'005',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/a9/ffc620dbda9b9c02.png',
-                  name:'一日游'
-              },{
-                  id:'006',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'温泉'
-              },{
-                  id:'007',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'温泉'
-              },{
-                  id:'008',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'温泉'
-              },{
-                  id:'009',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'温泉'
-              }]
+         
       }
+  },
+
+  props:{
+      IconsList:Array
   },
   computed:{
      pages:function(){
@@ -87,14 +55,14 @@
           height:0;
           padding-bottom:50%;
           overflow: hidden;
+          margin-top: 10px;
      }
-
+     
      .icon{
           width:25%;
           height:0;
           padding-bottom:25%;
           overflow: hidden;
-   
           position:relative;
           float:left;
      }

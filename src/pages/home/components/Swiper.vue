@@ -20,19 +20,16 @@ export default {
          swiperOption: {
               pagination:'.swiper-pagination',
               loop:true,
-              autoplay : 10000,
+              autoplay : 3000,
               autoplayDisableOnInteraction : false,
               paginationClickable: true
          } ,
-         SwiperList:[{
-                  id:'001',
-                  ImgUrl:'https://img1.qunarzz.com/vc/b8/25/51/f6173dbd12c1a0f783abe73855.jpg'
-              },{
-                  id:'002',
-                  ImgUrl:'https://h-des-activity-fecp.qunarzz.com/h_des_activity_fe_h_des_activity_fe/973dc1ae0da73a58410186df08ff25cb.jpg'
-              }]
+     
       }
-  }
+  },
+  props:{
+           SwiperList:Array
+       }
 }
 </script>
 

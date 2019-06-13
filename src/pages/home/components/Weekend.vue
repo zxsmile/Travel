@@ -18,38 +18,11 @@ export default{
    name:'HomeWeekend',
    data:function(){
        return {
-           weekendList:[{
-               id:'001',
-                weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-                weekendTitle:'大唐芙蓉园',
-                weekendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'002',
-                weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-                weekendTitle:'大唐芙蓉园',
-                weekendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'003',
-               weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-                weekendTitle:'大唐芙蓉园',
-                weekendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'004',
-                weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-                weekendTitle:'大唐芙蓉园',
-                weekendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'005',
-                weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-                weekendTitle:'大唐芙蓉园',
-                weekendDescribe:'进入中国盛唐文化之旅'
-           },{
-               id:'006',
-               weekendImgSrc:'http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg',
-               weekendTitle:'大唐芙蓉园',
-               weekendDescribe:'进入中国盛唐文化之旅'
-           }]
+          
     }
+   },
+   props:{
+       weekendList:Array
    }
 }
 </script>
@@ -57,7 +30,6 @@ export default{
 <style scoped>
     .title{
         background-color:#eee;
-        margin-top:10px;
         line-height:40px;
         height:40px;
         text-indent:10px;
@@ -67,7 +39,7 @@ export default{
         width:100%;
         height:0;
         overflow: hidden;
-        padding-bottom:33.9%;
+        padding-bottom:50.6%;
       
     }
     .img{
