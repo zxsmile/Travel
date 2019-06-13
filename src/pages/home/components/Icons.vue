@@ -57,10 +57,6 @@
                   id:'008',
                   ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
                   name:'温泉'
-              },{
-                  id:'009',
-                  ImgUrl:'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-                  name:'温泉'
               }]
       }
   },
@@ -87,14 +83,14 @@
           height:0;
           padding-bottom:50%;
           overflow: hidden;
+          margin-top: 10px;
      }
-
+     
      .icon{
           width:25%;
           height:0;
           padding-bottom:25%;
           overflow: hidden;
-   
           position:relative;
           float:left;
      }
