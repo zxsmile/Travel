@@ -21,10 +21,7 @@ export default {
 </script>
 
 <style scoped>
-   *{
-        margin:0;
-        font-size:14px;
-    }
+   
    .header{
        width:100%;
        height:43px;
