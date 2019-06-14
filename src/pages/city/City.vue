@@ -1,0 +1,23 @@
+<template>
+        <div>
+            <city-header></city-header>
+        </div>
+</template>
+
+<script>
+import CityHeader from './components/Header'
+export default{
+    name:'City',
+    components: {
+      CityHeader
+  },
+}
+</script>
+
+<style scoped>
+   *{
+        margin:0;
+        font-size:14px;
+        padding:0;
+    }
+</style>
