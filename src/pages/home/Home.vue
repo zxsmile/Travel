@@ -61,5 +61,6 @@ export default {
         margin:0;
         font-size:14px;
         padding:0;
+        box-sizing:border-box;
     }
 </style>
