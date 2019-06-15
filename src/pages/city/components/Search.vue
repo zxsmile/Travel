@@ -15,7 +15,7 @@ export default{
       height:43px;
       background-color: turquoise; 
       padding:0 10px;
-      overflow: hidden;
+      overflow: hidden; 
   }
   .search-input{
       width:100%;
@@ -26,6 +26,7 @@ export default{
       padding: 0 5px;
       color:#666;
       box-sizing: border-box;
+     
 }
 
   

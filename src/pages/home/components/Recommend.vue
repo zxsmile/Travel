@@ -15,11 +15,6 @@
 <script>
 export default{
    name:'HomeRecommend',
-   data:function(){
-       return {
-          
-    }
-   },
    props:{
        recommandList:Array
    }
