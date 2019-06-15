@@ -23,6 +23,7 @@ export default{
     text-align:center;
     line-height:43px;
     color: #fff;
+    font-size: 16px;
   }
   .back-icon{
       font-size:20px;

@@ -22,8 +22,10 @@ export default{
       height:33px;
       line-height:33px;
       text-align: center;
-      border-radius: 5px;
+      border-radius: 6px;
       padding: 0 5px;
+      color:#666;
+      box-sizing: border-box;
 }
 
   
