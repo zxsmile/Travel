@@ -1,7 +1,15 @@
 <template>
         
             <ul class='Alphabet'>
-                <li class="item" v-for='(item,key) of cities' :key="key">{{key}}</li>
+                <li class="item" 
+                    v-for='item of letters' 
+                    :key="item" 
+                    :ref="item"
+                    @click='clickHandleLetter'
+                    @touthstart="handleTouthstart"
+                    @touthmove="handleTouthmove"
+                    @touthend="handleTouthend"
+                >{{item}}</li>
             </ul>
             
         
@@ -11,7 +19,42 @@
 export default{
     name:'CityAlphabet',
     props:{
-        cities:Object
+        cities:Object,
+    },
+    data:function(){
+        return {
+        touch:false
+        }
+    },
+    computed:{
+        letters:function(){
+            let letters = [];
+            for(let i in this.cities){
+                letters.push(i)
+            }
+            return letters
+        }
+    },
+    methods:{
+        clickHandleLetter:function(event){
+            this.$emit('change',event.target.innerHTML)
+        },
+        handleTouthstart:function(){
+            this.touch=ture
+        },
+        handleTouthmove:function(event){
+             if(this.touch){
+               let letterY = this.$refs['A'][0].offsetTop;
+               let touchY  = event.touchs[0].clientY-86;
+               let elementIndex = Math.floor((letterY - touchY)/20);
+            if(elementIndex>=0 && elementIndexthis.letters.length)
+               this.$emit('change',event.letters[elementIndex])
+             }
+        },
+        handleTouthend:function(){
+            this.touch.false
+        }
+        
     }
 }
 </script>
@@ -23,7 +66,7 @@ export default{
      right:0;
      bottom:0;
      width:16px;
-     background-color: brown;
+     color:turquoise;
      display:flex;
      flex-direction: column;
      justify-content:center;
