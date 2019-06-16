@@ -29,12 +29,13 @@ export default {
      SwiperList:[],
      IconsList:[],
      recommandList:[],
-     weekendList:[]
+     weekendList:[],
+     lastCity:''
    } 
   },
   methods:{
      getHomeInfo:function(){
-       axios.get('/api/index.json')
+       axios.get('/api/index.json?city='+this.$store.state.city)
          .then(this.getHomeInfoSuccess)
      },
      getHomeInfoSuccess:function(res){
@@ -49,7 +50,14 @@ export default {
      }
   },
   mounted:function(){
+     this.lastCity = this.$store.state.city
      this.getHomeInfo()
+  },
+  activated:function(){
+    if(this.lastCity!==this.$store.state.city){
+          this.lastCity = this.$store.state.city
+          this.getHomeInfo()
+    }
   }
 }
 </script>
