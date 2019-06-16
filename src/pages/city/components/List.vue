@@ -5,22 +5,22 @@
                 <div class="title">当前城市</div>
                 <div class='city-list'>
                     <div class="list-wrapper">
-                        <div class="list-content">西安</div>
+                        <div class="list-content">{{this.$store.state.city}}</div>
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="title">热门城市</div>
                 <div class='city-list'>
-                    <div class="list-wrapper" v-for='item of hotCities' :key='item.id'>
-                        <div class="list-content">{{item.name}}</div>
+                    <div class="list-wrapper" v-for='item of hotCities' :key='item.id' >
+                        <div class="list-content" @click='handleClick(item.name)'>{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class="area" v-for="(item,key) of cities" :key='key' :ref='key'>
                 <div class="title">{{key}}</div>
                 <div class="city-item border-bottom" v-for='innerItem of item' :key='innerItem.id'>
-                    <div class="item ">{{innerItem.name}}</div>
+                    <div class="item " @click='handleClick(innerItem.name)'>{{innerItem.name}}</div>
                 </div>
                 
             </div>
@@ -33,6 +33,12 @@
 import BScroll from 'better-scroll'
 export default{
     name:'CityList',
+    methods:{
+        handleClick:function(city){
+           this.$store.dispatch('changeCity',city)
+            this.$router.push('./')
+        }
+    },
     mounted:function(){
         this.scroll = new BScroll(this.$refs.wrapper)
        
@@ -80,12 +86,12 @@ export default{
        padding:5px 20px 5px 5px;
     }
     .list-wrapper{
-        width:33.3%;
+        min-width:33.3%;
         float:left;
         }
     .list-content{
         text-align: center;
-        padding: 5px 0;
+        padding: 5px;
         border: 1px solid #ccc;
         margin:5px;
         border-radius: 3px;
@@ -94,6 +100,7 @@ export default{
         width:100%;
         padding-left:10px;
         line-height: 40px;
+        
     }
     .border-bottom{
         border-bottom:1px solid #ccc;
