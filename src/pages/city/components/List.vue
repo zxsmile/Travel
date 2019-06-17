@@ -30,31 +30,40 @@
 </template>
 
 <script>
-import BScroll from 'better-scroll'
-export default{
-    name:'CityList',
-    methods:{
-        handleClick:function(city){
-           this.$store.dispatch('changeCity',city)
-            this.$router.push('./')
+  import BScroll from 'better-scroll'
+
+  export default {
+    name: 'CityList',
+    methods: {
+      handleClick:function(city) {
+        this.$store.dispatch('changeCity',city)
+        this.$router.push('./')
         }
     },
-    mounted:function(){
-        this.scroll = new BScroll(this.$refs.wrapper)
-       
+    mounted:function() { 
+      //this.scroll = new BScroll(this.$refs.wrapper)
+      
+      this.$nextTick(()=>{
+                  if (!this.scroll) {
+                    this.scroll = new BScroll(this.$refs.wrapper, {
+                      click: true
+                    });
+                  } else {
+                    this.scroll.refresh();
+                  };
+            });
     },
-    props:{
-        cities:Object,
-        hotCities:Array,
-        letter:String
+    props: {
+      cities:Object,
+      hotCities:Array,
+      letter:String
     },
-    watch:{
-        letter:function(){
-            const element = this.$refs[this.letter][0]
-            this.scroll.scrollToElement(element)
+    watch: {
+      letter: function() {
+        const element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
     }
-    }
-    
 }
 </script>
 
