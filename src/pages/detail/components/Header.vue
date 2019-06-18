@@ -42,6 +42,9 @@ export default {
   },
   activated:function(){
        window.addEventListener('scroll',this.hanleScroll)
+  },
+  deactivated:function(){
+      window.removeEventListener('scroll',this.hanleScroll)
   }
 }
 </script>
