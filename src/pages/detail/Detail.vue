@@ -45,6 +45,10 @@ import axios from 'axios'
        },
        mounted:function(){
            this.getDetailInfo()
+        },
+        activated:function(){
+            this.getDetailInfo()
+        
         }
    }
 </script>
