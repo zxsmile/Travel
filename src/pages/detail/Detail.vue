@@ -28,7 +28,7 @@ import axios from 'axios'
        },
        methods:{
            getDetailInfo:function(){
-               axios.get('/api/detail.json?id='+this.$route.params)
+               axios.get('/api/detail.json?id='+this.$route.params.id)
                .then(this.getDetailInfoSuccess)
            },
            getDetailInfoSuccess:function(res){

@@ -10,16 +10,20 @@
            </div>
         </div>
       </div>
-     <common-gallary :imgs='imgs' v-show='showGallary' @change = 'handleChangeClick'></common-gallary>
+    <common-animation>
+        <common-gallary :imgs='imgs' v-show='showGallary' @change = 'handleChangeClick'></common-gallary>
+    </common-animation>
    </div>
 </template>
 
 <script>
  import CommonGallary from 'common/gallary/Gallary'
+ import CommonAnimation from 'common/animation/Animation'
    export default{
        name:'DetailBanner',
        components:{
-        CommonGallary
+        CommonGallary,
+        CommonAnimation
        },
        props:{
           bannerImg:String,
