@@ -67,6 +67,7 @@ export default {
         font-size: 20px;
     }
     .header-fixed{
+      z-index:99;
       width:100%;
       height:43px;
       background-color: turquoise;
