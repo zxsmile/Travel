@@ -165,8 +165,8 @@ export default {
     }
    .recommend-button{
        background-color: #ff9300;
-       border-radius: 5px;
-       /* padding: 0 5px; */
+       border-radius: 10px;
+       padding: 0 10px;
        color: #fff;
       margin-top: 10px;
     }

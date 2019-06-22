@@ -1,8 +1,7 @@
 <template>
-     <div class='ee'>
+     <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
         <detail-header></detail-header>
-        
         <detail-content :list='list'></detail-content>
      </div>
 </template>
@@ -57,7 +56,5 @@ import axios from 'axios'
 </script>
 
 <style scoped>
-  .ee{
-      height:1800px;
-  }
+  
 </style>

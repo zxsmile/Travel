@@ -8,10 +8,8 @@
      <div class="introduce">
          <span class="introduce-icon iconfont">&#xe606;</span>
          <div class="introduce-content">查看景点简介及开放时间</div>
-         <router-link to='./'>
-           <span class="introduce-icon-right iconfont">&#xe612;</span>
-        </router-link>
-     </div>
+         <router-link to='/introduce' tag="span" class="introduce-icon-right iconfont">&#xe612;</router-link>
+    </div>
      <div class="list">
       <detail-list :list='list'></detail-list>
      </div>
