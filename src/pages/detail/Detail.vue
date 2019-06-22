@@ -3,6 +3,7 @@
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
         <detail-header></detail-header>
         <detail-content :list='list'></detail-content>
+        
      </div>
 </template>
 
@@ -11,6 +12,7 @@ import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailList from './components/List'
 import DetailContent from './components/Content'
+import DetailOrder from './components/Order'
 import axios from 'axios'
    export default{
        name:'Detail',
@@ -18,7 +20,8 @@ import axios from 'axios'
            DetailBanner,
            DetailHeader,
            DetailList,
-           DetailContent
+           DetailContent,
+           DetailOrder
        },
        data:function(){
            return {

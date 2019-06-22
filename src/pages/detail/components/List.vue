@@ -30,27 +30,43 @@
                                {{order.money}}
                                
                             </div>
-                               <button class="recommend-button" >预定</button>
+                               <button class="recommend-button" @click="handleClickOrderShow(order.title,order.money)">预定</button>
                         </div> 
                   </div>
                  </div>
             </div> 
       </div>
+        <detail-order v-show='OrderShow' @handleClickDisapper='handleClickOrder1'> </detail-order>
+      
   </div>
 </template>
-
 <script>
+import DetailOrder from './Order'
 export default {
   name: 'DetailList',
   data:function(){
       return {
-          orderShow:false
+          OrderShow:false
       }
   },
+   components:{
+           DetailOrder
+       },
   methods:{
        handleClickOrder:function(child){
         child.orderShow=!child.orderShow;
-          
+       },
+       handleClickOrder1:function(){
+           this.OrderShow=false
+       },
+       
+       handleClickOrderShow:function(title,money){
+              this.$store.dispatch('changeTitle',title)
+              this.$store.dispatch('changeMoney',money)
+              this.OrderShow = !this.OrderShow;
+       },
+       handleClickOrderhidden:function(){
+           this.OrderShow = false
        }
   },
   props:{
@@ -63,7 +79,7 @@ export default {
 <style scoped>
    .list{
        margin-top: 10px;
-       
+       position: relative;
    }
    .list-title{
        height:40px;

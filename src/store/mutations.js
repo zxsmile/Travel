@@ -7,5 +7,11 @@ export default{
 
         }
         
+    },
+    changeTitleData:function(state,title){
+        state.title = title
+    },
+    changeMoneyData:function(state,money){
+        state.money = money
     }
 }

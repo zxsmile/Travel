@@ -9,6 +9,8 @@ let city = '西安'
 
  export default{
    
-        city:city
+        city:city,
+        title:'',
+        money:''
     
  }
