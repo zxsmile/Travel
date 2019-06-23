@@ -5,6 +5,7 @@ import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import Introduce from '@/pages/introduce/Introduce'
 import SwiperList from '@/pages/swiper-list/SwiperList'
+import SwiperListDetail from '@/pages/swiper-list-detail/SwiperListDetail'
 
 Vue.use(Router)
 
@@ -30,6 +31,10 @@ export default new Router({
   path: '/swiper-list/:id',
   name: 'SwiperList',
   component: SwiperList
+},{
+  path: '/swiper-list/swiper-list-detail/:id',
+  name: 'SwiperListDetail',
+  component: SwiperListDetail
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }

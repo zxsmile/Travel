@@ -1,13 +1,13 @@
 <template>
    <div>
-       <div class="recommend border-bottom" v-for='item of  recommandList' :key='item.id'>
+       <router-link :to="'./swiper-list-detail/'+ item.id" tag='div' class="recommend border-bottom" v-for='item of  recommandList' :key='item.id'>
            <img class='recommend-img' :src="item. recommandImgSrc" />
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>
                <p class="recommend-describe">{{item.recommendDescribe}}</p>
                <p class="recommend-button">￥39起</p>
            </div>
-       </div>
+       </router-link>
    </div>
 </template>
 
