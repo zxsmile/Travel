@@ -6,6 +6,7 @@ import Detail from '@/pages/detail/Detail'
 import Introduce from '@/pages/introduce/Introduce'
 import SwiperList from '@/pages/swiper-list/SwiperList'
 import SwiperListDetail from '@/pages/swiper-list-detail/SwiperListDetail'
+import WeekendDetail from '@/pages/weekend-detail/WeekendDetail'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
   path: '/swiper-list/swiper-list-detail/:id',
   name: 'SwiperListDetail',
   component: SwiperListDetail
+},{
+  path: '/weekend-detail/:id',
+  name: 'WeekendDetail',
+  component: WeekendDetail
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }

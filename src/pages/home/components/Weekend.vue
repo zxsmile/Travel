@@ -1,7 +1,7 @@
 <template>
    <div>
        <div class="title">周末去哪儿</div>
-       <div class=" weekend" v-for='item of weekendList' :key='item.id'>
+       <router-link :to="'./weekend-detail/id=' + item.id"  tag='div' class=" weekend" v-for='item of weekendList' :key='item.id'>
            <div class=' weekend-img'>
                <img  class="img" :src="item.  weekendImgSrc" />
            </div>
@@ -9,7 +9,7 @@
                <p class=" weekend-title">{{item. weekendTitle}}</p>
                <p class=" weekend-describe">{{item. weekendDescribe}}</p>
            </div>
-        </div>
+       </router-link>
    </div>
 </template>
 
