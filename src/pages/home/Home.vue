@@ -1,6 +1,6 @@
 <template>
     <div>
-        <home-header></home-header>
+        <home-header :cities="cities"></home-header>
         <home-swiper :SwiperList='SwiperList'></home-swiper>
         <home-icons :IconsList='IconsList'></home-icons>
         <home-recommend :recommandList='recommandList'></home-recommend>
@@ -30,7 +30,8 @@ export default {
      IconsList:[],
      recommandList:[],
      weekendList:[],
-     lastCity:''
+     lastCity:'',
+     cities:{}
    } 
   },
   methods:{
@@ -46,6 +47,8 @@ export default {
           this.IconsList=data.IconsList
           this.recommandList=data.recommandList
           this.weekendList=data.weekendList
+          this.cities = data.cities
+         
         }
      }
   },
