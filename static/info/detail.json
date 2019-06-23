@@ -1,10 +1,11 @@
 {
     "ret" : true,
     "data" :{
-        "bannnerName":"大连圣亚海洋世界(AAAA景区)",
-        "bannerImg": "http://img1.qunarzz.com/sight/p0/201404/23/04b92c99462687fa1ba45c1b5ba4ad77.jpg_800x800_70debc93.jpg",
-        "gallaryImgs":["http://img1.qunarzz.com/sight/p0/201404/23/04b92c99462687fa1ba45c1b5ba4ad77.jpg_800x800_70debc93.jpg",
-            "http://img1.qunarzz.com/sight/p0/1709/76/7691528bc7d7ad3ca3.img.png_800x800_9ef05ee7.png"],
+        "bannnerName":" 大唐芙蓉园(5A景区)",
+        "bannerImg": "http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_710x360_63dd8931.jpg",
+        "gallaryImgs":["http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_710x360_63dd8931.jpg",
+            "http://img1.qunarzz.com/sight/p0/1508/54/5423a4273fa6c9c2.img.jpg_1190x550_1943dd93.jpg",
+            "http://img1.qunarzz.com/sight/p0/1701/35/35584a4942d567c5a3.img.jpg_1190x550_e8587caf.jpg"],
         "list":[{
             "title":"促销票",
             "children":[{

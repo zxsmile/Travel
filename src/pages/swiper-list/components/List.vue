@@ -1,20 +1,19 @@
 <template>
    <div>
-       <div class="title">热销推荐</div>
-       <router-link :to="'./detail/'+ item.id" tag='div' class="recommend" v-for='item of  recommandList' :key='item.id'>
-           <img class='recommend-img' :src="item.recommandImgSrc" />
+       <div class="recommend border-bottom" v-for='item of  recommandList' :key='item.id'>
+           <img class='recommend-img' :src="item. recommandImgSrc" />
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>
                <p class="recommend-describe">{{item.recommendDescribe}}</p>
-               <button class="recommend-button">查看详情</button>
+               <p class="recommend-button">￥39起</p>
            </div>
-       </router-link>
+       </div>
    </div>
 </template>
 
 <script>
 export default{
-   name:'HomeRecommend',
+   name:'List',
    props:{
        recommandList:Array
    }
@@ -22,18 +21,16 @@ export default{
 </script>
 
 <style scoped>
-    .title{
-        background-color:#eee;
-        margin-top:10px;
-        line-height:40px;
-        height:40px;
-        text-indent:10px;
-    }
     .recommend{
         width:100%;
         height:94px;
         display: flex;
         overflow:hidden;
+        margin-top:10px;
+    }
+    .border-bottom{
+       border-bottom:1px solid #ccc;
+
     }
     .recommend-img{
         width:78px;
@@ -61,11 +58,10 @@ export default{
         white-space: nowrap;
     }
     .recommend-button{
-       background-color: #ff9300;
+       color: #ff9300;
        line-height:20px;
        margin-top: 5px;
-       border-radius: 5px;
-       padding: 0 10px;
-       color: #fff;
+       font-size: 16px;
+      
     }
 </style>

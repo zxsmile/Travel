@@ -4,6 +4,7 @@ import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import Introduce from '@/pages/introduce/Introduce'
+import SwiperList from '@/pages/swiper-list/SwiperList'
 
 Vue.use(Router)
 
@@ -25,6 +26,10 @@ export default new Router({
   path: '/introduce',
   name: 'Introduce',
   component: Introduce
+},{
+  path: '/swiper-list/:id',
+  name: 'SwiperList',
+  component: SwiperList
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }

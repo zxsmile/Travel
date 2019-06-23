@@ -2,14 +2,14 @@
    <div class='icons'>
       <swiper :options='swiperOption'>
        <swiper-slide v-for="(page,index) of pages" :key="index" >
-         <div class='icon' v-for="item of page" :key="item.id">
+          <router-link :to="'./swiper-list/' + item.id" tag='div' class='icon' v-for="item of page" :key="item.id">
               <div class="icon-img">
                  <img :src='item.ImgUrl' class='icon-img-content'> 
                </div>
                <div class="icon-name">
                  <p class="icon-name-content">{{item.name}}</p>
                </div>
-         </div>
+          </router-link>
        </swiper-slide>
       </swiper>
      </div>
