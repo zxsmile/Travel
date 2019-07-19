@@ -11,6 +11,10 @@ let city = '西安'
    
         city:city,
         title:'',
-        money:''
+        money:'',
+        year:'',
+        month:'',
+        day:''
+        // parentId:0
     
  }

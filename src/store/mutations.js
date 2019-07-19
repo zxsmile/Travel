@@ -13,5 +13,17 @@ export default{
     },
     changeMoneyData:function(state,money){
         state.money = money
-    }
+    },
+    GetYearData:function(state,year){
+        state.year = year
+    },
+    GetMonthData:function(state,month){
+        state.month = month
+    },
+    GetDayData:function(state,day){
+        state.day = day
+    },
+    // changeParentId:function(state,parentId){
+    //     state.parentId = parentId
+    // }
 }

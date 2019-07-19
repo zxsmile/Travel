@@ -1,7 +1,12 @@
 <template>
    <div>
        <div class="title">热销推荐</div>
-       <router-link :to="'./detail/'+ item.id" tag='div' class="recommend" v-for='item of  recommandList' :key='item.id'>
+       <router-link
+        :to="'./detail/'+ item.parentId"
+        tag='div'
+        class="recommend"
+        v-for='item of  recommandList'
+        :key='item.parentId'>
            <img class='recommend-img' :src="item.recommandImgSrc" />
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>
@@ -17,7 +22,7 @@ export default{
    name:'HomeRecommend',
    props:{
        recommandList:Array
-   }
+   },
 }
 </script>
 

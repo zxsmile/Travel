@@ -19,7 +19,7 @@
 
    export default{
        name:'CommonGallary',
-       data:function(){
+       data(){
            return {
                swiperOption:{
                    pagination:'.swiper-pagination',
@@ -32,9 +32,7 @@
        props:{
            imgs:{
                type:Array,
-               default:function(){
-                   return []
-               }
+               default:()=> [],
            },
        },
        methods:{
@@ -60,13 +58,14 @@
         display:flex;
         flex-direction: column;
         justify-content: center;
-        z-index:99;
+        z-index:100;
     }
     .wrapper{
          width:100%;
          height:0;
          padding-bottom:100%;
          /* overflow:hidden; */
+         
     }
     .img{
         width:100%;

@@ -10,6 +10,7 @@ import './assets/styles/reset.css'
 // import './assets/styles/border.css'
 import 'swiper/dist/css/swiper.css'
 import store from './store'
+const Bus= new Vue()
 
 
 Vue.config.productionTip = false
@@ -19,6 +20,7 @@ Vue.use(VueAwesomeSwiper, /* { default global options } */)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data:{Bus},
   router,
   store,
   components: { App },

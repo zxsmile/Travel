@@ -1,6 +1,6 @@
 <template>
-   <div>
-       <router-link :to="'./swiper-list-detail/'+ item.id" tag='div' class="recommend border-bottom" v-for='item of  recommandList' :key='item.id'>
+   <div :parentId='parentId'>
+       <router-link :to="'./'+parentId+'/swiper-list-detail/'+ item.listId" tag='div'  class="recommend border-bottom" v-for='item of  recommandList' :key='item.listId'>
            <img class='recommend-img' :src="item. recommandImgSrc" />
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>
@@ -15,11 +15,19 @@
 export default{
    name:'List',
    props:{
-       recommandList:Array
-   }
+       recommandList:Array,
+       parentId:String
+   },
+   data:function(){
+       return {
+           parentIdchange:this.parentId
+       }
+   },
+  
 }
-</script>
 
+</script>
+   
 <style scoped>
     .recommend{
         width:100%;

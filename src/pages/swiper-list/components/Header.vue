@@ -3,13 +3,16 @@
             <router-link to='/'>
                 <div class='iconfont back-icon'>&#xe624;</div>
             </router-link>
-            <div class='header-title'>景点门票</div>
+            <div class='header-title'>{{title}}</div>
         </div>
 </template>
 
 <script>
 export default{
-    name:'SwiperHeader'
+    name:'SwiperHeader',
+    props:{
+       title:String
+    }
 }
 </script>
 

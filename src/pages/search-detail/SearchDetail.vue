@@ -2,25 +2,19 @@
      <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
         <detail-header :back='back'></detail-header>
-        <detail-content 
-        :list='list' 
-        :introduce="introduce + parentId +'/introduce'"
-        :date="date +parentId+'/date'"
-        >
-        </detail-content>
-        
-     </div>
+        <detail-content :list='list' :introduce="introduce + parentId +'/introduce'"></detail-content>
+    </div>
 </template>
 
 <script>
-import DetailBanner from './components/Banner'
-import DetailHeader from './components/Header'
-import DetailList from './components/List'
-import DetailContent from './components/Content'
-import DetailOrder from './components/Order'
+import DetailBanner from '../detail/components/Banner'
+import DetailHeader from '../detail/components/Header'
+import DetailList from '../detail/components/List'
+import DetailContent from '../detail/components/Content'
+import DetailOrder from '../detail/components/Order'
 import axios from 'axios'
    export default{
-       name:'Detail',
+       name:'SearchDetail',
        components:{
            DetailBanner,
            DetailHeader,
@@ -35,36 +29,35 @@ import axios from 'axios'
             gallaryImgs:[],
             list:[],
             back:'/',
-            introduce:'/detail/',
-            parentId:'',
-            date:'/detail/'
+            introduce:'/search-detail/',
+             parentId:''
            }
        },
-      
        methods:{
-           getDetailInfo:function(){
-               axios.get('/api/detail.json?id='+this.$route.params.parentId)
-               .then(this.getDetailInfoSuccess)
+           getSwiperListDetailInfo:function(){
+               axios.get('/api/search-detail.json?id='+ this.$route.params.id)
+               .then(this.getSwiperListDetailInfoSuccess)
            },
-           getDetailInfoSuccess:function(res){
+           getSwiperListDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.parentId]
+                  const data = res.data[this.$route.params.id]
+                 
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.list = data.list
                   this.bannnerName = data.bannnerName
-                  this.parentId = this.$route.params.parentId
-              }
+                  this.parentId = this.$route.params.id
+              } 
            }
            
        },
        mounted:function(){
-           this.getDetailInfo()
-
+           this. getSwiperListDetailInfo()
+           
         },
         activated:function(){
-            this.getDetailInfo()
+            this. getSwiperListDetailInfo()
         
         }
    }

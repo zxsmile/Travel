@@ -1,16 +1,16 @@
 <template>
      <div>
-        <introduce-header :introduceBack = "introduceBack +'/'+ parentId +'/swiper-list-detail/'+listId"></introduce-header>
+        <introduce-header :introduceBack = "introduceBack + parentId "></introduce-header>
         <introduce-content :introduceList='introduceList'></introduce-content>
      </div>
 </template>
 
 <script>
-import IntroduceHeader from './components/Header'
-import IntroduceContent from './components/Content'
+import IntroduceHeader from '../introduce/components/Header'
+import IntroduceContent from '../introduce/components/Content'
 import  axios from 'axios'
    export default{
-       name:'Introduce',
+       name:'ListIntroduce',
        components:{
            IntroduceHeader,
            IntroduceContent
@@ -20,19 +20,20 @@ import  axios from 'axios'
                introduceList:[],
                parentId:'',
                listId:'',
-               introduceBack:'/swiper-list'
+               introduceBack:'/detail/',
+               
            }
        },
          methods:{
            getIntroduceInfo:function(){
-               axios.get('/api/introduce.json')
+               axios.get('/api/list-introduce.json')
                .then(this.getIntroduceInfoSuccess)
            },
            getIntroduceInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data
-                  this.introduceList = data[this.$route.params.parentId].introduceList[this.$route.params.listId].introduceContent
+                  const data = res.data[this.$route.params.parentId]
+                 this.introduceList = data.introduceList
                   this.parentId = this.$route.params.parentId
                   this.listId = this.$route.params.listId
                   

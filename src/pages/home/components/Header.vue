@@ -19,7 +19,7 @@
             <ul>
                 <li 
                 v-for="item of list" 
-                :key='item.id'
+                :key='item.parentId'
                 @click='handleClick(item.id)' 
                 class="search-list border-bottom"
                 >{{item.name}}</li>
@@ -47,7 +47,7 @@ export default {
     },
      methods:{
         handleClick:function(id){
-           this.$router.push('./detail/id='+ id)
+           this.$router.push('./search-detail/'+ id)
         }
     },
      props:{
@@ -167,14 +167,20 @@ export default {
     left:0;
     right:0;
     bottom:0;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #ccc;
-    z-index:99;
+    z-index:100;
 }
 .search-list{
    line-height:32px;
    padding-left: 10px;
    color:#666;
    background-color: #fff;
+   
 }
+.border-bottom{
+        /* border-bottom:0.1px solid #ccc; */
+
+    }
+
 </style>

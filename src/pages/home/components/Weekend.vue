@@ -1,13 +1,13 @@
 <template>
    <div>
        <div class="title">周末去哪儿</div>
-       <router-link :to="'./weekend-detail/id=' + item.id"  tag='div' class=" weekend" v-for='item of weekendList' :key='item.id'>
+       <router-link :to="'./weekend-detail/' + item.parentId"  tag='div' class=" weekend" v-for='item of weekendList' :key='item.parentId'>
            <div class=' weekend-img'>
-               <img  class="img" :src="item.  weekendImgSrc" />
+               <img  class="img" :src="item.weekendImgSrc" />
            </div>
            <div class=' weekend-content'>
-               <p class=" weekend-title">{{item. weekendTitle}}</p>
-               <p class=" weekend-describe">{{item. weekendDescribe}}</p>
+               <p class=" weekend-title">{{item.weekendTitle}}</p>
+               <p class=" weekend-describe">{{item.weekendDescribe}}</p>
            </div>
        </router-link>
    </div>

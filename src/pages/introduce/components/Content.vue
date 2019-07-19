@@ -36,7 +36,7 @@
    }
    .content-detail{
        line-height: 20px;
-       padding:0 10px;
+       padding:0 10px 10px 10px;
        color:darkgrey;
    }
 </style>

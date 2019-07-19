@@ -30,13 +30,13 @@
                                {{order.money}}
                                
                             </div>
-                               <button class="recommend-button" @click="handleClickOrderShow(order.title,order.money)">预定</button>
+                               <button class="recommend-button" @click.stop="handleClickOrderShow(order.title,order.money)">预定</button>
                         </div> 
                   </div>
                  </div>
             </div> 
       </div>
-        <detail-order v-show='OrderShow' @handleClickDisapper='handleClickOrder1'> </detail-order>
+        <detail-order v-show='OrderShow' @handleClickDisapper='handleClickOrder1' :date='date'> </detail-order>
       
   </div>
 </template>
@@ -49,6 +49,11 @@ export default {
           OrderShow:false
       }
   },
+   props:{
+     date:String,
+      list:Array
+
+ },
    components:{
            DetailOrder
        },
@@ -57,21 +62,46 @@ export default {
         child.orderShow=!child.orderShow;
        },
        handleClickOrder1:function(){
-           this.OrderShow=false
+        this.OrderShow=false
+         this.$root.Bus.$emit('hiddenDiv')
        },
        
        handleClickOrderShow:function(title,money){
               this.$store.dispatch('changeTitle',title)
               this.$store.dispatch('changeMoney',money)
               this.OrderShow = !this.OrderShow;
+              this.$root.Bus.$emit('displayDiv')
+             
        },
        handleClickOrderhidden:function(){
-           this.OrderShow = false
+            
+           if(this.OrderShow){ 
+            this.OrderShow = false
+            
+          
+       
+           }
+           
        }
   },
-  props:{
-      list:Array
+ 
+   mounted(){
+    // const that = this
+    // //console.log(this.OrderShow)
+    // this.$root.Bus.$on('orderHidden', function(value){
+    //     console.log(that.OrderShow)
+    //     console.log(value)
+     
+    //     that.OrderShow = 'false'
+    //     //  console.log(that.OrderShow)
+    //     //   if(!that.OrderShow){
+    //     //      value.style.display = 'none'
+    //     //   }
+      
+        
+    // })
   }
+ 
  
 }
 </script>

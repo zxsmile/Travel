@@ -1,5 +1,8 @@
 <template>
-    <div class="orderb">
+  
+
+    <div class="orderb" >
+       
         <span class='iconfont back-icon' @click='hanleClick'>&#xe66f;</span>
         <div class='order'>
             <div class="order-title"> 
@@ -28,16 +31,24 @@
                         <p>{{afterTomorrow}}</p>
                     </div>
                 </div>
-                 <div class="order-date-box">
-                    <div class="order-date-month" @click='hanleDateClick'>其他日期</div>
-                </div>
+                 <router-link
+                 tag='div' 
+                 class="order-date-box" 
+                 :to="date"
+                 >
+                    <div class="order-date-month" @click='hanleChooseDateClick'>
+                        其他日期
+                      <p>{{this.$store.state.month}}月{{this.$store.state.day}}日</p>
+                    </div>
+                 </router-link>
                 
         </div>  
         <p class='order-date-content'>需要在游玩当天的16：45前预定；预定后30分钟才能入园</p>
-        <button class="order-button">立即预定</button>
-        
+        <div class='button'>
+              <button class="order-button">立即预定</button>
+        </div>
     </div>
-        
+ 
 </template>
 
 <script>
@@ -54,23 +65,39 @@
        },
        props:{
            OrderShow:String,
+            date:String
        },
       methods:{
          hanleDateClick:function(e){
              let div=document.getElementsByClassName('order-date-month')
              div = Array.from(div)
-             div.forEach(element => {
-               element.style.backgroundColor='mintcream'
-                if(e.target.tagName === 'P'){
-                  e.target.parentNode.style.backgroundColor = 'oldlace'
+             div.forEach((element,index) => {
+              
+                    element.style.backgroundColor='white'
+               
+              if(e.target.tagName === 'P'){
+                  e.target.parentNode.style.backgroundColor = 'turquoise'
              }else{
-                 e.target.style.backgroundColor = 'oldlace'
+                 e.target.style.backgroundColor = 'turquoise'
              }
+
              });
-            
          },
+         hanleChooseDateClick:function(e){
+                this.hanleDateClick(e)
+
+         },
+        
          hanleClick:function(){
              this.$emit('handleClickDisapper')
+              let div=document.getElementsByClassName('order-date-month')
+             div = Array.from(div)
+             div.forEach((element,index) => {
+              
+                    element.style.backgroundColor='white'
+               
+            
+             });
          }
       },
       mounted:function(){
@@ -88,27 +115,52 @@
            let month3 = date3.getMonth()+1;
            let day3 = date3.getDate()
            this.afterTomorrow = month3+"月"+ day3+"日"
-           
-      }
+           if(this.today===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  let div=document.getElementsByClassName('order-date-month')
+                  div = Array.from(div)
+                  div[0].style.backgroundColor='turquoise'
+             }
+      },
+       activated:function(){
+             if(this.today===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  let div=document.getElementsByClassName('order-date-month')
+                  div = Array.from(div)
+                    div.forEach((element,index) => {
+                       element.style.backgroundColor='white'
+                    });
+                  div[0].style.backgroundColor='turquoise'
+             }
+             if(this.tomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  let div=document.getElementsByClassName('order-date-month')
+                  div = Array.from(div)
+                    div.forEach((element,index) => {
+                       element.style.backgroundColor='white'
+                    });
+                  div[1].style.backgroundColor='turquoise'
+             }
+             if(this.afterTomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  let div=document.getElementsByClassName('order-date-month')
+                  div = Array.from(div)
+                    div.forEach((element,index) => {
+                       element.style.backgroundColor='white'
+                    });
+                  div[2].style.backgroundColor='turquoise'
+             }
+        }
    }
 </script>
 
 <style scoped>
+
    .orderb{
-       /* width: 100%;
-       height: 100%;
-       background-color:dimgrey;
-       position:fixed;
-       top:0;
-       left:0;
-       right: 0;
-       bottom: 0;
-       z-index: 99;
-       opacity: 0.3; */ 
        position: fixed; 
        width: 100%;
-       background-color:mintcream;
+       background-color:white;
        bottom:0;
+       opacity: 1;
+       z-index: 100;
+       top:190px;
+       height: 484px; 
    }
    .back-icon{
      right:2px;
@@ -120,8 +172,8 @@
    .order{
        display:flex;
        flex-direction: column;
-       padding:10px;
-
+       padding: 20px 10px;
+       top:20px;
    }
     .order-title{
        font-size: 16px;
@@ -140,7 +192,7 @@
         padding:0 10px;
    }
    .order-date-title{
-       padding: 10px 22px;
+       padding: 20px 22px;
    } 
    .order-date-wrapper{
        overflow: hidden;
@@ -168,7 +220,7 @@
         height: 51px;
     }
     .order-date-content{
-         padding: 10px 22px;
+         padding: 30px 22px;
          line-height: 20px;
          color:coral;
     }
@@ -180,5 +232,12 @@
         font-size: 18px;
         color: #fff;
         font-weight: 500;
+        bottom:0;
+        position:absolute;
+        margin: 25px 0;
+        border-radius: 5px;
+        /* left: 50%;
+         transform: translateX(-50%); */
     }
+   
 </style>

@@ -1,6 +1,6 @@
 <template>
        <div class='header'>
-            <router-link to='/detail/id' >
+            <router-link :to='introduceBack' >
                 <div class='iconfont back-icon'>&#xe624;</div>
             </router-link>
             <div class='header-title'>景点介绍</div>
@@ -13,7 +13,9 @@
 
    export default{
        name:'IntroduceHeader',
-    
+      props:{
+          introduceBack:String
+      }
       
    }
 </script>

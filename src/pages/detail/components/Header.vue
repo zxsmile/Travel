@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="header-circle" v-show='showCircle'>
-         <router-link tag='div' to='/' class='iconfont header-back'>&#xe624;</router-link>
+         <router-link tag='div' :to='back' class='iconfont header-back'>&#xe624;</router-link>
       </div>
       <div class='header-fixed' v-show='!showCircle' :style="opacityStyle">
          <div class='header-fixed-title'>
@@ -11,19 +11,24 @@
              景点详情
          </div>
       </div>
+      <div class="he" @click="handleOrderHidden"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DetailHeader',
+  props:{
+     back:String
+  },
   data:function(){
       return {
           showCircle:true,
           opacityStyle:{
               opacity:0
+          },
+          
           }
-      }
   },
   methods:{
     hanleScroll:function(){
@@ -38,19 +43,48 @@ export default {
         }else{
             this.showCircle = true
         }
+    },
+    handleOrderHidden:function(){
+      const hiddenDiv = document.getElementsByClassName('he')[0]
+      this.$root.Bus.$emit('orderHidden',hiddenDiv)
     }
   },
   activated:function(){
        window.addEventListener('scroll',this.hanleScroll)
+       
   },
   deactivated:function(){
       window.removeEventListener('scroll',this.hanleScroll)
-  }
+  },
+  created(){
+    this.$root.Bus.$on('displayDiv', function(){
+        const hiddenDiv = document.getElementsByClassName('he')[0]
+        hiddenDiv.style.display="block"
+        
+    })
+     this.$root.Bus.$on('hiddenDiv', function(){
+        const hiddenDiv = document.getElementsByClassName('he')[0]
+        hiddenDiv.style.display="none"
+    })
+  },
 }
 </script>
 
 <style scoped>
-   
+    .he{
+        background-color:black;
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index:100;
+        opacity: 0.5;
+        display:none;
+    }
     .header-circle{
         position:absolute;
         height:40px;
@@ -65,6 +99,7 @@ export default {
         color: #fff;
         line-height: 40px;
         font-size: 20px;
+       
     }
     .header-fixed{
       z-index:99;

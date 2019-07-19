@@ -1,8 +1,13 @@
 <template>
      <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
-        <detail-header></detail-header>
-        <detail-content :list='list'></detail-content>
+        <detail-header :back='back'></detail-header>
+        <detail-content 
+        :list='list' 
+        :introduce="introduce + parentId +'/introduce'"
+        :date="date +parentId+'/date'"
+        >
+        </detail-content>
     </div>
 </template>
 
@@ -28,22 +33,27 @@ import axios from 'axios'
             bannerImg:'',
             gallaryImgs:[],
             list:[],
+            back:'/',
+            introduce:'/weekend-detail/',
+             parentId:'',
+             date:'/weekend-detail/'
            }
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/weekend-detail.json?id='+this.$route.params.id)
+               axios.get('/api/weekend-detail.json?id='+ this.$route.params.parentId)
                .then(this.getSwiperListDetailInfoSuccess)
            },
            getSwiperListDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data
+                  const data = res.data[this.$route.params.parentId]
+                 
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.list = data.list
                   this.bannnerName = data.bannnerName
-                 
+                  this.parentId = this.$route.params.parentId
               } 
            }
            
