@@ -1,8 +1,14 @@
 <template>
      <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
-        <detail-header></detail-header>
-        <detail-content :list='list'></detail-content>
+        <detail-header :back='back'></detail-header>
+        <detail-content 
+        :list='list' 
+        :introduce="introduce + parentId +'/introduce'"
+        :date="date +parentId+'/date'"
+        :orderInformation="date +parentId+'/recommand-order-information'"
+        >
+        </detail-content>
         
      </div>
 </template>
@@ -29,27 +35,34 @@ import axios from 'axios'
             bannerImg:'',
             gallaryImgs:[],
             list:[],
+            back:'/',
+            introduce:'/detail/',
+            parentId:'',
+            date:'/detail/'
            }
        },
+      
        methods:{
            getDetailInfo:function(){
-               axios.get('/api/detail.json?id='+this.$route.params.id)
+               axios.get('/api/detail.json?id='+this.$route.params.parentId)
                .then(this.getDetailInfoSuccess)
            },
            getDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data
+                  const data = res.data[this.$route.params.parentId]
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.list = data.list
                   this.bannnerName = data.bannnerName
+                  this.parentId = this.$route.params.parentId
               }
            }
            
        },
        mounted:function(){
            this.getDetailInfo()
+
         },
         activated:function(){
             this.getDetailInfo()

@@ -8,15 +8,15 @@
      <div class="introduce">
          <span class="introduce-icon iconfont">&#xe606;</span>
          <div class="introduce-content">查看景点简介及开放时间</div>
-         <router-link to='/introduce' tag="span" class="introduce-icon-right iconfont">&#xe612;</router-link>
+         <router-link :to='introduce' tag="span" class="introduce-icon-right iconfont">&#xe612;</router-link>
     </div>
      <div class="list">
-      <detail-list :list='list'></detail-list>
+      <detail-list :list='list' :date='date' :orderInformation='orderInformation'></detail-list>
      </div>
   </div>
 </template>
 
-<script>
+<script> 
 import DetailList from './List'
 export default {
   name: 'DetailContent',
@@ -24,7 +24,11 @@ export default {
       DetailList
   },
  props:{
-     list:Array
+     list:Array,
+     introduce:String,
+     date:String,
+     orderInformation:String
+
  }
 }
 </script>

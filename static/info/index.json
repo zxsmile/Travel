@@ -3,98 +3,98 @@
     "data":{
         "city":"北京",
         "SwiperList":[{
-            "id":"001",
+            "parentId":"0",
             "ImgUrl":"https://img1.qunarzz.com/vc/b8/25/51/f6173dbd12c1a0f783abe73855.jpg"
         },{
-            "id":"002",
+            "parentId":"1",
             "ImgUrl":"https://h-des-activity-fecp.qunarzz.com/h_des_activity_fe_h_des_activity_fe/973dc1ae0da73a58410186df08ff25cb.jpg"
         },{
-            "id": "003",
+            "parentId": "2",
             "ImgUrl": "https://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20196/c61c3090cdf54fd0e5e3cb9154d78421.jpg_945x288_afe1c44f.jpg"
           },{
-            "id": "004",
+            "parentId": "3",
             "ImgUrl": "https://h-des-activity-fecp.qunarzz.com/h_des_activity_fe_h_des_activity_fe/161bfb308c31ac5e61afca9b026e7cf4.jpg"
           }],
         "IconsList":[{
-            "id":"001",
+            "parentId":"0",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png",
             "name":"景点门票"
         },{
-            "id":"002",
+            "parentId":"1",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1711/df/86cbcfc533330d02.png",
             "name":"滑雪季"
         },{
-            "id":"003",
+            "parentId":"2",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1710/a6/83f636bd75ae6302.png",
             "name":"泡温泉"
         },{
-            "id":"004",
+            "parentId":"3",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/35/2640cab202c41b02.png",
             "name":"动植物园"
         },{
-            "id":"005",
+            "parentId":"4",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/d0/e09575e66f4aa402.png",
             "name":"游乐园"
         },{
-            "id":"006",
+            "parentId":"5",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/59/569d3c096e542502.png",
             "name":"必游榜单"
         },{
-            "id":"007",
+            "parentId":"6",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/17/4bd370f3eb1acd02.png",
             "name":"演出"
         },{
-            "id":"008",
+            "parentId":"7",
             "ImgUrl":"http://img1.qunarzz.com/piao/fusion/1611/a9/ffc620dbda9b9c02.png",
             "name":"一日游"
         }],
         "recommandList":[{
-            "id":"001",
+            "parentId":"0",
             "recommandImgSrc":"http://img1.qunarzz.com/sight/p0/1508/db/dbd0bef45fbc36b3.img.jpg_1190x550_e996629c.jpg",
             "recommandTitle":"大唐芙蓉园",
             "recommendDescribe":"进入中国盛唐文化之旅"
         },{
-            "id":"002",
+            "parentId":"1",
             "recommandImgSrc":"http://img1.qunarzz.com/sight/p0/1411/1a/5582f9f24bc50b475a8cbda4c5ac8d24.water.jpg_710x360_fd97063a.jpg",
             "recommandTitle":"秦始皇陵博物院（兵马俑）",
             "recommendDescribe":"世界第八大奇迹"
         },{
-            "id":"003",
+            "parentId":"2",
             "recommandImgSrc":"http://img1.qunarzz.com/sight/p0/1602/53/53cf6caed9f9b9ee90.img.jpg_710x360_f7f7d4c8.jpg",
             "recommandTitle":"华清宫",
             "recommendDescribe":"览盛唐宫阙，登骊山怀古，赏长恨歌舞"
         }],
         "weekendList":[{
-            "id":"001",
+            "parentId":"0",
             "weekendImgSrc":"http://img1.qunarzz.com/sight/p0/1412/84/f696c67a8052bb60e6fc51b0f9ba7388.water.jpg_710x360_28f877a6.jpg",
             "weekendTitle":"大明宫国家遗址公园",
             "weekendDescribe":"唐代长安城禁苑"
         },{
-            "id":"002",
+            "parentId":"1",
             "weekendImgSrc":"http://img1.qunarzz.com/sight/p0/1411/b8/f5fd5955bdecc923ce6d40ce453160eb.water.jpg_710x360_b8193d4a.jpg",
             "weekendTitle":"陕西历史博物馆 ",
             "weekendDescribe":"在这里，见证中华文明"
         },{
-            "id":"003",
+            "parentId":"2",
             "weekendImgSrc":"http://img1.qunarzz.com/sight/p0/1503/a1/a1ea9627a38fd8cd.water.jpg_710x360_4b97b4ed.jpg",
             "weekendTitle":"法门寺",
             "weekendDescribe":"释迦牟尼佛指舍利供奉圣地"
         }],
         "cities": {
 			"A": [{
-				"id": 56,
+				"id": 0,
 				"spell": "aba",
 				"name": "阿坝"
 			}, {
-				"id": 57,
+				"id": 1,
 				"spell": "akesu",
 				"name": "阿克苏"
 			}, {
-				"id": 58,
+				"id": 2,
 				"spell": "alashanmeng",
 				"name": "阿拉善盟"
 			}, {
-				"id": 59,
+				"id": 3,
 				"spell": "aletai",
 				"name": "阿勒泰"
 			}, {
