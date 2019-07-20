@@ -2,7 +2,7 @@
    <div>
      <div class="address">
          <span class="address-icon iconfont">&#xe61e;</span>
-         <div class="address-content">陕西省西安市雁塔曲江新区芙蓉西路99号</div>
+         <router-link :to='MapAddress' class="address-content" tag='div'>陕西省西安市雁塔曲江新区芙蓉西路99号</router-link>
          <span class="address-icon-right iconfont">&#xe612;</span>
      </div>
      <div class="introduce">
@@ -27,7 +27,8 @@ export default {
      list:Array,
      introduce:String,
      date:String,
-     orderInformation:String
+     orderInformation:String,
+     MapAddress:String
 
  }
 }

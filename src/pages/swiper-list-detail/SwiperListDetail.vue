@@ -18,6 +18,7 @@
         :introduce=" introduce + '/'+parentId+'/swiper-list-detail/'+ listId+'/introduce'" 
         :date="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/date'"
         :orderInformation="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/order-information'"
+        :MapAddress="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/swiper-list-map-address'"
         >
         </detail-content>
     </div>

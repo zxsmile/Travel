@@ -7,6 +7,7 @@
         :introduce="introduce + parentId +'/introduce'"
         :date="date +parentId+'/date'"
         :orderInformation="date +parentId+'/weekend-order-information'"
+        :MapAddress ="date +parentId+'/weekend-map-address'"
         >
         </detail-content>
     </div>

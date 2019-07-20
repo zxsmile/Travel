@@ -19,6 +19,10 @@ import WeekendOrderInformation from '@/pages/weekend-order-information/WeekendOr
 import RecommandOrderInformation from '@/pages/recommand-order-information/RecommandOrderInformation'
 import SearchDate from '@/pages/search-date/SearchDate'
 import SearchOrderInformation from '@/pages/search-order-information/SearchOrderInformation'
+import SwiperListMapAddress from '@/pages/swiper-list-map-address/SwiperListMapAddress'
+import RecommandMapAddress from '@/pages/recommand-map-address/RecommandMapAddress'
+import WeekendMapAddress from '@/pages/weekend-map-address/WeekendMapAddress'
+import SearchMapAddress from '@/pages/search-map-address/SearchMapAddress'
 
 Vue.use(Router)
 
@@ -100,6 +104,22 @@ export default new Router({
   path: '/search-detail/:parentId/search-order-information',
   name: 'SearchOrderInformation',
   component: SearchOrderInformation
+},{
+  path: '/swiper-list/:parentId/swiper-list-detail/:listId/swiper-list-map-address',
+  name: 'SwiperListMapAddress',
+  component: SwiperListMapAddress
+},{
+  path: '/detail/:parentId/recommand-map-address',
+  name: 'RecommandMapAddress',
+  component: RecommandMapAddress
+},{
+  path: '/weekend-detail/:parentId/weekend-map-address',
+  name: 'WeekendMapAddress',
+  component: WeekendMapAddress
+},{
+  path: '/search-detail/:parentId/search-map-address',
+  name: 'SearchMapAddress',
+  component: SearchMapAddress
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }
