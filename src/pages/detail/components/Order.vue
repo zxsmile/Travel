@@ -16,7 +16,7 @@
                 <div class="order-date-box" >
                     <div class="order-date-month" @click='hanleDateClick'>
                         今天
-                        <p>{{today}}</p>
+                        <p class="order-date">{{today}}</p>
                     </div>
                     </div>
                 <div class="order-date-box">
@@ -28,7 +28,7 @@
                 <div class="order-date-box">
                     <div class="order-date-month" @click='hanleDateClick'>
                         后天
-                        <p>{{afterTomorrow}}</p>
+                        <p class="order-date">{{afterTomorrow}}</p>
                     </div>
                 </div>
                  <router-link
@@ -38,14 +38,14 @@
                  >
                     <div class="order-date-month" @click='hanleChooseDateClick'>
                         其他日期
-                      <p>{{this.$store.state.month}}月{{this.$store.state.day}}日</p>
+                      <p v-show='otherShow' class="order-date">{{this.$store.state.month}}月{{this.$store.state.day}}日</p>
                     </div>
                  </router-link>
                 
         </div>  
         <p class='order-date-content'>需要在游玩当天的16：45前预定；预定后30分钟才能入园</p>
         <router-link class='button' :to="orderInformation" tag="div">
-              <button class="order-button">立即预定</button>
+              <button class="order-button" @click='handleOrderClick'>立即预定</button>
         </router-link>
     </div>
  
@@ -60,7 +60,9 @@
            return {
                today:'',
                tomorrow:'',
-               afterTomorrow:''
+               afterTomorrow:'',
+               otherShow:false,
+               pColor:[]
            }
        },
        props:{
@@ -72,6 +74,7 @@
       methods:{
          hanleDateClick:function(e){
              let div=document.getElementsByClassName('order-date-month')
+             let that = this
              div = Array.from(div)
              div.forEach((element,index) => {
               
@@ -79,20 +82,32 @@
                
               if(e.target.tagName === 'P'){
                   e.target.parentNode.style.backgroundColor = 'turquoise'
+              
+                  
              }else{
                  e.target.style.backgroundColor = 'turquoise'
+              
              }
-
-             });
+             that.pColor[0] = div[0].style.backgroundColor
+             that.pColor[1] = div[1].style.backgroundColor
+             that.pColor[2] = div[2].style.backgroundColor  
+             that.pColor[3] = div[3].style.backgroundColor 
+             
+             })
+           
+             
          },
          hanleChooseDateClick:function(e){
                 this.hanleDateClick(e)
+            
+                this.otherShow = true
 
          },
         
          hanleClick:function(){
              this.$emit('handleClickDisapper')
               let div=document.getElementsByClassName('order-date-month')
+              let other = document.getElementById('other')
              div = Array.from(div)
              div.forEach((element,index) => {
               
@@ -100,23 +115,39 @@
                
             
              });
+            this.otherShow = false
+         },
+         handleOrderClick:function(){
+             let div=document.getElementsByClassName('order-date')
+             div = Array.from(div)
+             this.pColor.forEach((element,index) => {
+              if(element === 'turquoise'){
+                 //this.$root.Bus.$emit('handleGetDate',div[index].innerHTML)
+                 this.$store.dispatch('handleGetDate',div[index].innerHTML)
+                 
+             }
+                
+             });
+
+              
+                
          }
       },
       mounted:function(){
            let date1 = new Date();
-           let month1 = date1.getMonth()+1;
-           let day1 = date1.getDate()
-           this.today = month1+"月"+ day1+"日"
+           this.month1 = date1.getMonth()+1;
+           this.day1 = date1.getDate()
+           this.today = this.month1+"月"+ this.day1+"日"
            let date2 = new Date()
            date2.setTime(date2.getTime()+ 24*60*60*1000);
-           let month2 = date2.getMonth()+1;
-           let day2 = date2.getDate()
-           this.tomorrow = month2+"月"+ day2+"日"
+           this.month2 = date2.getMonth()+1;
+           this.day2 = date2.getDate()
+           this.tomorrow = this.month2+"月"+ this.day2+"日"
            let date3 = new Date()
            date3.setTime(date3.getTime()+ 2*24*60*60*1000);
-           let month3 = date3.getMonth()+1;
-           let day3 = date3.getDate()
-           this.afterTomorrow = month3+"月"+ day3+"日"
+           this.month3 = date3.getMonth()+1;
+           this.day3 = date3.getDate()
+           this.afterTomorrow = this.month3+"月"+ this.day3+"日"
            if(this.today===this.$store.state.month+'月'+this.$store.state.day+'日'){
                   let div=document.getElementsByClassName('order-date-month')
                   div = Array.from(div)
@@ -148,7 +179,8 @@
                     });
                   div[2].style.backgroundColor='turquoise'
              }
-        }
+        },
+         
    }
 </script>
 

@@ -15,7 +15,7 @@
                <div class="ticket-information">
                   <div class="ticket-title">
                     <div class="ticket-title-information">{{this.$store.state.title}}</div>
-                    <div class="ticket-date">2019-07-20</div>
+                    <div class="ticket-date">{{this.$store.state.year}}年{{this.$store.state.date}}</div>
                   </div>
                   <div class="ticket-money">{{'￥'+this.$store.state.money+'/张'}}</div>
                </div>
@@ -145,7 +145,7 @@ export default{
    },
    handleClickBack:function(){
           this.$router.push({  
-             path:'/weekend-detail/'+this.parentId
+             path:'/'+this.$route.params.cityId+'/weekend-detail/'+this.parentId
            })
            this.name=''
            this.phone=''
@@ -255,7 +255,8 @@ export default{
            const button = document.getElementById('button');
            button.disabled = true
            button.style.backgroundColor = '#ccc'
-        }
+        },
+        
 }
 </script>
 

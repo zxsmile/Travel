@@ -13,14 +13,14 @@
                 <div class="title">热门城市</div>
                 <div class='city-list'>
                     <div class="list-wrapper" v-for='item of hotCities' :key='item.id' >
-                        <div class="list-content" @click='handleClick(item.name)'>{{item.name}}</div>
+                        <div class="list-content" @click='handleClick(item.name,item.id)'>{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class="area" v-for="(item,key) of cities" :key='key' :ref='key'>
                 <div class="title">{{key}}</div>
                 <div class="city-item border-bottom" v-for='innerItem of item' :key='innerItem.id'>
-                    <div class="item " @click='handleClick(innerItem.name)'>{{innerItem.name}}</div>
+                    <div class="item " @click='handleClick(innerItem.name,innerItem.id)'>{{innerItem.name}}</div>
                 </div>
                 
             </div>
@@ -35,9 +35,10 @@
   export default {
     name: 'CityList',
     methods: {
-      handleClick:function(city) {
+      handleClick:function(city,id) {
         this.$store.dispatch('changeCity',city)
-        this.$router.push('./')
+        this.$store.dispatch('changeId',id)
+        this.$router.push('/'+ this.$store.state.id)
         }
     },
     mounted:function() { 
@@ -56,7 +57,8 @@
     props: {
       cities:Object,
       hotCities:Array,
-      letter:String
+      letter:String,
+      id:String
     },
     watch: {
       letter: function() {

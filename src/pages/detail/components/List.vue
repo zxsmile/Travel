@@ -126,7 +126,7 @@ export default {
     }
     
    .border-bottom-content{
-       border-bottom:10px solid #F5F5DC;
+       border-bottom:0px solid #F5F5DC;
        border-radius: 5px;
       
     }

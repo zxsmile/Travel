@@ -27,7 +27,7 @@ export default{
     methods:{
         handleClick:function(city){
            this.$store.dispatch('changeCity',city)
-           this.$router.push('./')
+           this.$router.push('/'+ this.id)
         }
     },
     data:function(){
@@ -38,7 +38,8 @@ export default{
         }
     },
     props:{
-        cities:Object
+        cities:Object,
+        id:String
     },
     computed:{
         hasNoList:function(){

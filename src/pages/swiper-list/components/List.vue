@@ -5,7 +5,7 @@
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>
                <p class="recommend-describe">{{item.recommendDescribe}}</p>
-               <p class="recommend-button">￥39起</p>
+               <p class="recommend-button">￥{{item.recommandMoney}}</p>
            </div>
        </router-link>
    </div>

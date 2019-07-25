@@ -6,7 +6,7 @@
           tag='div' 
           class='icon' 
           v-for="item of page" 
-          :to="'./swiper-list/' + item.parentId" 
+          :to="cityId+'/swiper-list/' + item.parentId" 
           :key="item.parentId">
               <div class="icon-img">
                  <img :src='item.ImgUrl' class='icon-img-content'> 
@@ -35,7 +35,8 @@
   },
 
   props:{
-      IconsList:Array
+      IconsList:Array,
+      cityId:String
   },
   computed:{
      pages:function(){
@@ -90,7 +91,7 @@
           left:0;
           right:0;
           bottom:0;
-          top:71.75px
+          
      }
       .icon-name-content{
        text-align: center;

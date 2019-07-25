@@ -2,7 +2,7 @@
    <div>
      <div class="address">
          <span class="address-icon iconfont">&#xe61e;</span>
-         <router-link :to='MapAddress' class="address-content" tag='div'>陕西省西安市雁塔曲江新区芙蓉西路99号</router-link>
+         <router-link :to='MapAddress' class="address-content" tag='div'>{{address}}</router-link>
          <span class="address-icon-right iconfont">&#xe612;</span>
      </div>
      <div class="introduce">
@@ -24,6 +24,7 @@ export default {
       DetailList
   },
  props:{
+     address:String,
      list:Array,
      introduce:String,
      date:String,

@@ -8,6 +8,15 @@ export default{
         }
         
     },
+    changeIdData:function(state,id){
+        state.id=id
+        try{
+            localStorage.id = id
+        }catch(e){
+
+        }
+        
+    },
     changeTitleData:function(state,title){
         state.title = title
         try{
@@ -48,6 +57,15 @@ export default{
 
         }
     },
+    handleGetDateData:function(state,date){
+        state.date = date
+        try{
+            localStorage.date = date
+        }catch(e){
+
+        }
+    }
+
     // changeParentId:function(state,parentId){
     //     state.parentId = parentId
     // }

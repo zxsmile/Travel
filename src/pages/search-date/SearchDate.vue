@@ -3,7 +3,7 @@
            <div class='header'>
                <router-link 
                tag='div' 
-               :to="'/search-detail/'+parentId" 
+               :to="'/'+cityId+'/search-detail/'+parentId" 
                class='iconfont header-back'
                 @click="gethandleStatic"
                >
@@ -42,6 +42,7 @@ export default{
         return{
            parentId:'' ,
            listId:'',
+           cityId:'',
            year:'',
            month:'',
            day:'',
@@ -116,7 +117,7 @@ export default{
             this.$store.dispatch('GetMonth',this.month)
             this.$store.dispatch('GetDay',e.target.innerHTML)
             this.$router.push({ 
-            path:'/search-detail/'+ this.parentId
+            path:'/'+this.cityId+'/search-detail/'+ this.parentId
             })
    }
       
@@ -125,12 +126,14 @@ export default{
   mounted:function(){
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
+           this.cityId = this.$route.params.cityId
            this.getCalendar()
            this.gethandleStatic()
         },
   activated:function(){
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
+           this.cityId = this.$route.params.cityId
            this.gethandleStatic()
         }
 }

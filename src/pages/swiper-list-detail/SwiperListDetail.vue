@@ -8,17 +8,18 @@
         </detail-banner>
         
         <detail-header 
-        :back="back+'/' + parentId"
+        :back="back+ cityId+'/swiper-list/'+ parentId"
         >
         </detail-header>
         
         <detail-content 
         :list='list' 
+        :address='address'
         :parentId='parentId' 
-        :introduce=" introduce + '/'+parentId+'/swiper-list-detail/'+ listId+'/introduce'" 
-        :date="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/date'"
-        :orderInformation="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/order-information'"
-        :MapAddress="date + '/'+parentId+'/swiper-list-detail/'+ listId+'/swiper-list-map-address'"
+        :introduce=" introduce +  cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId+'/introduce'" 
+        :date="date +  cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId+'/date'"
+        :orderInformation="date +  cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId+'/order-information'"
+        :MapAddress="date +  cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId+'/swiper-list-map-address'"
         >
         </detail-content>
     </div>
@@ -45,31 +46,37 @@ import axios from 'axios'
             bannnerName:'',
             bannerImg:'',
             gallaryImgs:[],
+            address:'',
             list:[],
-            back:'/swiper-list',
-            introduce:'/swiper-list',
+            back:'/',
+            introduce:'/',
             parentId:'',
             listId:'',
-            date:'/swiper-list'
+            cityId:'',
+            date: '/',
            
            }
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/swiper-list-detail.json?id='+ this.$route.params.listId)
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this.getSwiperListDetailInfoSuccess)
            },
            getSwiperListDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const datas = res.data[this.$route.params.parentId].detail
+                  const datas = res.data[this.$route.params.cityId].swiperListDetail[this.$route.params.parentId].detail
                   const data = datas[this.$route.params.listId]
                   this.bannerImg = data.bannerImg
-                  this.gallaryImgs = data.gallaryImgs
+                  this.gallaryImgs = data.gallaryImgs,
+                  this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
                   this.listId = this.$route.params.listId
+                  this.cityId = this.$route.params.cityId
+                  
+                 
               } 
            }
            

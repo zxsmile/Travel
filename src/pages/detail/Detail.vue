@@ -1,11 +1,12 @@
 <template>
      <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
-        <detail-header :back='back'></detail-header>
+        <detail-header :back="back+ cityId"></detail-header>
         <detail-content 
+        :address='address'
         :list='list' 
-        :introduce="introduce + parentId +'/introduce'"
-        :date="date +parentId+'/date'"
+        :introduce="introduce +cityId+'/detail/' +parentId +'/introduce'"
+        :date="date +cityId+'/detail/' +parentId+'/date'"
         :orderInformation="date +parentId+'/recommand-order-information'"
         :MapAddress ="date +parentId+'/recommand-map-address'"
         >
@@ -35,28 +36,33 @@ import axios from 'axios'
             bannnerName:'',
             bannerImg:'',
             gallaryImgs:[],
+            address:'',
             list:[],
             back:'/',
-            introduce:'/detail/',
+            introduce:'/',
             parentId:'',
-            date:'/detail/'
+            cityId:'',
+            date:'/',
+            
            }
        },
       
        methods:{
            getDetailInfo:function(){
-               axios.get('/api/detail.json?id='+this.$route.params.parentId)
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this.getDetailInfoSuccess)
            },
            getDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.parentId]
+                  const data = res.data[this.$route.params.cityId].detail[this.$route.params.parentId]
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
+                  this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
+                    this.cityId = this.$route.params.cityId
               }
            }
            

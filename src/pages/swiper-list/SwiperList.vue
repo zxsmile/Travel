@@ -1,6 +1,6 @@
 <template>
      <div>
-       <swiper-header :title='title'></swiper-header>
+       <swiper-header :title='title' :cityId='cityId'></swiper-header>
        <list :recommandList='recommandList' :parentId = "parentId"></list>
      </div>
 </template>
@@ -19,22 +19,23 @@ import axios from 'axios'
            return {
                recommandList:[],
                title:'',
-               parentId:''
+               parentId:'',
+               cityId:''
            }
        },
        methods:{
            getSwiperListInfo:function(){
-               axios.get('/api/swiper-list.json?id='+ this.$route.params.parentId)
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this. getSwiperListInfoSuccess)
            },
            getSwiperListInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.parentId]
+                  const data = res.data[this.$route.params.cityId].swiperList[this.$route.params.parentId]
                   this.recommandList = data.recommandList
                   this.title = data.title
                   this.parentId = this.$route.params.parentId
-                  
+                  this.cityId=this.$route.params.cityId
               }
            }
 

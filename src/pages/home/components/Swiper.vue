@@ -36,15 +36,20 @@ export default {
 <style scoped>
      .swiper >>> .swiper-pagination-bullet-active {
          background-color: #fff;
+         
      }
+    .swiper >>> .swiper-pagination-bullets{
+        bottom:30px;
+    }
     .swiper{
         width:100%;
         height:0;
-        padding-bottom:31.25%;
+        padding-bottom:46.2%;
         overflow:hidden;
     }
     .swiper-img{
         width:100%;
+        height:100%;
     }
     
 

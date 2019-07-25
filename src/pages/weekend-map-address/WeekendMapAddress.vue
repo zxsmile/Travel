@@ -3,7 +3,7 @@
              <div class='header'>
                <router-link 
                tag='div' 
-               :to="'/weekend-detail/'+ parentId" 
+               :to="'/'+cityId+'/weekend-detail/'+ parentId" 
                class='iconfont header-back'
               
                >
@@ -24,7 +24,8 @@
                address_detail: null, //详细地址
                userlocation: {lng: "", lat: ""},
                parentId:'',
-               listId:''
+               listId:'',
+               cityId:''
            }
        },
        mounted(){
@@ -76,13 +77,13 @@
            }) 
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
-          
+           this.cityId = this.$route.params.cityId
        },
       
         activated:function(){
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
-          
+           this.cityId = this.$route.params.cityId
         }
  
    }

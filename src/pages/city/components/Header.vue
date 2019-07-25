@@ -1,6 +1,6 @@
 <template>
         <div class='header'>
-            <router-link to='/'>
+            <router-link :to="'/'+ this.$store.state.id">
                 <div class='iconfont back-icon'>&#xe624;</div>
             </router-link>
             <div class='header-title'>城市选择</div>
@@ -9,7 +9,10 @@
 
 <script>
 export default{
-    name:'CityHeader'
+    name:'CityHeader',
+    props:{
+        id:String
+    }
 }
 </script>
 

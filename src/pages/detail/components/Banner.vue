@@ -6,7 +6,7 @@
             <div class='banner-title'>{{bannnerName}}</div>
             <div class='banner-number'>
                 <span class='iconfont banner-icon'>&#xe606;</span>
-                 36
+                 {{this.imgs.length}}
            </div>
         </div>
       </div>

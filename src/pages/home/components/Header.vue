@@ -1,13 +1,13 @@
 <template>
     <div class='header'>
         <div class='header-left'>
-            <div class='iconfont back-icon'>&#xe624;</div>
+            <div class='iconfont back-icon' @click='handleClickBack'>&#xe624;</div>
         </div>
         <!-- <div class='header-middle'> -->
             <i class='iconfont search' v-show = 'searchIcon'>&#xe632;</i>
             <input type='text' placeholder='输入城市/景点/游玩主题' class='header-middle' v-model="searchData" />
         <!-- </div> -->
-        <router-link to='/city'>
+        <router-link :to="'/'+this.$store.state.id+'/city'">
             <div class='header-right'>
                 <div class='header-right-content'>
                {{this.$store.state.city}}
@@ -49,13 +49,20 @@ export default {
         handleClick:function(id){
            
             this.$router.push({  
-             path:'/search-detail/'+ id
+             path:'/'+this.$store.state.id+'/search-detail/'+ id
+           })
+           
+        },
+        handleClickBack:function(){
+            this.$router.push({  
+             path:'/'
            })
            
         }
     },
      props:{
-        cities:Object
+        cities:Object,
+        cityId:String
     },
      computed:{
         hasNoList:function(){

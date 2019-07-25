@@ -1,7 +1,7 @@
 <template>
    <div>
        <div class="title">周末去哪儿</div>
-       <router-link :to="'./weekend-detail/' + item.parentId"  tag='div' class=" weekend" v-for='item of weekendList' :key='item.parentId'>
+       <router-link :to="cityId+'/weekend-detail/' + item.parentId"  tag='div' class=" weekend" v-for='item of weekendList' :key='item.parentId'>
            <div class=' weekend-img'>
                <img  class="img" :src="item.weekendImgSrc" />
            </div>
@@ -22,7 +22,8 @@ export default{
     }
    },
    props:{
-       weekendList:Array
+       weekendList:Array,
+       cityId:String
    }
 }
 </script>

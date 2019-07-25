@@ -1,8 +1,8 @@
 <template>
         <div class='city'>
-            <city-header></city-header>
-            <city-search :cities='cities'></city-search>
-            <city-list :cities='cities' :hotCities="hotCities" :letter="letter"></city-list>
+            <city-header :id='id'></city-header>
+            <city-search :cities='cities' :id='id'></city-search>
+            <city-list :cities='cities' :hotCities="hotCities" :letter="letter" :id='id'></city-list>
             <city-alphabet :cities='cities' @change='handleClickChange'></city-alphabet>
         </div>
 </template>
@@ -25,7 +25,8 @@ export default{
         return{
             cities:{},
             hotCities:[],
-            letter:''
+            letter:'',
+            id:''
         }
   },
   methods:{
@@ -39,6 +40,8 @@ export default{
             let data = res.data;
              this.cities=data.cities
              this.hotCities = data.hotCities
+             this.id = this.$route.params.id
+             
          }
      },
      handleClickChange:function(res){
@@ -47,6 +50,10 @@ export default{
   },
   mounted:function(){
       this.getCityInfo()
+  },
+  activated:function(){
+    this.getCityInfo()
+        
   }
 }
 </script>

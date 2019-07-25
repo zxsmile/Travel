@@ -3,7 +3,7 @@
            <div class='header'>
                <router-link 
                tag='div' 
-               :to="'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId" 
+               :to="'/'+cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId" 
                class='iconfont header-back'
                @click="gethandleStatic"
                >
@@ -42,6 +42,7 @@ export default{
         return{
            parentId:'' ,
            listId:'',
+           cityId:'',
            year:'',
            month:'',
            day:'',
@@ -116,8 +117,9 @@ export default{
             this.$store.dispatch('GetMonth',this.month)
             this.$store.dispatch('GetDay',e.target.innerHTML)
             this.$router.push({ 
-            path:'/swiper-list/'+ this.parentId+'/swiper-list-detail/'+ this.listId
+            path:'/'+this.cityId+'/swiper-list/'+ this.parentId+'/swiper-list-detail/'+ this.listId
             })
+          
    }
       
 },
@@ -125,14 +127,19 @@ export default{
   mounted:function(){
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
+           this.cityId = this.$route.params.cityId
            this.getCalendar()
            this.gethandleStatic()
         },
   activated:function(){
            this.parentId = this.$route.params.parentId
            this.listId = this.$route.params.listId
+           this.cityId = this.$route.params.cityId
            this.gethandleStatic()
-        }
+        },
+        
+     
+
  
 }
 </script>

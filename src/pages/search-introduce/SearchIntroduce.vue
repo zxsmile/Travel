@@ -20,19 +20,19 @@ import  axios from 'axios'
                introduceList:[],
                parentId:'',
                listId:'',
-               introduceBack:'/search-detail/',
+               introduceBack:'/'+this.$route.params.cityId+'/search-detail/',
                
            }
        },
          methods:{
            getIntroduceInfo:function(){
-               axios.get('/api/search-introduce.json')
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this.getIntroduceInfoSuccess)
            },
            getIntroduceInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.id]
+                  const data = res.data[this.$route.params.cityId].searchIntroduce[this.$route.params.id]
                   this.introduceList = data.introduceList
                   this.parentId = this.$route.params.id
                   this.listId = this.$route.params.id

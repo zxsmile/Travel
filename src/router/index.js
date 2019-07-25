@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Page from '@/pages/page/Page'
 import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
@@ -30,94 +31,99 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Page',
+      component: Page
+    },
+    {
+      path: '/:cityId',
       name: 'Home',
       component: Home
     },{
-      path: '/city',
+      path: '/:id/city',
       name: 'City',
       component: City
   },{
-    path: '/detail/:parentId',
+    path: '/:cityId/detail/:parentId',
     name: 'Detail',
     component: Detail
 },{
-  path: '/swiper-list/:parentId/swiper-list-detail/:listId/introduce',
+  path: '/:cityId/swiper-list/:parentId/swiper-list-detail/:listId/introduce',
   name: 'Introduce',
   component: Introduce
 },{
-  path: '/swiper-list/:parentId',
+  path: '/:cityId/swiper-list/:parentId',
   name: 'SwiperList',
   component: SwiperList
 },{
-  path: '/swiper-list/:parentId/swiper-list-detail/:listId',
+  path: '/:cityId/swiper-list/:parentId/swiper-list-detail/:listId',
   name: 'SwiperListDetail',
   component: SwiperListDetail
 },{
-  path: '/weekend-detail/:parentId',
+  path: '/:cityId/weekend-detail/:parentId',
   name: 'WeekendDetail',
   component: WeekendDetail
 },{
-  path: '/weekend-detail/:parentId/introduce',
+  path: '/:cityId/weekend-detail/:parentId/introduce',
   name: 'WeekendIntroduce',
   component: WeekendIntroduce
 },{
-  path: '/detail/:parentId/introduce',
+  path: '/:cityId/detail/:parentId/introduce',
   name: 'ListIntroduce',
   component: ListIntroduce
 },{
-  path: '/search-detail/:id',
+  path: '/:cityId/search-detail/:id',
   name: 'SearchDetail',
   component: SearchDetail
 },{
-  path: '/search-detail/:id/introduce',
+  path: '/:cityId/search-detail/:id/introduce',
   name: 'SearchIntroduce',
   component: SearchIntroduce
 },{
-  path: '/search-detail/:parentId/date',
+  path: '/:cityId/search-detail/:parentId/date',
   name: 'SearchDate',
   component: SearchDate
 },{
-  path: '/swiper-list/:parentId/swiper-list-detail/:listId/date',
+  path: '/:cityId/swiper-list/:parentId/swiper-list-detail/:listId/date',
   name: 'SwiperListDate',
   component: SwiperListDate
 },{
-  path: '/weekend-detail/:parentId/date',
+  path: '/:cityId/weekend-detail/:parentId/date',
   name: 'WeekendDate',
   component: WeekendDate
 },{
-  path: '/detail/:parentId/date',
+  path: '/:cityId/detail/:parentId/date',
   name: 'RecommandDate',
   component: RecommandDate
 },{
-  path: '/swiper-list/:parentId/swiper-list-detail/:listId/order-information',
+  path: '/:cityId/swiper-list/:parentId/swiper-list-detail/:listId/order-information',
   name: 'OrderInformation',
   component: OrderInformation
 },{
-  path: '/weekend-detail/:parentId/weekend-order-information',
+  path: '/:cityId/weekend-detail/:parentId/weekend-order-information',
   name: 'WeekendOrderInformation',
   component: WeekendOrderInformation
 },{
-  path: '/detail/:parentId/recommand-order-information',
+  path: '/:cityId/detail/:parentId/recommand-order-information',
   name: 'RecommandOrderInformation',
   component:RecommandOrderInformation
 },{
-  path: '/search-detail/:parentId/search-order-information',
+  path: '/:cityId/search-detail/:parentId/search-order-information',
   name: 'SearchOrderInformation',
   component: SearchOrderInformation
 },{
-  path: '/swiper-list/:parentId/swiper-list-detail/:listId/swiper-list-map-address',
+  path: '/:cityId/swiper-list/:parentId/swiper-list-detail/:listId/swiper-list-map-address',
   name: 'SwiperListMapAddress',
   component: SwiperListMapAddress
 },{
-  path: '/detail/:parentId/recommand-map-address',
+  path: '/:cityId/detail/:parentId/recommand-map-address',
   name: 'RecommandMapAddress',
   component: RecommandMapAddress
 },{
-  path: '/weekend-detail/:parentId/weekend-map-address',
+  path: '/:cityId/weekend-detail/:parentId/weekend-map-address',
   name: 'WeekendMapAddress',
   component: WeekendMapAddress
 },{
-  path: '/search-detail/:parentId/search-map-address',
+  path: '/:cityId/search-detail/:parentId/search-map-address',
   name: 'SearchMapAddress',
   component: SearchMapAddress
 }],

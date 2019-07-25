@@ -5,7 +5,7 @@
       </div>
       <div class='header-fixed' v-show='!showCircle' :style="opacityStyle">
          <div class='header-fixed-title'>
-             <router-link to='/'>
+             <router-link :to='back'>
                  <div class='iconfont header-fixed-icon'>&#xe624;</div>
              </router-link>
              景点详情

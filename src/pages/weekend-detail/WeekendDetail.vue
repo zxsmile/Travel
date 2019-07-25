@@ -1,13 +1,14 @@
 <template>
      <div>
         <detail-banner :imgs='gallaryImgs' :bannerImg='bannerImg' :bannnerName='bannnerName'></detail-banner>
-        <detail-header :back='back'></detail-header>
-        <detail-content 
+        <detail-header :back='back+cityId'></detail-header>
+        <detail-content
+        :address='address' 
         :list='list' 
-        :introduce="introduce + parentId +'/introduce'"
+        :introduce="introduce +cityId+'/weekend-detail/'+ parentId +'/introduce'"
         :date="date +parentId+'/date'"
-        :orderInformation="date +parentId+'/weekend-order-information'"
-        :MapAddress ="date +parentId+'/weekend-map-address'"
+        :orderInformation="date +cityId+'/weekend-detail/'+parentId+'/weekend-order-information'"
+        :MapAddress ="date +cityId+'/weekend-detail/'+parentId+'/weekend-map-address'"
         >
         </detail-content>
     </div>
@@ -34,28 +35,32 @@ import axios from 'axios'
             bannnerName:'',
             bannerImg:'',
             gallaryImgs:[],
+            address:'',
             list:[],
             back:'/',
-            introduce:'/weekend-detail/',
+            introduce:'/',
              parentId:'',
-             date:'/weekend-detail/'
+             date:'/',
+            cityId:'',
            }
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/weekend-detail.json?id='+ this.$route.params.parentId)
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this.getSwiperListDetailInfoSuccess)
            },
            getSwiperListDetailInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.parentId]
+                  const data = res.data[this.$route.params.cityId].weekendDetail[this.$route.params.parentId]
                  
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
+                  this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
+                  this.cityId = this.$route.params.cityId
               } 
            }
            

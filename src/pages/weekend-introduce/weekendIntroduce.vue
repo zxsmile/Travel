@@ -20,19 +20,19 @@ import  axios from 'axios'
                introduceList:[],
                parentId:'',
                listId:'',
-               introduceBack:'/weekend-detail/',
+               introduceBack:'/'+this.$route.params.cityId+'/weekend-detail/',
                
            }
        },
          methods:{
            getIntroduceInfo:function(){
-               axios.get('/api/weekend-introduce.json')
+               axios.get('/api/index.json?city='+this.$store.state.city)
                .then(this.getIntroduceInfoSuccess)
            },
            getIntroduceInfoSuccess:function(res){
                res = res.data
               if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.parentId]
+                  const data = res.data[this.$route.params.cityId].weekendIntroduce[this.$route.params.parentId]
                   this.introduceList = data.introduceList
                   this.parentId = this.$route.params.parentId
                   this.listId = this.$route.params.listId

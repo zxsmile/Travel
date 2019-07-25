@@ -1,6 +1,6 @@
 <template>
         <div class='header'>
-            <router-link to='/'>
+            <router-link :to="'/'+cityId">
                 <div class='iconfont back-icon'>&#xe624;</div>
             </router-link>
             <div class='header-title'>{{title}}</div>
@@ -11,7 +11,8 @@
 export default{
     name:'SwiperHeader',
     props:{
-       title:String
+       title:String,
+       cityId:String
     }
 }
 </script>

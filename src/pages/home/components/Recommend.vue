@@ -2,7 +2,7 @@
    <div>
        <div class="title">热销推荐</div>
        <router-link
-        :to="'./detail/'+ item.parentId"
+        :to="cityId+'/detail/'+ item.parentId"
         tag='div'
         class="recommend"
         v-for='item of  recommandList'
@@ -21,7 +21,8 @@
 export default{
    name:'HomeRecommend',
    props:{
-       recommandList:Array
+       recommandList:Array,
+       cityId:String
    },
 }
 </script>

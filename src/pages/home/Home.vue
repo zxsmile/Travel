@@ -1,10 +1,10 @@
 <template>
     <div>
-        <home-header :cities="cities"></home-header>
+        <home-header :cities="cities" :cityId='cityId'></home-header>
         <home-swiper :SwiperList='SwiperList'></home-swiper>
-        <home-icons :IconsList='IconsList'></home-icons>
-        <home-recommend :recommandList='recommandList'></home-recommend>
-        <home-weekend :weekendList='weekendList'></home-weekend>
+        <home-icons :IconsList='IconsList' :cityId='cityId'></home-icons>
+        <home-recommend :recommandList='recommandList' :cityId='cityId'></home-recommend>
+        <home-weekend :weekendList='weekendList' :cityId='cityId'></home-weekend>
     </div>
 </template>
 
@@ -31,7 +31,9 @@ export default {
      recommandList:[],
      weekendList:[],
      lastCity:'',
-     cities:{}
+     cities:{},
+     cityId:'',
+     
    } 
   },
   methods:{
@@ -42,13 +44,13 @@ export default {
      getHomeInfoSuccess:function(res){
         res=res.data
         if(res.ret&&res.data){
-          const data = res.data
+          const data = res.data[this.$route.params.cityId]
           this.SwiperList=data.SwiperList
           this.IconsList=data.IconsList
           this.recommandList=data.recommandList
           this.weekendList=data.weekendList
           this.cities = data.cities
-         
+          this.cityId = this.$route.params.cityId
         }
      }
   },

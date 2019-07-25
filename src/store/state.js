@@ -4,6 +4,8 @@ let money = ''
 let year = ''
 let month = ''
 let day = ''
+let date = ''
+let id = ''
 
  try{
    if(localStorage.city){
@@ -24,6 +26,12 @@ let day = ''
   if(localStorage.day){
     day = localStorage.day
   }
+  if(localStorage.date){
+    date = localStorage.date
+  }
+  if(localStorage.id){
+    id = localStorage.id
+  }
  }catch(e){
 
  }
@@ -37,7 +45,10 @@ let day = ''
         money:money,
         year:year,
         month:money,
-        day:day
+        day:day,
+        date:date,
+        id:id
+       
         // parentId:0
     
  }
