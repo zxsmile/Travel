@@ -2,7 +2,7 @@
    <div>
        <div class="title">热销推荐</div>
        <router-link
-        :to="cityId+'/detail/'+ item.parentId"
+        :to="cityId+'/detail/'+  (item.recommandList_id-1)"
         tag='div'
         class="recommend"
         v-for='item of  recommandList'

@@ -105,7 +105,7 @@ export default {
       z-index:99;
       width:100%;
       height:43px;
-      background-color: turquoise;
+      background-color: #DCDCDC;
       position:fixed;
       top:0;
       left:0;

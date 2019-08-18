@@ -72,6 +72,7 @@ export default {
               this.$store.dispatch('changeMoney',money)
               this.OrderShow = !this.OrderShow;
               this.$root.Bus.$emit('displayDiv')
+              this.$root.Bus.$emit('disabledOrderButton')
              
        },
        handleClickOrderhidden:function(){

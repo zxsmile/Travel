@@ -1,6 +1,6 @@
 <template>
     <div>
-        <home-header :cities="cities" :cityId='cityId'></home-header>
+        <home-header :cityId='cityId' :scenic="scenic"></home-header>
         <home-swiper :SwiperList='SwiperList'></home-swiper>
         <home-icons :IconsList='IconsList' :cityId='cityId'></home-icons>
         <home-recommend :recommandList='recommandList' :cityId='cityId'></home-recommend>
@@ -31,27 +31,35 @@ export default {
      recommandList:[],
      weekendList:[],
      lastCity:'',
-     cities:{},
      cityId:'',
-     
+     scenic:{}
    } 
   },
   methods:{
      getHomeInfo:function(){
-       axios.get('/api/index.json?city='+this.$store.state.city)
-         .then(this.getHomeInfoSuccess)
+       axios.get('/api')
+         .then(this.getHomeInfoSuccess,function(){
+           console.log('获取数据失败')
+         })
      },
      getHomeInfoSuccess:function(res){
-        res=res.data
-        if(res.ret&&res.data){
-          const data = res.data[this.$route.params.cityId]
-          this.SwiperList=data.SwiperList
-          this.IconsList=data.IconsList
-          this.recommandList=data.recommandList
-          this.weekendList=data.weekendList
-          this.cities = data.cities
-          this.cityId = this.$route.params.cityId
+          res=res.data
+        if(!res.SwiperList[this.$store.state.city]){
+          this.SwiperList=res.SwiperList['北京']
+          this.IconsList=res.IconList['北京']
+          this.recommandList=res.recommandList['北京']
+          this.weekendList=res.weekendList['北京']
+        }else{
+          this.SwiperList=res.SwiperList[this.$store.state.city]
+          this.IconsList=res.IconList[this.$store.state.city]
+          this.recommandList=res.recommandList[this.$store.state.city]
+          this.weekendList=res.weekendList[this.$store.state.city]
         }
+          this.scenic = res.scenic
+          this.cityId=this.$store.state.city
+          console.log('成功')
+      
+        
      }
   },
   mounted:function(){

@@ -5,7 +5,7 @@
         <detail-content 
         :address='address' 
         :list='list' 
-        :introduce="introduce + parentId +'/introduce'"
+        :introduce="introduce +cityId+'/search-detail/'+ parentId +'/introduce'"
         :date="date +cityId+'/search-detail/'+parentId+'/date'"
         :orderInformation="date +cityId+'/search-detail/'+parentId+'/search-order-information'"
         :MapAddress ="date+cityId+'/search-detail/' +parentId+'/search-map-address'"
@@ -46,23 +46,22 @@ import axios from 'axios'
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this.getSwiperListDetailInfoSuccess)
+               axios.get('/api/search-detail')
+               .then(this.getSwiperListDetailInfoSuccess,function(){
+                   console.log('获取数据失败')
+               })
            },
            getSwiperListDetailInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].searchDetail[this.$route.params.id]
-                 
+                  res = res.data
+                  const data = res[this.$route.params.id]
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.id,
-                   this.cityId = this.$route.params.cityId
+                  this.cityId = this.$route.params.cityId
               } 
-           }
            
        },
        mounted:function(){

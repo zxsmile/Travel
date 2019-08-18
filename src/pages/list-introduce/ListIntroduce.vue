@@ -26,20 +26,22 @@ import  axios from 'axios'
        },
          methods:{
            getIntroduceInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
+               axios.get('/api/recommend-introduce')
                .then(this.getIntroduceInfoSuccess)
            },
            getIntroduceInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].recommandIntroduce[this.$route.params.parentId]
-                 this.introduceList = data.introduceList
+                  res = res.data
+                  let data=''
+                  if(!res[this.$store.state.city]){
+                      data = res['北京'][this.$route.params.parentId]
+                  }else{
+                      data = res[this.$store.state.city][this.$route.params.parentId]
+                  }
+                  this.introduceList = data.introduceList
                   this.parentId = this.$route.params.parentId
                   this.listId = this.$route.params.listId
                   
            }
-           
-       }
          },
        mounted:function(){
            this.getIntroduceInfo()

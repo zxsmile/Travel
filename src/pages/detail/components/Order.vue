@@ -38,15 +38,15 @@
                  >
                     <div class="order-date-month" @click='hanleChooseDateClick'>
                         其他日期
-                      <p v-show='otherShow' class="order-date">{{this.$store.state.month}}月{{this.$store.state.day}}日</p>
+                      <p v-show='otherShow' class="order-date">{{otherDataChange}}</p>
                     </div>
                  </router-link>
                 
         </div>  
         <p class='order-date-content'>需要在游玩当天的16：45前预定；预定后30分钟才能入园</p>
-        <router-link class='button' :to="orderInformation" tag="div">
-              <button class="order-button" @click='handleOrderClick'>立即预定</button>
-        </router-link>
+        <div class='button'>
+              <button class="order-button" @click='handleOrderClick' :disabled='disabledOrder'>立即预定</button>
+        </div>
     </div>
  
 </template>
@@ -62,7 +62,9 @@
                tomorrow:'',
                afterTomorrow:'',
                otherShow:false,
-               pColor:[]
+               pColor:[],
+               otherData:'',
+               disabledOrder:true
            }
        },
        props:{
@@ -79,8 +81,8 @@
              div.forEach((element,index) => {
               
                     element.style.backgroundColor='white'
-               
-              if(e.target.tagName === 'P'){
+                    
+                if(e.target.tagName === 'P'){
                   e.target.parentNode.style.backgroundColor = 'turquoise'
               
                   
@@ -91,31 +93,27 @@
              that.pColor[0] = div[0].style.backgroundColor
              that.pColor[1] = div[1].style.backgroundColor
              that.pColor[2] = div[2].style.backgroundColor  
-             that.pColor[3] = div[3].style.backgroundColor 
-             
+             that.pColor[3] = div[3].style.backgroundColor   
+              
+                 this.disabledOrder=false
+                 let orderButton = document.getElementsByClassName('order-button')[0]
+                 orderButton.style.backgroundColor="coral"
              })
            
              
          },
          hanleChooseDateClick:function(e){
                 this.hanleDateClick(e)
-            
                 this.otherShow = true
 
          },
         
          hanleClick:function(){
              this.$emit('handleClickDisapper')
-              let div=document.getElementsByClassName('order-date-month')
-              let other = document.getElementById('other')
-             div = Array.from(div)
-             div.forEach((element,index) => {
-              
-                    element.style.backgroundColor='white'
-               
-            
-             });
+              this.dateColor ()
             this.otherShow = false
+            this.$store.state.day=''
+            this.$store.state.month=''
          },
          handleOrderClick:function(){
              let div=document.getElementsByClassName('order-date')
@@ -124,17 +122,30 @@
               if(element === 'turquoise'){
                  //this.$root.Bus.$emit('handleGetDate',div[index].innerHTML)
                  this.$store.dispatch('handleGetDate',div[index].innerHTML)
-                 
-             }
-                
-             });
-
-              
-                
-         }
-      },
-      mounted:function(){
-           let date1 = new Date();
+                }
+            });
+            if(!this.$store.state.month||!this.$store.state.day){
+                 this.disabledOrder=true
+                 let orderButton = document.getElementsByClassName('order-button')[0]
+                 orderButton.style.backgroundColor="coral"
+            }
+            this.$router.push({ 
+                  path:this.orderInformation
+            })
+        
+        },
+        dateColor (i){
+             let div=document.getElementsByClassName('order-date-month')
+             div = Array.from(div)
+             div.forEach((element,index) => {
+                 element.style.backgroundColor='white'
+                if(i!==undefined){
+                    div[i].style.backgroundColor='turquoise'
+                }
+            });
+        },
+        computedDate() {
+            let date1 = new Date();
            this.month1 = date1.getMonth()+1;
            this.day1 = date1.getDate()
            this.today = this.month1+"月"+ this.day1+"日"
@@ -149,37 +160,47 @@
            this.day3 = date3.getDate()
            this.afterTomorrow = this.month3+"月"+ this.day3+"日"
            if(this.today===this.$store.state.month+'月'+this.$store.state.day+'日'){
-                  let div=document.getElementsByClassName('order-date-month')
-                  div = Array.from(div)
-                  div[0].style.backgroundColor='turquoise'
-             }
+                  this.dateColor (0)
+            }else if(this.tomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  this.dateColor (1)
+            }else if(this.afterTomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
+                  this.dateColor (2)
+            }else if(!this.$store.state.month||!this.$store.state.day){
+                   this.dateColor ()
+                   this.disabledOrder=true
+                   let orderButton = document.getElementsByClassName('order-button')[0]
+                   orderButton.style.backgroundColor="coral"
+            }
+        }
+      },
+      computed:{
+         otherDataChange:function(){
+               if(this.$store.state.month||this.$store.state.day){
+                      this.otherData = this.$store.state.month+'月'+this.$store.state.day+'日'
+               }else{
+                   this.otherData = ''
+               }
+               return this.otherData
+         }
+      },
+      mounted:function(){
+          
+        this.computedDate()
+        let orderButton = document.getElementsByClassName('order-button')[0]
+                 orderButton.style.backgroundColor="#ccc"
+          this.$root.Bus.$on('orderButtonColor',()=>{
+            this.$nextTick(()=>{
+                let orderButton = document.getElementsByClassName('order-button')
+                orderButton[0].style.backgroundColor="coral"
+                 this.computedDate()
+            })
+        }) 
       },
        activated:function(){
-             if(this.today===this.$store.state.month+'月'+this.$store.state.day+'日'){
-                  let div=document.getElementsByClassName('order-date-month')
-                  div = Array.from(div)
-                    div.forEach((element,index) => {
-                       element.style.backgroundColor='white'
-                    });
-                  div[0].style.backgroundColor='turquoise'
-             }
-             if(this.tomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
-                  let div=document.getElementsByClassName('order-date-month')
-                  div = Array.from(div)
-                    div.forEach((element,index) => {
-                       element.style.backgroundColor='white'
-                    });
-                  div[1].style.backgroundColor='turquoise'
-             }
-             if(this.afterTomorrow===this.$store.state.month+'月'+this.$store.state.day+'日'){
-                  let div=document.getElementsByClassName('order-date-month')
-                  div = Array.from(div)
-                    div.forEach((element,index) => {
-                       element.style.backgroundColor='white'
-                    });
-                  div[2].style.backgroundColor='turquoise'
-             }
-        },
+            this.computedDate()
+            let orderButton = document.getElementsByClassName('order-button')[0]
+                 orderButton.style.backgroundColor="#ccc"
+        }
          
    }
 </script>

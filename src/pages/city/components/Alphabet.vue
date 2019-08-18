@@ -66,7 +66,7 @@ export default{
      right:0;
      bottom:0;
      width:16px;
-     color:turquoise;
+     color:#DCDCDC;
      display:flex;
      flex-direction: column;
      justify-content:center;

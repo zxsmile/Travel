@@ -7,8 +7,8 @@
         :list='list' 
         :introduce="introduce +cityId+'/detail/' +parentId +'/introduce'"
         :date="date +cityId+'/detail/' +parentId+'/date'"
-        :orderInformation="date +parentId+'/recommand-order-information'"
-        :MapAddress ="date +parentId+'/recommand-map-address'"
+        :orderInformation="date+cityId+'/detail/'+parentId+'/recommand-order-information'"
+        :MapAddress ="date +cityId+'/detail/'+parentId+'/recommand-map-address'"
         >
         </detail-content>
         
@@ -49,21 +49,27 @@ import axios from 'axios'
       
        methods:{
            getDetailInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this.getDetailInfoSuccess)
+               axios.get('/api/recommend-detail')
+               .then(this.getDetailInfoSuccess,function(){
+                   console.log('获取数据失败')
+               })
            },
            getDetailInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].detail[this.$route.params.parentId]
+                  res = res.data
+                  let data =''
+                  if(!res[this.$store.state.city]){
+                      data =res['北京'][this.$route.params.parentId]
+                  }else{
+                      data = res[this.$store.state.city][this.$route.params.parentId]
+                  }
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
-                    this.cityId = this.$route.params.cityId
-              }
+                  this.cityId = this.$route.params.cityId
+                  console.log('成功')
            }
            
        },

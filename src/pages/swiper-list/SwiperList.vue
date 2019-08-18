@@ -25,19 +25,25 @@ import axios from 'axios'
        },
        methods:{
            getSwiperListInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this. getSwiperListInfoSuccess)
+               axios.get('/api/swiper-list')
+               .then(this. getSwiperListInfoSuccess,function(){
+                   console.log('获取数据失败')
+               })
            },
            getSwiperListInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].swiperList[this.$route.params.parentId]
+                  res = res.data
+                  let data=''
+                  if(!res[this.$store.state.city]){
+                    data = res['北京'][this.$route.params.parentId]
+                  }else{
+                    data = res[this.$store.state.city][this.$route.params.parentId]
+                  }
                   this.recommandList = data.recommandList
                   this.title = data.title
                   this.parentId = this.$route.params.parentId
                   this.cityId=this.$route.params.cityId
               }
-           }
+          
 
        },
        mounted:function(){

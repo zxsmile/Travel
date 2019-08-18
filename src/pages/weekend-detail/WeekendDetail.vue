@@ -6,7 +6,7 @@
         :address='address' 
         :list='list' 
         :introduce="introduce +cityId+'/weekend-detail/'+ parentId +'/introduce'"
-        :date="date +parentId+'/date'"
+        :date="date +cityId+'/weekend-detail/'+parentId+'/date'"
         :orderInformation="date +cityId+'/weekend-detail/'+parentId+'/weekend-order-information'"
         :MapAddress ="date +cityId+'/weekend-detail/'+parentId+'/weekend-map-address'"
         >
@@ -46,14 +46,20 @@ import axios from 'axios'
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this.getSwiperListDetailInfoSuccess)
+               axios.get('/api/weekend-detail')
+               .then(this.getSwiperListDetailInfoSuccess,function(){
+
+                   console.log('获取数据失败')
+               })
            },
            getSwiperListDetailInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].weekendDetail[this.$route.params.parentId]
-                 
+                  res = res.data
+                  let data = ''
+                  if(!res[this.$store.state.city]){
+                      data = res['北京'][this.$route.params.parentId]
+                  }else{
+                      data = res[this.$store.state.city][this.$route.params.parentId]
+                  }
                   this.bannerImg = data.bannerImg
                   this.gallaryImgs = data.gallaryImgs
                   this.address = data.address
@@ -61,7 +67,7 @@ import axios from 'axios'
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
                   this.cityId = this.$route.params.cityId
-              } 
+             
            }
            
        },

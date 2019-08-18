@@ -153,6 +153,7 @@ export default{
            this.name2=''
            this.phone2=''
            this.card=''
+            this.$root.Bus.$emit('orderButtonColor')
    },
    handleClickInput:function(e){
          const rightPhone= /^1[3-9][0-9]{9}$/
@@ -262,7 +263,7 @@ export default{
 
 <style scoped>
   .order{
-      background-color:turquoise;
+      background-color:#DCDCDC;
   }
   .header{
        display:flex;
@@ -270,7 +271,7 @@ export default{
        width:100%;
        padding: 5px;
        flex-wrap: nowrap;
-       background-color:turquoise;
+       background-color:#DCDCDC;
        color:#fff
    }
    .header-back{

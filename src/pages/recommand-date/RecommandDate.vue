@@ -1,14 +1,12 @@
 <template>
         <div>
            <div class='header'>
-               <router-link 
-               tag='div' 
-               :to="'/'+cityId+'/detail/'+parentId" 
+               <div
                class='iconfont header-back'
-               @click="gethandleStatic"
+               @click="getBackDetail"
                >
                &#xe624;
-               </router-link>
+               </div>
                <p class="header-title">游玩日期</p>
            </div>
             <div class='weeks'>
@@ -25,7 +23,7 @@
                
             </div>
            <div class='days'>
-             <div class='day' v-for='item of DayWeek' :key='item' @click='gethandleClick'>{{item}}</div>
+             <div class='day' v-for='(item,index) of DayWeek' :key='index' @click='gethandleClick'>{{item}}</div>
            </div>
         </div>
 </template>
@@ -85,21 +83,31 @@ export default{
               j++;
            }
    },
-
+    getBackDetail() {
+       this.$router.push({ 
+            path:'/'+this.cityId+'/detail/'+this.parentId
+            })
+       this.$store.state.day=''
+       this.$store.state.month=''
+        
+    },
    gethandleStatic:function(){
-       let dayDocument = document.getElementsByClassName('day')
-        let date = new Date();
+           let dayDocument = document.getElementsByClassName('day')
+            let date = new Date();
             dayDocument = Array.from(dayDocument)
              dayDocument.forEach((element,index) => {
                  element.style.color='black'
-                 if(index === this.day){
+                 if(element.innerHTML == this.day){
                     element.style.color='red'
                  }
-                  if(index<this.day){
+                  
+                  if(element.innerHTML<this.day){
                    element.style.pointerEvents ='none'
                    element.style.color='#ccc'
                     }
+                    
             });
+          
    },
        
    gethandleClick:function(e){
@@ -116,8 +124,9 @@ export default{
             this.$store.dispatch('GetMonth',this.month)
             this.$store.dispatch('GetDay',e.target.innerHTML)
             this.$router.push({ 
-            path:'/'+this.cityId+'/detail/'+ this.parentId
+            path:'/'+this.cityId+'/detail/'+this.parentId
             })
+             this.$root.Bus.$emit('orderButtonColor')
    }
       
 },
@@ -134,7 +143,11 @@ export default{
            this.listId = this.$route.params.listId
            this.cityId = this.$route.params.cityId
            this.gethandleStatic()
-        }
+
+        },
+  updated:function(){
+      this.gethandleStatic()
+  }
 }
 </script>
 

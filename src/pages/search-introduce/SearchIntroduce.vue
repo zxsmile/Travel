@@ -26,19 +26,19 @@ import  axios from 'axios'
        },
          methods:{
            getIntroduceInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this.getIntroduceInfoSuccess)
+               axios.get('/api/search-introduce')
+               .then(this.getIntroduceInfoSuccess,function(){
+                   console.log('数据请求失败')
+               })
            },
            getIntroduceInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const data = res.data[this.$route.params.cityId].searchIntroduce[this.$route.params.id]
+                   res = res.data
+                  const data = res[this.$route.params.id]
                   this.introduceList = data.introduceList
                   this.parentId = this.$route.params.id
                   this.listId = this.$route.params.id
            }
            
-       }
          },
        mounted:function(){
            this.getIntroduceInfo()

@@ -59,26 +59,32 @@ import axios from 'axios'
        },
        methods:{
            getSwiperListDetailInfo:function(){
-               axios.get('/api/index.json?city='+this.$store.state.city)
-               .then(this.getSwiperListDetailInfoSuccess)
+               axios.get('/api/swiper-list-detail')
+               .then(this.getSwiperListDetailInfoSuccess,function(){
+                   console.log('失败')
+               })
            },
            getSwiperListDetailInfoSuccess:function(res){
-               res = res.data
-              if(res.ret&&res.data){
-                  const datas = res.data[this.$route.params.cityId].swiperListDetail[this.$route.params.parentId].detail
+                  res = res.data
+                  let datas=''
+                  if(!res[this.$store.state.city]){
+                      datas = res['北京'][this.$route.params.parentId].detail
+                  }else{
+                      datas = res[this.$store.state.city][this.$route.params.parentId].detail
+                  }
                   const data = datas[this.$route.params.listId]
                   this.bannerImg = data.bannerImg
-                  this.gallaryImgs = data.gallaryImgs,
+                  this.gallaryImgs = data.gallaryImgs
                   this.address = data.address
                   this.list = data.list
                   this.bannnerName = data.bannnerName
                   this.parentId = this.$route.params.parentId
                   this.listId = this.$route.params.listId
                   this.cityId = this.$route.params.cityId
-                  
+                  console.log('成功')
                  
               } 
-           }
+        
            
        },
        mounted:function(){

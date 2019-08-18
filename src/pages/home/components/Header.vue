@@ -7,7 +7,7 @@
             <i class='iconfont search' v-show = 'searchIcon'>&#xe632;</i>
             <input type='text' placeholder='输入城市/景点/游玩主题' class='header-middle' v-model="searchData" />
         <!-- </div> -->
-        <router-link :to="'/'+this.$store.state.id+'/city'">
+        <router-link :to="'/'+this.$store.state.city+'/city'">
             <div class='header-right'>
                 <div class='header-right-content'>
                {{this.$store.state.city}}
@@ -20,7 +20,7 @@
                 <li 
                 v-for="item of list" 
                 :key='item.parentId'
-                @click='handleClick(item.id)' 
+                @click='handleClick(item.scenicid)' 
                 class="search-list border-bottom"
                 >{{item.name}}</li>
                 <li class="search-list border-bottom" v-show='hasNoList'>没有匹配的数据</li>
@@ -49,7 +49,7 @@ export default {
         handleClick:function(id){
            
             this.$router.push({  
-             path:'/'+this.$store.state.id+'/search-detail/'+ id
+             path:'/'+this.$store.state.id+'/search-detail/'+ (id-1)
            })
            
         },
@@ -61,7 +61,7 @@ export default {
         }
     },
      props:{
-        cities:Object,
+        scenic:Object,
         cityId:String
     },
      computed:{
@@ -84,8 +84,8 @@ export default {
             }
             this.timer = setTimeout(() => {
                 const result=[]
-                for(let i in this.cities){
-                     this.cities[i].forEach(value => {
+                for(let i in this.scenic){
+                     this.scenic[i].forEach(value => {
                      if(value.name.indexOf(this.searchData) > -1 || value.spell.indexOf(this.searchData)>-1){
                          result.push(value) 
                        
@@ -105,7 +105,7 @@ export default {
        width:100%;
        height:43px;
        line-height:43px;
-       background-color:turquoise;
+       background-color:#DCDCDC;
        display: flex;
        color:white;
    }

@@ -6,7 +6,7 @@
           tag='div' 
           class='icon' 
           v-for="item of page" 
-          :to="cityId+'/swiper-list/' + item.parentId" 
+          :to="cityId+'/swiper-list/' + (item.iconList_id-1)" 
           :key="item.parentId">
               <div class="icon-img">
                  <img :src='item.ImgUrl' class='icon-img-content'> 

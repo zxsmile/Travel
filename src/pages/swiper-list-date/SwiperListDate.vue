@@ -1,14 +1,12 @@
 <template>
         <div>
            <div class='header'>
-               <router-link 
-               tag='div' 
-               :to="'/'+cityId+'/swiper-list/'+parentId+'/swiper-list-detail/'+ listId" 
+               <div
                class='iconfont header-back'
-               @click="gethandleStatic"
+               @click="getBackDetail"
                >
                &#xe624;
-               </router-link>
+               </div>
                <p class="header-title">游玩日期</p>
            </div>
            <div class='weeks'>
@@ -25,7 +23,7 @@
                
             </div>
            <div class='days'>
-             <div class='day' v-for='item of DayWeek' :key='item' @click='gethandleClick'>{{item}}</div>
+             <div class='day' v-for='(item,index) of DayWeek' :key='index' @click='gethandleClick'>{{item}}</div>
            </div>
         </div>
 </template>
@@ -86,17 +84,23 @@ export default{
               j++;
            }
    },
-
+getBackDetail() {
+       this.$router.push({ 
+            path:'/'+this.cityId+'/swiper-list/'+ this.parentId+'/swiper-list-detail/'+ this.listId
+            })
+       this.$store.state.day=''
+       this.$store.state.month=''
+    },
    gethandleStatic:function(){
        let dayDocument = document.getElementsByClassName('day')
         let date = new Date();
             dayDocument = Array.from(dayDocument)
              dayDocument.forEach((element,index) => {
                  element.style.color='black'
-                 if(index === this.day){
+                 if(element.innerHTML == this.day){
                     element.style.color='red'
                  }
-                  if(index<this.day){
+                  if(element.innerHTML<this.day){
                    element.style.pointerEvents ='none'
                    element.style.color='#ccc'
                     }
@@ -119,7 +123,7 @@ export default{
             this.$router.push({ 
             path:'/'+this.cityId+'/swiper-list/'+ this.parentId+'/swiper-list-detail/'+ this.listId
             })
-          
+           this.$root.Bus.$emit('orderButtonColor')
    }
       
 },
@@ -138,7 +142,9 @@ export default{
            this.gethandleStatic()
         },
         
-     
+    updated:function(){
+      this.gethandleStatic()
+  }
 
  
 }

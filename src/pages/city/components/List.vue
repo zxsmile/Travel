@@ -12,15 +12,15 @@
             <div class="area">
                 <div class="title">热门城市</div>
                 <div class='city-list'>
-                    <div class="list-wrapper" v-for='item of hotCities' :key='item.id' >
-                        <div class="list-content" @click='handleClick(item.name,item.id)'>{{item.name}}</div>
+                    <div class="list-wrapper" v-for='item of hotCities' :key='item.city_id' >
+                        <div class="list-content" @click='handleClick(item.name,item.city_id)'>{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class="area" v-for="(item,key) of cities" :key='key' :ref='key'>
                 <div class="title">{{key}}</div>
-                <div class="city-item border-bottom" v-for='innerItem of item' :key='innerItem.id'>
-                    <div class="item " @click='handleClick(innerItem.name,innerItem.id)'>{{innerItem.name}}</div>
+                <div class="city-item border-bottom" v-for='innerItem of item' :key='innerItem.city_id'>
+                    <div class="item " @click='handleClick(innerItem.name,innerItem.city_id)'>{{innerItem.name}}</div>
                 </div>
                 
             </div>
@@ -38,7 +38,7 @@
       handleClick:function(city,id) {
         this.$store.dispatch('changeCity',city)
         this.$store.dispatch('changeId',id)
-        this.$router.push('/'+ this.$store.state.id)
+        this.$router.push('/'+ this.$store.state.city)
         }
     },
     mounted:function() { 

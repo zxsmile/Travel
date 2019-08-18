@@ -6,6 +6,11 @@
         <div class="moto-container" >
           <div class="moto" @click='handleClickButton'>开启去哪儿之旅</div>  
         </div>
+        <div class="loginButton">
+           <div class="login" @click='handleClickLogin'>登录</div>
+           <div class='regist' @click='handleClickRegist'>注册</div>
+           <div class='regist' @click='handleClickAdmin'>管理员</div>
+        </div>
       </div>
     </div>
         
@@ -26,7 +31,16 @@ export default {
   },
   methods:{
     handleClickButton:function(){
-         this.$router.push('/'+ this.$store.state.id)
+         this.$router.push('/'+ this.$store.state.city)
+    },
+    handleClickLogin() {
+        this.$router.push('/user/login')
+    },
+    handleClickRegist() {
+        this.$router.push('/user/regist')
+    },
+     handleClickAdmin() {
+        this.$router.push('/admin/login')
     }
   },
   mounted:function(){
@@ -42,7 +56,7 @@ export default {
    .welcome{
       width:100%;
       height:100%;
-       background-color: turquoise;
+       background-color: #DCDCDC;
     }
    .container{
       display: flex;
@@ -63,7 +77,7 @@ export default {
 }
 
 .moto {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 40px;
   color: #405f80;
@@ -72,11 +86,21 @@ export default {
 .moto-container {
   margin-top: 100px;
   border: 1px solid#405f80;
-  width: 100px;
+  width: 130px;
   height: 40px;
   border-radius: 5px;
   text-align: center;
 }
-
-
+.loginButton{
+   display:flex;
+   flex-direction: row;
+   margin-top:20px;
+   color: #405f80;
+}
+.login{
+  padding:2px;
+}
+.regist{
+  padding:2px;
+}
 </style>

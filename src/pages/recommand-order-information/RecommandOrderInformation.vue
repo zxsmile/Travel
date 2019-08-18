@@ -152,6 +152,7 @@ export default{
            this.name2=''
            this.phone2=''
            this.card=''
+            this.$root.Bus.$emit('orderButtonColor')
    },
    handleClickInput:function(e){
          const rightPhone= /^1[3-9][0-9]{9}$/

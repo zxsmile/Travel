@@ -30,19 +30,19 @@ export default{
         }
   },
   methods:{
-     getCityInfo:function(){
-         axios.get('/api/city.json')
-           .then(this.getCityInfoSuccess)
+      getCityInfo:function(){
+         axios.get('/api/city')
+           .then(this.getCityInfoSuccess,function(){
+               console.log('获取数据失败')
+           })
      },
      getCityInfoSuccess:function(res){
-         res=res.data;
-         if(res.ret&&res.data){
-            let data = res.data;
-             this.cities=data.cities
-             this.hotCities = data.hotCities
-             this.id = this.$route.params.id
-             
-         }
+           res=res.data;
+           this.cities=res.cities
+           this.hotCities = res.hotCities
+           //this.city_id = res.cities.city_id
+         
+        console.log('成功')
      },
      handleClickChange:function(res){
            this.letter=res;

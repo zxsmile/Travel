@@ -27,7 +27,7 @@ export default{
     methods:{
         handleClick:function(city){
            this.$store.dispatch('changeCity',city)
-           this.$router.push('/'+ this.id)
+           this.$router.push('/'+ this.$store.state.city)
         }
     },
     data:function(){
@@ -75,7 +75,7 @@ export default{
 <style scoped>
   .search{
       height:43px;
-      background-color: turquoise; 
+      background-color: #DCDCDC; 
       padding:0 10px;
       overflow: hidden; 
   }

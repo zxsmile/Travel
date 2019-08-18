@@ -24,7 +24,7 @@
    .header{
       width:100%;
       height:43px;
-      background-color: turquoise;
+      background-color: #DCDCDC;
   }
   .header-title{
     text-align:center;

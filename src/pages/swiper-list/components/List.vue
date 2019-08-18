@@ -1,6 +1,6 @@
 <template>
    <div :parentId='parentId'>
-       <router-link :to="'./'+parentId+'/swiper-list-detail/'+ item.listId" tag='div'  class="recommend border-bottom" v-for='item of  recommandList' :key='item.listId'>
+       <router-link :to="'./'+parentId+'/swiper-list-detail/'+ item.list_id" tag='div'  class="recommend border-bottom" v-for='item of  recommandList' :key='item.listId'>
            <img class='recommend-img' :src="item. recommandImgSrc" />
            <div class='recommend-content'>
                <p class="recommend-title">{{item.recommandTitle}}</p>

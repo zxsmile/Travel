@@ -24,6 +24,9 @@ import SwiperListMapAddress from '@/pages/swiper-list-map-address/SwiperListMapA
 import RecommandMapAddress from '@/pages/recommand-map-address/RecommandMapAddress'
 import WeekendMapAddress from '@/pages/weekend-map-address/WeekendMapAddress'
 import SearchMapAddress from '@/pages/search-map-address/SearchMapAddress'
+import Login from '@/pages/login/Login'
+import Regist from '@/pages/regist/Regist'
+import Admin from '@/pages/admin/Admin'
 
 Vue.use(Router)
 
@@ -33,8 +36,7 @@ export default new Router({
       path: '/',
       name: 'Page',
       component: Page
-    },
-    {
+    },{
       path: '/:cityId',
       name: 'Home',
       component: Home
@@ -126,6 +128,18 @@ export default new Router({
   path: '/:cityId/search-detail/:parentId/search-map-address',
   name: 'SearchMapAddress',
   component: SearchMapAddress
+},{
+  path: '/user/login',
+  name: 'Login',
+  component: Login
+},{
+  path: '/user/regist',
+  name: 'Regist',
+  component: Regist
+},{
+  path: '/admin/login',
+  name: 'Admin',
+  component: Admin
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }

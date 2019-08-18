@@ -97,7 +97,7 @@
     }
     #all{
         text-align: center;
-        background-color: aquamarine;
+        background-color: #DCDCDC;
         height: 100%;
     }
       .header{
