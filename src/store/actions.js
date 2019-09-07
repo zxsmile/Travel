@@ -31,7 +31,8 @@ export default{
             ctx.commit('handleGetDateData',date)
         },
        
-        // changeParent:function(ctx,parentId){
-        //     ctx.commit('changeParentId',parentId)
-        // }
+        changeTook:function(ctx,{took,userNameBack,imgUrlBack,userPawBack}){
+            ctx.commit('changeTookData',{took,userNameBack,imgUrlBack,userPawBack})
+        },
+       
 }

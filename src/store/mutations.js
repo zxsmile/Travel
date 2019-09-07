@@ -64,9 +64,23 @@ export default{
         }catch(e){
 
         }
-    }
+    },
 
-    // changeParentId:function(state,parentId){
-    //     state.parentId = parentId
-    // }
+    changeTookData:function(state,{took,userNameBack,imgUrlBack,userPawBack}){
+        state.took = took
+        state.userNameBack = userNameBack
+        state.imgUrlBack = imgUrlBack
+        state.userPawBack=userPawBack
+        try{
+            localStorage.took = took
+            localStorage.userNameBack=userNameBack
+            localStorage.imgUrlBack = imgUrlBack
+            localStorage.userPawBack=userPawBack
+        }catch(e){
+
+        }
+    },
+
+    
+
 }

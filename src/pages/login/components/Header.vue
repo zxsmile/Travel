@@ -1,8 +1,8 @@
 <template>
    <div class='header'>
-            <router-link to='/'>
-                <div class='iconfont back-icon'>&#xe624;</div>
-            </router-link>
+            <div>
+                <div class='iconfont back-icon' @click="backLogin">&#xe624;</div>
+            </div>
             <div class='header-title'>用户登录</div>
     </div>
 
@@ -10,7 +10,12 @@
 
 <script>
 export default {
-  name: 'LoginHeader'
+  name: 'LoginHeader',
+  methods:{
+    backLogin() {
+      this.$router.go(-1)
+    }
+  }
   
 }
 </script>

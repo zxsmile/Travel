@@ -9,7 +9,17 @@ const db = mysql.createPool({host:'localhost',user:'root',password:'081232xl',da
 
 module.exports=function(){
     var router = express.Router();
-    
+    // router.post('/',function(res,req){
+    //     // res.send({
+           
+    //     //     took: 0
+           
+    //     // }).end()
+   
+    //    console.log('req.session.took')
+    //    next()
+    // })
+   
      router.get('/',function(req,res){
          let home_data ={}
         db.query('SELECT * FROM beijing_swiper', (err,data)=>{
@@ -425,5 +435,11 @@ module.exports=function(){
             }
         })
     })
+    // router.get('/information',function(res,req){
+    // //    if(req.session.took==undefined){
+    // //        req.session['took']=0
+    // //    }
+    //    console.log('req.session.took')
+    // })
     return router
 }

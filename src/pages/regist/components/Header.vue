@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'LoginHeader'
+  name: 'RegistHeader'
   
 }
 </script>

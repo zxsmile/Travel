@@ -1,8 +1,8 @@
 <template>
     <div class="welcome">
       <div class='container'>
-        <img class="user-avatar" src="http://img11.weikeimg.com/data/uploads/2015/01/06/8893656754ab5c58cdaf5.png" />
-        <div class="user-name">Hello，smile*</div>
+        <img class="user-avatar" :src="showImg" />
+        <div class="user-name">Hello，{{showUserName}}</div>
         <div class="moto-container" >
           <div class="moto" @click='handleClickButton'>开启去哪儿之旅</div>  
         </div>
@@ -18,14 +18,15 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 
 export default {
   name: 'Page',
  
   data:function(){
    return{
-     
+     showImg:'',
+     showUserName:''
      
    } 
   },
@@ -41,13 +42,68 @@ export default {
     },
      handleClickAdmin() {
         this.$router.push('/admin/login')
-    }
+    },
+    changeMassage() {
+       if(this.$store.state.took==1){
+          this.showImg= require("../../assets/images/"+this.$store.state.imgUrlBack)
+          this.showUserName = this.$store.state.userNameBack
+       }else if(this.$store.state.took==0){
+         this.showImg= require("../../assets/images/covers3.jpg")
+         this.showUserName = 'roly*'
+       }
+         
+          
+    },
+     
   },
   mounted:function(){
-    
+     this.changeMassage()
+     var time = 1000*60*60*24*7;  //1000*60*60*24*7;
+     var storage = window.localStorage; 
+     var oldTimestamp = storage.getItem('timestamp');//以前存的时间戳 
+     oldTimestamp=eval('('+oldTimestamp+')')
+     var nowTimestamp = new Date().getTime();//当前时间戳
+     var sumTimestamp = oldTimestamp + time;
+     if(nowTimestamp > sumTimestamp){ 
+        if (storage.getItem('timestamp')&&!sessionStorage.getItem('greenPath')){
+         // 如果当前时间戳> 前面存的时间戳+过期时间 表示已经过期
+           let userNameBack = this.$store.state.userNameBack
+           let imgUrlBack =this.$store.state.imgUrlBack
+           let  userPawBack = ''
+           let took = 0
+           this.$store.dispatch('changeTook',{took,userNameBack ,imgUrlBack, userPawBack})
+            let msg = '登录已过期，请重新登录'
+           window.sessionStorage.setItem('msg',msg);
+       }
+   }else{
+    window.sessionStorage.setItem('greenPath',1);
+   }
+ console.log(window.sessionStorage.getItem('msg'))
   },
   activated:function(){
-   
+     this.changeMassage()
+     var time =1000*60*60*24*7;  //1000*60*60*24*7;
+     var storage = window.localStorage; 
+     var oldTimestamp = storage.getItem('timestamp');//以前存的时间戳 
+     oldTimestamp=eval('('+oldTimestamp+')')
+     var nowTimestamp = new Date().getTime();//当前时间戳
+     var sumTimestamp = oldTimestamp + time;
+     if(nowTimestamp > sumTimestamp){ 
+        if (storage.getItem('timestamp')&&!sessionStorage.getItem('greenPath')){
+         // 如果当前时间戳> 前面存的时间戳+过期时间 表示已经过期
+           let userNameBack = this.$store.state.userNameBack
+           let imgUrlBack =this.$store.state.imgUrlBack
+           let userPawBack = ''
+           let took = 0
+           let msg = '登录已过期，请重新登录'
+           this.$store.dispatch('changeTook',{took,userNameBack ,imgUrlBack, userPawBack})
+            window.sessionStorage.setItem('msg',msg);
+       }
+   }
+   else{
+    window.sessionStorage.setItem('greenPath',1);
+   }
+  console.log(window.sessionStorage.getItem('msg'))
   }
 }
 </script>

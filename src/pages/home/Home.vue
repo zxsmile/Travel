@@ -64,12 +64,12 @@ export default {
   },
   mounted:function(){
      this.lastCity = this.$store.state.city
-     this.getHomeInfo()
+    this.getHomeInfo()
   },
   activated:function(){
     if(this.lastCity!==this.$store.state.city){
           this.lastCity = this.$store.state.city
-          this.getHomeInfo()
+        this.getHomeInfo()
     }
   }
 }

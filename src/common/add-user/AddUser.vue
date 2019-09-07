@@ -1,9 +1,8 @@
 <template>
-<div class="login">
-   <admin-header></admin-header>
-    <div class="welcome">
-       <div class='submit'>
-           <div class='submit-title'>
+  <div class='shadow'>
+    
+        <div class='submit'>
+            <div class='submit-title'>
                  <input type="file" id='input' name='imgfile' @change="changeFile"  />
                   <label for="input"></label>
                    <div  class="img" v-if='uploadImg'>
@@ -12,29 +11,28 @@
                   <img :src='showImg' class="img" id='img' v-else />
                    <regist-img v-show='showGallary' :img='img' @hiddenImg='hiddenImg' @showImgClick='showImgClick'></regist-img>
             </div>
-          <div class='submit-input-box'>
+            <div class='submit-input-box'>
               <div class='submit-input'>
-                 <input type="text" name="user" value='' class='input' placeholder="用户名" v-model="userName" @input="changeInput()" :readonly='write'/>
-                 <input type="password" name="password" value='' class='input' placeholder="密码" v-model="userPaw" @input="changeInput()" :readonly='write' />
+                 <input type="text" name="user" value='' class='input' placeholder="用户名" v-model="userName" @input="changeInput()" />
+                 <input type="password" name="password" value='' class='input' placeholder="密码" v-model="userPaw" @input="changeInput()" />
                  <p class='error'></p>
-                 <input type="button"  value='登录' class='input-botton' @click='getAdminInfo' :disabled='showDisabled' />
+                  <div class='button-box'>
+                        <input type="button"  value='注册' class='input-botton' @click='getRegistInfo' :disabled='showDisabled'/>
+                        <input type="button"  value='取消' class='input-botton'  @click='handleRemoveInput' />
+                 </div>
               </div>
-           </div>
-           <div class="submit-inform" @click='Regist'>登入</div>
+            </div>
         </div>
-    </div>
+   
  </div>
 </template>
 
 <script>
-import AdminHeader from './components/Header'
-import RegistImg from './components/Img'
+import RegistImg from './component/Img'
 import Vue from 'vue' 
 import axios from 'axios'
 
-
-
- const instance=axios.create({
+  const instance=axios.create({
     // baseURL:'http://127.0.0.1/', // 通常配置基础的接口入口地址 
     // timeout:5000, // 请求超时时间
     headers:{// 这里可设置所有的请求头
@@ -56,15 +54,15 @@ import axios from 'axios'
         return data;
     }],
 })
-
 instance.all=axios.all;
 Vue.prototype.instance=instance;
 
 export default {
-  name: 'Admin',
+  name: 'AddUser',
   components: {
-    AdminHeader,
-    RegistImg
+   
+    RegistImg,
+    
   },
   data:function(){
    return{
@@ -74,9 +72,11 @@ export default {
       showGallary:false,
       img:'',
       showImg:'',
-      uploadImg:true,
-      write:false
+      uploadImg:true
      } 
+  },
+  props:{
+     
   },
   methods:{
     clearForm() {
@@ -84,9 +84,9 @@ export default {
         this.userPaw=''
         let error = document.getElementsByClassName('error')
         error[0].style.visibility='hidden'
+        this.uploadImg=true
     },
-    
-     changeFile (e) {
+    changeFile (e) {
       this.file = e.target.files[0]
       let reader = new FileReader()
       reader.readAsDataURL(this.file);//发起异步请求
@@ -107,23 +107,16 @@ export default {
      
     },
    changeInput() {
-     if(!sessionStorage.getItem('took')){
-          this.write=false
-          if(this.userName&&this.userPaw){
-              this.showDisabled=false
-          }else {
-              this.showDisabled=true
-              let error = document.getElementsByClassName('error')
-              error[0].style.visibility='hidden'
-           }
-     }else if(sessionStorage.getItem('took')==1){
-       this.showDisabled=true
-       this.write=true
-     }
-    
-       
+        if(this.userName&&this.userPaw){
+          this.showDisabled=false
+        }else{
+           this.showDisabled=true
+           let error = document.getElementsByClassName('error')
+           error[0].style.visibility='hidden'
+        }
     },
-     dataURItoBlob(dataURI) {//图片转成Buffer
+    
+ dataURItoBlob(dataURI) {//图片转成Buffer
     
              var byteString = atob(dataURI.split(',')[1]);
              var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -134,7 +127,7 @@ export default {
              }
              return new Blob([ab], {type: mimeString});
          },
-    getAdminInfo:function(){
+    getRegistInfo:function(){
          let formdata = new FormData()
          let img=document.getElementById('img')
          let imgSrc = ''
@@ -142,38 +135,33 @@ export default {
           var blob = this.dataURItoBlob(img.src);
          formdata.append('file',img.src)
          }
+       
+        //  formdata.append('imgfile',this.file)
          formdata.append('userName',this.userName)
          formdata.append('userPaw',this.userPaw)
-        this.instance.post('/api/admin/login',formdata)
-         .then(this.getAdminInfoSuccess,function(){
+        this.instance.post('/api/user/regist',formdata)
+         .then(this.getRegistInfoSuccess,function(){
            console.log('获取数据失败')
          })
      },
-     getAdminInfoSuccess:function(res){
+     getRegistInfoSuccess:function(res){
          let data = eval("("+res.data+")")  
-         let took = data.took
-          let error = document.getElementsByClassName('error')
-          if(data.state){
-               error[0].innerHTML=data.msg
-              window.sessionStorage.setItem('took',took);
-              window.localStorage.setItem("adminImg",data.result.imgUrl);
-               this.$router.push({ 
-                  path:'/admin/users'
-                })
-            }else{
-              error[0].style.visibility='visible'
-              error[0].innerHTML=data.msg
-            }
-        
+         let error = document.getElementsByClassName('error')
+         if(!data.state){
+           error[0].style.visibility='visible'
+           error[0].innerHTML=data.msg
+
+         }else{
+          error[0].style.visibility='visible'
+          error[0].innerHTML=data.msg
+         }
       },
-    Regist() {
-       if(sessionStorage.getItem('took')==1){
-          this.$router.push({ 
-                  path:'/admin/users'
+      Login() {
+        this.$router.push({ 
+                  path:'/user/login'
             })
-       }
-     },
-      showImgClick(canvasUrl){
+      },
+     showImgClick(canvasUrl){
         this.showGallary=false
         this.uploadImg =false
         this.showImg=canvasUrl
@@ -182,69 +170,44 @@ export default {
         this.showGallary=false
         this.uploadImg =true
         this.showImg=''
-      }
+      },
+      handleRemoveInput() {
+        this.$emit('hiddenUser')
+    },
   },
   mounted:function(){
     this.clearForm()
-    if(sessionStorage.getItem('took')==1){
-       this.showDisabled=true
-       this.write=true
-    }else if(!sessionStorage.getItem('took')){
-      this.showDisabled=true
-      this.write=false
-    }
+    
   },
   activated:function(){
     this.clearForm()
-     if(sessionStorage.getItem('took')==1){
-       this.showDisabled=true
-       this.write=true
-    }else if(!sessionStorage.getItem('took')){
-      this.showDisabled=true
-      this.write=false
-    }
   },
 }
 </script>
 
 <style scoped>
-.login{
-      background:url(http://hbimg.b0.upaiyun.com/e57a8b9856ed523601d3f9d6afff18131388f1f313ff6-hq7OLK_fw658) 	#DCDCDC;
-      background-size:cover;
- }
-    .welcome{
-      width:100%;
-      height:100%;
-      display: flex;
-      align-items:center;
-      justify-content:center;
-      position:absolute;
-      background:url(http://hbimg.b0.upaiyun.com/e57a8b9856ed523601d3f9d6afff18131388f1f313ff6-hq7OLK_fw658) 	#DCDCDC;
-      background-size:cover;
+ .shadow{
+  position: fixed;
+  background-color: #000;
+  opacity: 0.8;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  }
   
-    }
-  
-    .submit{
-      width:80%;
-      height:0;
-      padding-bottom:90%;
-      overflow:hidden;
-      background-color:#E6E6FA;
-      display:flex;
-      flex-direction: column;
-      position: relative;
-      /* border: 1px solid; */
-      box-shadow: 5px 5px 10px #ccc;
+     .submit{
+      border: 1px solid;
+       background-color:#E6E6FA;
+       width:20%;
        
     }
     .submit-title{
-      margin: 0 auto;
-      /* font-size: 20px;
-      font-weight: 800;
-      height:40%;
-      padding:10px; */
+      /* margin: 0 auto; */
       margin-top: 20px;
-      /* margin-bottom:40px; */
       position: relative;
     }
      #input{
@@ -253,14 +216,19 @@ export default {
     }
      label {
     position: absolute;
-    top: 0;left: 0;right: 0;bottom: 0;
-    /* z-index: 10; 这个z-index之后说到 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: 10; */
+    
 }
     .img{
        width: 80px;
        height: 80px;
        border-radius: 50%;
        background-color: white;
+       margin: 0 auto;
     }
      .add-icon{
      font-size:60px;
@@ -294,7 +262,8 @@ export default {
        margin-top: 20px;
        padding:5px 20px;
        border-radius: 10px;
-       bottom: 0px
+       bottom: 0px;
+        margin-left:5px; 
      }
      .submit-inform{
        line-height:14px;

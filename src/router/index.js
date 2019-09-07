@@ -27,6 +27,8 @@ import SearchMapAddress from '@/pages/search-map-address/SearchMapAddress'
 import Login from '@/pages/login/Login'
 import Regist from '@/pages/regist/Regist'
 import Admin from '@/pages/admin/Admin'
+import AdminUsers from '@/pages/admin-users/AdminUsers'
+
 
 Vue.use(Router)
 
@@ -140,8 +142,13 @@ export default new Router({
   path: '/admin/login',
   name: 'Admin',
   component: Admin
+},{
+  path: '/admin/users',
+  name: 'AdminUsers',
+  component: AdminUsers
 }],
 scrollBehavior (to, from, savedPosition) {
   return { x: 0, y: 0 }
 }
 })
+

@@ -20,10 +20,15 @@
            </div>
            <div class='date boder'>
                {{this.year}}年{{this.month}}月
-               
             </div>
            <div class='days'>
              <div class='day' v-for='(item,index) of DayWeek' :key='index' @click='gethandleClick'>{{item}}</div>
+           </div>
+           <div class='date boder'>
+               {{this.year2}}年{{this.month2}}月
+            </div>
+           <div class='days'>
+             <div class='day2' v-for='(item,index) of DayWeek2' :key='index' @click='gethandleClick2'>{{item}}</div>
            </div>
         </div>
 </template>
@@ -44,7 +49,10 @@ export default{
            month:'',
            day:'',
            DayWeek:[],
-           
+           year2:'',
+           month2:'',
+           day2:'',
+           DayWeek2:[],
         }
   },
   methods:{
@@ -80,6 +88,31 @@ export default{
            }
            for(let i=0; i<days; i++){
               this.DayWeek.push(j)
+              j++;
+           }
+   },
+   getNextCandar() {
+           let date = new Date();
+           this.year = date.getFullYear();
+           this.month = date.getMonth()+1;
+           this.day = date.getDate();
+           this.year2 =this.year
+           this.month2 = parseInt(this.month) + 1
+           if (this.month2 == 13) {
+                this.year2 = parseInt(this.year2) + 1;
+                this.month2 = 1;
+            }
+           let days2= this.getMonthDays(this.year2,this.month2);
+           let FirstDayWeek2 = this.getWeekday(this.year2,this.month2,1);
+           let LaststDayWeek2 = this.getWeekday(this.year2,this.month2,days2);
+           let weeks2 = this.getweeksInMonth(this.year2,this.month2);
+            let  j=1;
+           
+           for(let k=0;k<FirstDayWeek2;k++){
+                this.DayWeek2[k]=' '
+           }
+           for(let i=0; i<days2; i++){
+              this.DayWeek2.push(j)
               j++;
            }
    },
@@ -127,6 +160,24 @@ export default{
             path:'/'+this.cityId+'/detail/'+this.parentId
             })
              this.$root.Bus.$emit('orderButtonColor')
+   },
+   gethandleClick2:function(e){
+        let dayDocument = document.getElementsByClassName('day2')
+        let date = new Date();
+            dayDocument = Array.from(dayDocument)
+             dayDocument.forEach((element,index) => {
+                
+                    element.style.color='black'
+                    
+                   
+            });
+            this.$store.dispatch('GetYear',this.year2)
+            this.$store.dispatch('GetMonth',this.month2)
+            this.$store.dispatch('GetDay',e.target.innerHTML)
+            this.$router.push({ 
+            path:'/'+this.cityId+'/detail/'+this.parentId
+            })
+             this.$root.Bus.$emit('orderButtonColor')
    }
       
 },
@@ -136,6 +187,7 @@ export default{
            this.listId = this.$route.params.listId
            this.cityId = this.$route.params.cityId
            this.getCalendar()
+           this.getNextCandar()
            this.gethandleStatic()
         },
   activated:function(){
@@ -196,6 +248,12 @@ export default{
        flex-wrap: wrap;
     }
     .day{
+        width:14%;
+        text-align:center;
+        padding: 10px 0 30px 0;
+        /* pointer-events:none */
+    }
+   .day2{
         width:14%;
         text-align:center;
         padding: 10px 0 30px 0;

@@ -73,36 +73,25 @@ export default {
               this.OrderShow = !this.OrderShow;
               this.$root.Bus.$emit('displayDiv')
               this.$root.Bus.$emit('disabledOrderButton')
-             
+              this.$root.Bus.$emit('hiddenOrederButton')
        },
        handleClickOrderhidden:function(){
             
            if(this.OrderShow){ 
             this.OrderShow = false
-            
-          
-       
-           }
+        }
            
        }
   },
  
    mounted(){
-    // const that = this
-    // //console.log(this.OrderShow)
-    // this.$root.Bus.$on('orderHidden', function(value){
-    //     console.log(that.OrderShow)
-    //     console.log(value)
-     
-    //     that.OrderShow = 'false'
-    //     //  console.log(that.OrderShow)
-    //     //   if(!that.OrderShow){
-    //     //      value.style.display = 'none'
-    //     //   }
-      
         
-    // })
-  }
+      
+  },
+   activated() {
+     
+      
+   },
  
  
 }

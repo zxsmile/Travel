@@ -6,6 +6,11 @@ let month = ''
 let day = ''
 let date = ''
 let id = ''
+let took=''
+let imgUrlBack = ''
+let userNameBack = ''
+let userPawBack=''
+
 
  try{
    if(localStorage.city){
@@ -32,6 +37,19 @@ let id = ''
   if(localStorage.id){
     id = localStorage.id
   }
+  if(localStorage.took){
+    took = localStorage.took
+  }
+  if(localStorage.imgUrlBack){
+    imgUrlBack = localStorage.imgUrlBack
+  }
+  if(localStorage.userNameBack){
+    userNameBack = localStorage.userNameBack
+  }
+  if(localStorage. userPawBack){
+    userPawBack = localStorage.userPawBack
+  }
+ 
  }catch(e){
 
  }
@@ -47,8 +65,11 @@ let id = ''
         month:money,
         day:day,
         date:date,
-        id:id
-       
+        id:id,
+        took:took,
+        imgUrlBack:imgUrlBack,
+        userNameBack:userNameBack,
+        userPawBack:userPawBack
         // parentId:0
     
  }

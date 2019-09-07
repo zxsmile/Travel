@@ -114,6 +114,7 @@
             this.otherShow = false
             this.$store.state.day=''
             this.$store.state.month=''
+             this.disabledOrder=true
          },
          handleOrderClick:function(){
              let div=document.getElementsByClassName('order-date')
@@ -132,7 +133,7 @@
             this.$router.push({ 
                   path:this.orderInformation
             })
-        
+           
         },
         dateColor (i){
              let div=document.getElementsByClassName('order-date-month')
@@ -187,19 +188,30 @@
           
         this.computedDate()
         let orderButton = document.getElementsByClassName('order-button')[0]
-                 orderButton.style.backgroundColor="#ccc"
+        orderButton.style.backgroundColor="#ccc"
+                   
           this.$root.Bus.$on('orderButtonColor',()=>{
             this.$nextTick(()=>{
                 let orderButton = document.getElementsByClassName('order-button')
                 orderButton[0].style.backgroundColor="coral"
+                this.disabledOrder = false
                  this.computedDate()
             })
         }) 
+        this.$root.Bus.$on('hiddenOrederButton',()=>{
+             let orderButton = document.getElementsByClassName('order-button')[0]
+             orderButton.style.backgroundColor="#ccc"
+        })
+        this.disabledOrder = true
+         
       },
        activated:function(){
             this.computedDate()
             let orderButton = document.getElementsByClassName('order-button')[0]
-                 orderButton.style.backgroundColor="#ccc"
+            orderButton.style.backgroundColor="#ccc"
+          
+             this.disabledOrder = true
+             
         }
          
    }

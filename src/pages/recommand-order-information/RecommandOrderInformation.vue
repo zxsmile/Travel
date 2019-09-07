@@ -8,7 +8,8 @@
                &#xe624;
                </div>
                <p class="header-title">订单填写</p>
-               <P class='header-register'>登录</P>
+               <p class='header-register' v-if='showLogin'>已登录</p>
+               <P class='header-register' @click='login' v-else>登录</P>
            </div>
            <div class="ticket">
                <div class="ticket-information">
@@ -132,7 +133,8 @@ export default{
            card:'',
            name2:'',
            phone2:'',
-           card2:''
+           card2:'',
+           showLogin:false
         }
   },
   methods:{
@@ -205,6 +207,12 @@ export default{
          button.disabled = true
           button.style.backgroundColor = '#ccc'
      }
+   },
+    login() {
+       this.$router.push({
+           path:'/user/login'
+       })
+     
    }
 },
  watch:{
@@ -243,7 +251,12 @@ export default{
            const button = document.getElementById('button');
            button.disabled = true
            button.style.backgroundColor = '#ccc'
-           
+           if(this.$store.state.took==1){
+               this.showLogin=true
+           }
+           if(this.$store.state.took==0){
+               this.showLogin=false
+           }
         },
   activated:function(){
            this.parentId = this.$route.params.parentId
@@ -255,6 +268,12 @@ export default{
            const button = document.getElementById('button');
            button.disabled = true
            button.style.backgroundColor = '#ccc'
+           if(this.$store.state.took==1){
+               this.showLogin=true
+           }
+           if(this.$store.state.took==0){
+               this.showLogin=false
+           }
         },
        
 }
@@ -262,7 +281,7 @@ export default{
 
 <style scoped>
   .order{
-      background-color:turquoise;
+      background-color:#E6E6FA;
   }
   .header{
        display:flex;
@@ -270,7 +289,7 @@ export default{
        width:100%;
        padding: 5px;
        flex-wrap: nowrap;
-       background-color:turquoise;
+       background-color:#E6E6FA;
        color:#fff
    }
    .header-back{
@@ -325,7 +344,7 @@ export default{
         padding: 5px 7px;
     }
     .ticket-money{
-      padding: 5px 0;
+      padding: 7px 0;
       font-size: 16px;
         color:coral;
     }
