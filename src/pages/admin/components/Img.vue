@@ -269,11 +269,10 @@
    
     .imgDiv{
       width:100%;
-      opacity: 0.6;
-      background-color: white;
+      
       position: fixed;
       cursor: pointer;
-     
+       opacity: 0;
     }
     .imgChoose{
       width: 0;
@@ -281,7 +280,8 @@
       position: fixed;
       /* border-radius: 50%; */
       border:solid 1px black;
-      
+      opacity: 0.6;
+      background-color: white;
      
     }
     .button{

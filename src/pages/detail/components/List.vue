@@ -1,44 +1,41 @@
 <template>
-   <div class="list border-bottom-content">
-      <div v-for="(item,index) of list" :key='index' class="list-content">
-          <div class="list-title border-bottom">
-              <span class="list-title-icon"></span>
-              {{item.title}}
-          </div>
-         
-             <div v-for="(child,index) of item.children" :key="index">
-                  <div class="children border-bottom" @click="handleClickOrder(child)">
-                      <div class="children-title">
-                           <b>{{child.title}}</b>
-                           <div class="children-content">{{child.content}}</div>
-                       </div>
-                        <div class="children-money">
-                            <div class='children-money-content'>
-                               {{'￥'+child.money}}
+    <div class='wrapper' ref='wrapper'>
+        <div class="list border-bottom-content">
+            <div v-for="(item,index) of list" :key='index' class="list-content">
+                    <div class="list-title border-bottom">
+                        <span class="list-title-icon"></span>
+                        {{item.title}}
+                    </div>
+                    <div v-for="(child,index) of item.children" :key="index">
+                        <div class="children border-bottom" @click="handleClickOrder(child)">
+                            <div class="children-title">
+                                <b>{{child.title}}</b>
+                                <div class="children-content">{{child.content}}</div>
                             </div>
-                            <div class="list-title-icon-right iconfont">&#xe633;</div>
-                        </div> 
-                  </div>
-                  <div  v-if="child.orderShow">
-                  <div class="order border-bottom" v-for="(order,index) of child.order" :key="index">
-                      <div class="children-title">
-                           <b>{{order.title}}</b>
-                           <div class="children-content">{{order.time}}</div>
-                       </div>
-                        <div class="order-money">
-                            <div class='order-money-content'>
-                               {{'￥'+order.money}}
-                               
+                            <div class="children-money">
+                                <div class='children-money-content'>
+                                    {{'￥'+child.money}}
+                                </div>
+                                <div class="list-title-icon-right iconfont">&#xe633;</div>
+                            </div> 
+                        </div>
+                        <div  v-if="child.orderShow">
+                            <div class="order border-bottom" v-for="(order,index) of child.order" :key="index">
+                                <div class="children-title">
+                                    <b>{{order.title}}</b>
+                                    <div class="children-content">{{order.time}}</div>
+                                </div>
+                                <div class="order-money">
+                                    <div class='order-money-content'>{{'￥'+order.money}}</div>
+                                    <button class="recommend-button" @click.stop="handleClickOrderShow(order.title,order.money)">预定</button>
+                                </div> 
                             </div>
-                               <button class="recommend-button" @click.stop="handleClickOrderShow(order.title,order.money)">预定</button>
-                        </div> 
-                  </div>
-                 </div>
-            </div> 
-      </div>
-        <detail-order v-show='OrderShow' @handleClickDisapper='handleClickOrder1' :date='date' :orderInformation='orderInformation'> </detail-order>
-      
-  </div>
+                        </div>
+                    </div> 
+            </div>
+            <detail-order v-show='OrderShow' @handleClickDisapper='handleClickOrder1' :date='date' :orderInformation='orderInformation'> </detail-order>
+        </div>
+    </div>
 </template>
 <script>
 import DetailOrder from './Order'
@@ -98,6 +95,14 @@ export default {
 </script>
 
 <style scoped>
+   .wrapper{
+       /* overflow: hidden;
+       position:absolute;
+       top:43px;
+       left:0;
+       right:0;
+       bottom: 0; */
+   }
    .list{
        margin-top: 10px;
        position: relative;

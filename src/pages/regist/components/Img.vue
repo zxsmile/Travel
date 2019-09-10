@@ -7,7 +7,7 @@
            <div class='wrapper'  id='wrapper' >
               <img :src='img' class='img' id='img' @changeImg='changeImg' @touchstart='touchstart' @touchmove='touchmove' @touchend='touchend'/>
               <div class='imgDiv' id="imgDiv" v-show='imgChoose'></div>
-              <canvas  id="imgChoose" class='imgChoose'  v-show='imgChoose'></canvas>
+              <div  id="imgChoose" class='imgChoose'  v-show='imgChoose'></div>
           </div>
             <div class='button'>
                <button class='rightButton' @click='saveImg'>确定</button>
@@ -73,8 +73,9 @@
                    }
                    let img=document.getElementById('img')
                    img.style.height=height+'px'
-                   img.style.width=width+'px'
+                   img.style.width=width+'px' 
                }
+               let img=document.getElementById('img')
                 this.clearCanvas()
           },
         showImg(e){
@@ -97,12 +98,14 @@
            this.imgChooseHeight = this.imgChooseHeight*this.scaleY
            var imgStart = (this.imgChooseLeft-e.target.offsetLeft)*this.scaleX
            var imgEnd = (this.imgChooseTop-e.target.offsetTop)*this.scaleY
+           //console.log( image)
            image.onload=function(){
               let ctx = canvas.getContext("2d");
               ctx.clearRect( 0, 0,canvas.width, canvas.height);
               ctx.drawImage( image,imgStart,imgEnd,that.imgChooseWidth,that.imgChooseHeight,0,0,80,80) 
+              
           }
-         
+          
         },
          touchstart(e) {
              this.imgChoose=true
@@ -165,7 +168,6 @@
                 this.imgChooseHeight=0
              }
              }
-
              imgChoose.style.width =  this.imgChooseWidth+'px'
              imgChoose.style.height = this.imgChooseHeight+'px'
          },
@@ -182,6 +184,7 @@
           let canvas = document.getElementById('canvas')
            let img=document.getElementById('img')
           let canvasUrl = canvas.toDataURL('image/jpeg',0.92)
+          this.clearCanvas()
           if(this.canvasImg){
                this.$emit('showImgClick',canvasUrl)
           }
@@ -204,9 +207,9 @@
            this.$root.Bus.$on('changeImg',(imgSrc)=>{
              this.$nextTick(()=>{
                 this.changeImg(imgSrc)
-           })
+            })
         })
-      
+       
   },
     activated:function(){
       this.$root.Bus.$on('changeImg',(imgSrc)=>{
@@ -214,8 +217,9 @@
                this.changeImg(imgSrc)
            })
         })
+     
+},
 
-   }
    
    }
 </script>
@@ -269,11 +273,11 @@
    
     .imgDiv{
       width:100%;
-      opacity: 0.6;
+      opacity: 0;
       background-color: white;
       position: fixed;
       cursor: pointer;
-     
+      
     }
     .imgChoose{
       width: 0;
@@ -281,8 +285,8 @@
       position: fixed;
       /* border-radius: 50%; */
       border:solid 1px black;
-      
-     
+      opacity: 0.6;
+      background-color: white;
     }
     .button{
         margin: 0 auto;

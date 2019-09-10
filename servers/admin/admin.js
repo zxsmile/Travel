@@ -126,21 +126,49 @@ module.exports=function(){
     })
   })
   router.post('/user',function(req,res){
-
+    let number=(req.body.number)-1
+    
     pool.getConnection(function(err, connection){
-      connection.query(`SELECT * FROM user_regist `,(err,data)=>{
+      connection.query(`SELECT SQL_CALC_FOUND_ROWS * FROM user_regist limit ${number*5},5`,(err,data)=>{
       if(err){
         console.log(err)
         res.status(500).send('database error').end()
      }else{
-        res.send(data).end()
+        let datas=[]
+         datas.push(data)
+          connection.query(`SELECT COUNT(*) AS TOTAL FROM user_regist`,(err,data)=>{
+              if(err){
+                console.log(err)
+                res.status(500).send('database error').end()
+              }else{
+               
+              datas.push(data)
+              console.log(datas)
+                 res.send(datas).end()
+              }
+          })
+       
      }
  connection.release();
   })
     })
+})
 
-  
- })
+// router.post('/userName',function(req,res){
+//   pool.getConnection(function(err, connection){
+//     connection.query(`SELECT * FROM user_regist `,(err,data)=>{
+//     if(err){
+//       console.log(err)
+//       res.status(500).send('database error').end()
+//    }else{
+//       let pages = data.length
+//       console.log(pages)
+//       res.send(pages).end()
+//    }
+// connection.release();
+// })
+//   })
+// })
 
  router.post('/revise',function(req,res){
   var userName = req.body.userName

@@ -20,28 +20,31 @@ import axios from 'axios'
                recommandList:[],
                title:'',
                parentId:'',
-               cityId:''
+               cityId:'',
+               num:0
            }
        },
        methods:{
            getSwiperListInfo:function(){
-               axios.get('/api/swiper-list')
+               axios.post('/api/swiper-list',{
+                   num:this.num,
+                   parseInt:this.$route.params.parentId
+                })
                .then(this. getSwiperListInfoSuccess,function(){
                    console.log('获取数据失败')
                })
            },
            getSwiperListInfoSuccess:function(res){
                   res = res.data
-                  let data=''
+                   let data=''
                   if(!res[this.$store.state.city]){
-                    data = res['北京'][this.$route.params.parentId]
+                     data = res['北京'][1]
                   }else{
-                    data = res[this.$store.state.city][this.$route.params.parentId]
+                     data = res[this.$store.state.city][1]
                   }
-                  this.recommandList = data.recommandList
-                  this.title = data.title
-                  this.parentId = this.$route.params.parentId
-                  this.cityId=this.$route.params.cityId
+                   this.title = data.title
+                   this.parentId = this.$route.params.parentId
+                   this.cityId=this.$route.params.cityId
               }
           
 
@@ -50,7 +53,7 @@ import axios from 'axios'
            this.getSwiperListInfo()
        },
         activated:function(){
-            this.getSwiperListInfo()
+           this.getSwiperListInfo()
        }
         
    }

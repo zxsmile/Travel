@@ -9,16 +9,6 @@ const db = mysql.createPool({host:'localhost',user:'root',password:'081232xl',da
 
 module.exports=function(){
     var router = express.Router();
-    // router.post('/',function(res,req){
-    //     // res.send({
-           
-    //     //     took: 0
-           
-    //     // }).end()
-   
-    //    console.log('req.session.took')
-    //    next()
-    // })
    
      router.get('/',function(req,res){
          let home_data ={}
@@ -226,64 +216,70 @@ module.exports=function(){
             }
         })
     })
-    router.get('/swiper-list',function(req,res){
-        let swiperList = {}
-        db.query('SELECT * FROM beijing_swiperlist',(err,data)=>{
+    router.post('/swiper-list',function(req,res){
+        let num = req.body.num
+        let parseInt = req.body.parseInt
+        db.query(`SELECT * FROM beijing_swiperlist WHERE iconlist_id = '${parseInt}' limit ${num*7},7`,(err,data)=>{
             if(err){
                 console.log(err)
                 res.status(500).send('database error').end();
             }else{
-                let iconList_id_max=0
-                data.forEach(element=>{
-                    if(element.iconList_id>iconList_id_max){
-                         iconList_id_max = element.iconList_id
-                     }
-                })
-                 
-                data.forEach(element=>{
-                     let list=[]
-                for(let j=0;j<= iconList_id_max;j++){
-                    list.push({title:'',recommandList:[]})
-                }
-                for(let i=0;i<data.length;i++){
-                    list[data[i].iconList_id].recommandList[data[i].list_id] = data[i] 
-                    list[data[i].iconList_id].title = data[i].title
-                }
-                swiperList['北京']=list
-                
-                })
-                db.query('SELECT * FROM shanghai_swiperlist',(err,data)=>{
+                    let lists={}
+                    let swiperList=[]
+                    let list={recommandList:data}
+                    let title = {title:data[0].title}
+                    swiperList.push(list)
+                    swiperList.push(title)
+                    lists['北京']=swiperList
+                db.query(`SELECT * FROM shanghai_swiperlist WHERE iconlist_id = '${parseInt}' limit ${num*7},7`,(err,data)=>{
                     if(err){
                         console.log(err)
                         res.status(500).send('database error').end();
                     }else{
-                        
-                        let iconList_id_max=0
-                        data.forEach(element=>{
-                        if(element.iconList_id>iconList_id_max){
-                             iconList_id_max = element.iconList_id
-                         }
-                    })
-        
-                        data.forEach(element=>{
-                             let list=[]    
-                        for(let j=0;j<=iconList_id_max;j++){
-                            list.push({title:'',recommandList:[]})
-                        }
-                        for(let i=0;i<data.length;i++){
-                            list[data[i].iconList_id].recommandList[data[i].list_id] = data[i] 
-                            list[data[i].iconList_id].title = data[i].title
-                        }
-                        swiperList['上海']=list
-                        })
-                        res.send(swiperList).end()
+                          let swiperList=[]
+                          let list={recommandList:data}
+                          let title = {title:data[0].title}
+                          swiperList.push(list)
+                          swiperList.push(title)
+                          lists['上海']=swiperList
+                          console.log(lists)
+                          res.send(lists).end()
                     }
                 })
                 
             }
         })
     })
-
+    router.post('/swiper-list-pull',function(req,res){
+        let swiperList = {}
+        let num = req.body.num
+        let parseInt = req.body.parseInt
+        db.query(`SELECT * FROM beijing_swiperlist WHERE iconlist_id = '${parseInt}' limit ${num*7},7`,(err,data)=>{
+            if(err){
+                console.log(err)
+                res.status(500).send('database error').end();
+            }else{     
+                          let lists={}
+                          let swiperList=[]
+                          let list={recommandList:data}
+                          swiperList.push(list)
+                          lists['北京']=swiperList
+                db.query(`SELECT * FROM shanghai_swiperlist WHERE iconlist_id = '${parseInt}' limit ${num*7},7`,(err,data)=>{
+                    if(err){
+                        console.log(err)
+                        res.status(500).send('database error').end();
+                    }else{
+                          let swiperList=[]
+                          let list={recommandList:data}
+                          swiperList.push(list)
+                          lists['上海']=swiperList
+                          res.send(lists).end()
+                    }
+                })
+                
+            }
+        })
+    })
     router.get('/swiper-list-detail',function(req,res){
         let swiperListDetail ={}
         db.query('SELECT * FROM beijing_swiperlistdetail',(err,data)=>{

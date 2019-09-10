@@ -66,7 +66,7 @@ import axios from 'axios'
                   this.gallaryImgs = data.gallaryImgs
                   this.address = data.address
                   this.list = data.list
-                  this.bannnerName = data.bannnerName
+                  this.bannnerName = data.bannerName
                   this.parentId = this.$route.params.parentId
                   this.cityId = this.$route.params.cityId
                   console.log('成功')

@@ -14,6 +14,7 @@
                   </div>
                   <div class='massage-content'>
                       <div class='content'>
+                        
                           <router-link to='/' tag='div' class='content-list'><span>首页</span></router-link>
                            <router-link to='/admin/login' tag='div' class='content-list'><span>登录页面</span></router-link>
                           <div class='content-list' @click='showAddUserClick'><span>添加管理员</span></div>
@@ -22,6 +23,16 @@
                   </div>
           </div>
           <div class='user-massage'>
+            <div class='page'>
+               <p class='pages'>共{{number}}/{{pages}}页</p>
+              <div class='first' @click='first'>首页</div>
+              <button class='next' @click='prev' :disabled='prevDisabled'>prev</button>
+              <input type="text" name="page" value='' class='page_input' placeholder="页码" v-model='number' />
+              <button class='go' @click='getUserInfo'>go</button>
+              <button class='next' @click='next' :disabled='nextDisabled'>next</button>
+              <div class='end' @click='end'>尾页</div>
+             
+            </div>
               <table>
                  <tr>
                    <th>ID</th>
@@ -40,7 +51,7 @@
                       <td class='button-td'>
                         <div class='buttonBox'>
                             <button class='button' @click.stop='handleShowInput'>修改</button>
-                            <button class='button' @click.stop='handleDel'>删除</button>
+                            <button class='button' @click.stop='handleDelInput'>删除</button>
                         </div>
                       </td>
                  </tr> 
@@ -83,6 +94,19 @@
             </div>
         </div>
       </div>
+      <div class='shadow' v-show='showDelUser'>
+         <div class='submit'>
+            <div class='submit-input-box'>
+              <div class='submit-input'>
+                 <p>确定删除？</p>
+                <div class='button-box'>
+                    <input type="button"  value='确定' class='input-botton' @click='handleDel' />
+                    <input type="button"  value='取消' class='input-botton' @click='handleDelRemoveClick' />
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
       <!-- <common-animation> 
         <add-user v-show='showAddUser' @hiddenUser='hiddenUser'></add-user>
     </common-animation> -->
@@ -107,9 +131,13 @@ export default {
      users:{},
      imgUrl:'',
      showAddUser:false,
+     showDelUser:false,
      userNameAdd:'',
      userPawAdd:'',
-     
+     number:1,
+     pages:0,
+     prevDisabled:true,
+     nextDisabled:false
    } 
   },
    beforeRouteEnter:(to,from,next)=>{
@@ -132,6 +160,12 @@ export default {
       this.userPaw = tds[2].innerText
       this.imgUrl = tds[3].getElementsByTagName("img")[0].src
     },
+    handleDelInput(e) {
+      let tr =e.target.parentNode.parentNode.parentNode
+        let tds = tr.getElementsByTagName("td")
+        this.userName = tds[1].innerText
+      this.showDelUser=true;
+    },
     handleRemoveInput() {
       this.showinput=false;
     },
@@ -148,14 +182,41 @@ export default {
           console.log('成功')
       },
      getUserInfo:function(){
-       axios.post('/api/admin/user')
+       axios.post('/api/admin/user',{
+         number:this.number
+       })
          .then(this.getUserInfoSuccess,function(){
            console.log('获取数据失败')
          })
      },
      getUserInfoSuccess:function(res){
-          let data = res.data
-          this.users=data
+           console.log(this.number)
+           let data = res.data[0]
+           this.users=data
+           this.pages=Math.ceil(res.data[1][0].TOTAL/5)
+           if(this.number<=1){
+             this.prevDisabled=true
+             this.nextDisabled=false
+             let first = document.getElementsByClassName('first')[0]
+             first.style.visibility='hidden'
+             let end = document.getElementsByClassName('end')[0]
+              end.style.visibility='visible'
+            
+           }else if(this.number<this.pages){
+              this.prevDisabled=false
+              this.nextDisabled=false
+             let first = document.getElementsByClassName('first')[0]
+             first.style.visibility='visible'
+             let end = document.getElementsByClassName('end')[0]
+              end.style.visibility='visible'
+           }else{
+             this.prevDisabled=false
+              this.nextDisabled=true
+             let first = document.getElementsByClassName('first')[0]
+             first.style.visibility='visible'
+             let end = document.getElementsByClassName('end')[0]
+              end.style.visibility='hidden'
+           }
           console.log('成功')
       },
       handleReviseClick() {
@@ -181,23 +242,26 @@ export default {
            window.sessionStorage.setItem('msg',msg);
            console.log('成功')
       },
+      handleDelRemoveClick() {
+            this.showDelUser=false
+      },
       handleDel(e) {
-        let tr =e.target.parentNode.parentNode.parentNode
-        let tds = tr.getElementsByTagName("td")
-        this.userName = tds[1].innerText
-        if(confirm('确定删除？')){
+      
            axios.post('/api/admin/del',{
             userName:this.userName,
           })
          .then(this.handleDelSuccess,function(){
            console.log('获取数据失败')
          })
-        }
+        
         
         
       },
       handleDelSuccess(res) {
         this.getUserInfo()
+        setTimeout(()=>{
+           this.showDelUser=false
+         },3000)
          console.log('成功')
       },
       handleOutLogin() {
@@ -251,17 +315,139 @@ export default {
          },3000)
          //this.showAddUser=false
         console.log('成功')
-     }
+     },
+     first() {
+       this.number=1
+       axios.post('/api/admin/user',{
+         number:this.number
+        })
+         .then(this.handlefirstSuccess,function(){
+           console.log('获取数据失败')
+         })
+     },
+
+     handlefirstSuccess(res) {
+        let data = res.data[0]
+        this.users=data
+        this.prevDisabled=true
+        this.nextDisabled=false
+        let first = document.getElementsByClassName('first')[0]
+        first.style.visibility='hidden'
+        let end = document.getElementsByClassName('end')[0]
+        end.style.visibility='visible'
+        console.log('成功')
+     },
+    prev() {
+      axios.post('/api/admin/user',{
+          number:this.number-1
+        })
+         .then(this.handleprevSuccess,function(){
+           console.log('获取数据失败')
+         })
+    },
+    handleprevSuccess(res) {
+            this.number--
+            console.log(this.number)
+            if(this.number>1){
+                this.prevDisabled=false
+                let first = document.getElementsByClassName('first')[0]
+                first.style.visibility='visible'
+                if(this.number<this.pages){
+                  this.nextDisabled=false
+                  let end = document.getElementsByClassName('end')[0]
+                   end.style.visibility='visible'
+                }else{
+                  this.nextDisabled=true
+                  let end = document.getElementsByClassName('end')[0]
+                  end.style.visibility='hidden'
+                }
+           }else{
+            this.prevDisabled=true
+            this.nextDisabled=false
+            let first = document.getElementsByClassName('first')[0]
+            first.style.visibility='hidden'
+            let end = document.getElementsByClassName('end')[0]
+             end.style.visibility='visible'
+           }
+
+         let data = res.data[0]
+        this.users=data
+        console.log('成功')
+    },
+     next() {
+        axios.post('/api/admin/user',{
+          number:this.number+1
+        })
+         .then(this.handlenextSuccess,function(){
+           console.log('获取数据失败')
+         })
+     },
+
+     handlenextSuccess(res) {
+        this.number++
+        console.log(this.number)
+         if(this.number<this.pages){
+              this.number++
+              this.nextDisabled=false
+              if(this.number>1){
+                this.prevDisabled=false
+                let first = document.getElementsByClassName('first')[0]
+                first.style.visibility='visible'
+              }else{
+                this.prevDisabled=true
+                let first = document.getElementsByClassName('first')[0]
+                first.style.visibility='hidden'
+              }
+           }else{
+              this.nextDisabled=true
+              this.prevDisabled=false
+              let end = document.getElementsByClassName('end')[0]
+              end.style.visibility='hidden'
+              let first = document.getElementsByClassName('first')[0]
+              first.style.visibility='visible'
+           }
+         let data = res.data[0]
+         this.users=data
+         console.log('成功')
+     },
+     end() {
+        this.number=this.pages
+        axios.post('/api/admin/user',{
+           number:this.number
+        })
+         .then(this.handleendSuccess,function(){
+           console.log('获取数据失败')
+         })
+     },
+     handleendSuccess(res) {
+        this.prevDisabled=false
+        this.nextDisabled=true
+        let data = res.data[0]
+         this.users=data
+          let end = document.getElementsByClassName('end')[0]
+          end.style.visibility='hidden'
+          let first = document.getElementsByClassName('first')[0]
+          first.style.visibility='visible'
+        console.log('成功')
+     },
+    getUserName() {
+      // axios.post('/api/admin/userName')
+      //    .then(this.handleUserNameSuccess,function(){
+      //      console.log('获取数据失败')
+      //    })
+    },
+    handleUserNameSuccess(res) {
+      // console.log(res.data)
+    }
   },
   mounted:function(){
-    this.getUserInfo()
-   // this.getAdminInfo()
     this.imgUrl=require("../../assets/images/admin/"+ window.localStorage.getItem('adminImg')) 
   },
   activated:function(){
         this.getUserInfo()
-        //this.getAdminInfo()
-    this.imgUrl=require("../../assets/images/admin/"+ window.localStorage.getItem('adminImg')) 
+        let first = document.getElementsByClassName('first')[0]
+         first.style.visibility='hidden'
+        this.imgUrl=require("../../assets/images/admin/"+ window.localStorage.getItem('adminImg')) 
   }
 }
 </script>
@@ -458,9 +644,6 @@ td{
       color:red;
       visibility: hidden;
     }
-    .button-box{
-     
-    }
      .input-botton{
        margin-top: 20px;
        padding:5px 20px;
@@ -469,5 +652,40 @@ td{
        background-color: #ccc;
        margin-left:5px; 
      }
-    
+     .page{
+       display: flex;
+       flex-direction: row;
+       margin-bottom: 30px;
+     }
+     .page_input{
+      border:1px solid #ccc; 
+      /* width:80%; */
+     
+      padding:5px;
+     }
+     .pages{
+       line-height: 23px;
+       padding:5px;
+       cursor: pointer;
+    }
+    .first{
+       line-height: 23px;
+       padding:5px;
+       cursor: pointer;
+    }
+    .go{
+       padding:3px 10px;
+       margin: 0 5px;
+       border-radius:5px;
+    }
+    .next{
+      padding:3px 5px;
+       margin:0 5px;
+       border-radius:5px;
+    }
+    .end{
+       line-height: 23px;
+       padding:5px;
+       cursor: pointer;
+    }
 </style>

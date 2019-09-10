@@ -137,6 +137,7 @@ export default {
   font-weight: bold;
   line-height: 40px;
   color: #405f80;
+  cursor: pointer;
 }
 
 .moto-container {
@@ -155,8 +156,10 @@ export default {
 }
 .login{
   padding:2px;
+  cursor: pointer;
 }
 .regist{
   padding:2px;
+  cursor: pointer;
 }
 </style>

@@ -87,6 +87,7 @@ export default {
     },
     
      changeFile (e) {
+       this.uploadImg=true
       this.file = e.target.files[0]
       let reader = new FileReader()
       reader.readAsDataURL(this.file);//发起异步请求
@@ -101,7 +102,7 @@ export default {
         
       }else{
         that.showGallary=false
-        that.img=''
+        that.img='../../assets/images/covers3.jpg'
       }
   }   
      
