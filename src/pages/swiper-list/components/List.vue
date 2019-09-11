@@ -1,16 +1,23 @@
 <template>
    <div :parentId='parentId' class='wrapper' ref='wrapper'>
         <div class='content'>
-            <p class='fresh'>~~上拉刷新~~</p>
-            <router-link :to="'./'+parentId+'/swiper-list-detail/'+ item.list_id1" tag='div'  class="recommend border-bottom" v-for='item of  recommandList' :key='item.id'>
-                <img class='recommend-img' :src="item. recommandImgSrc" />
-                <div class='recommend-content'>
-                    <p class="recommend-title">{{item.recommandTitle}}</p>
-                    <p class="recommend-describe">{{item.recommendDescribe}}</p>
-                    <p class="recommend-button">￥{{item.recommandMoney}}</p>
-                </div>
-            </router-link>
-             <p class='freshs' @click='pullingUp'>~~点击加载更多~~</p>
+            <p class='fresh'></p>
+            <div class='list'>
+                <router-link 
+                :to="'./'+parentId+'/swiper-list-detail/'+ item.list_id1" 
+                tag='div'  class="recommend border-bottom" 
+                v-for='item of  recommandList' 
+                :key='item.id'
+                >
+                    <img class='recommend-img'  src="**" :dataSrc="item. recommandImgSrc" />
+                    <div class='recommend-content'>
+                        <p class="recommend-title">{{item.recommandTitle}}</p>
+                        <p class="recommend-describe">{{item.recommendDescribe}}</p>
+                        <p class="recommend-button">￥{{item.recommandMoney}}</p>
+                    </div>
+                </router-link>
+            </div>
+             <p class='freshs' @click='pullingUp'></p>
         </div>
    </div>
 </template>
@@ -32,7 +39,7 @@ export default{
            
        }
    },
-
+   
    methods:{
         getSwiperListInfo:function(){
                axios.post('/api/swiper-list',{
@@ -111,16 +118,33 @@ export default{
                   }
                   if(data.recommandList.length<=0){
                       var freshs = document.getElementsByClassName('freshs')[0]
-                      freshs.innerHTML = '我也是有底线的~~'
+                      freshs.innerHTML = '人家也是有底线的~~'
                   }
                   this.recommandList =this.recommandList.concat(data.recommandList)
+                  this.lazyLoad(this.$refs.wrapper.scrollTop)
                 //    if( this.recommandList.length<=7){
                 //       var freshs = document.getElementsByClassName('freshs')[0]
                 //       var fresh = document.getElementsByClassName('fresh')[0]
                 //       freshs.innerHTML = '暂时没有新数据~~'
                 //       fresh.innerHTML = ''
                 //   }
+              },
+
+              lazyLoad(pos) {
+                  var img = this.$refs.wrapper.getElementsByClassName("recommend-img"); 
+                    // 已滚动高度+可视区高度
+                    var top = pos + this.$refs.wrapper.clientHeight;
+                    for(var i = 0; i < img.length; i++) {
+                        if(img[i].offsetTop <= top) {  // 在可视区内则显示图片
+                            img[i].src = img[i].getAttribute("datasrc");
+                        }
+                    } 
               }
+   },
+   watch: {
+      num() {
+        
+      }
    },
    mounted:function() { 
    this.getSwiperListInfo()
@@ -140,6 +164,13 @@ export default{
                 } else {
                     this.scroll.refresh();
                   }
+
+                // setTimeout(_ => {
+                //     this.lazyLoad(0)
+                // }, 200);
+                this.scroll.on('scroll', (pos) => {
+                   this.lazyLoad(-pos.y)
+                })
 
                 this.scroll.on('pullingDown', () => {
                        //发送Ajax从后台拿数据
@@ -162,8 +193,10 @@ export default{
                                         fresh.innerHTML = '~~上拉刷新~~'
                                     },2000)
                         })
-                })
 
+                        
+                })
+                
                 // this.scroll.on('pullingUp', () => {
                         
                 //         this.$nextTick(() => {
@@ -171,13 +204,23 @@ export default{
                 //         })
                 //           this.scroll.finishPullUp() // 上拉加载动作完成后调用此方法告诉BScroll完成一次上拉动作
                 //         })
+
+                 
                })
     },
 
    activated:function() { 
    this.getSwiperListInfo()
-     
+    // this.$nextTick(()=>{
+    //    setTimeout(_ => {
+    //       this.lazyLoad(0)
+    //     }, 200);
+    //  })
     },
+
+  updated() {
+      this.lazyLoad(0)
+  }
 }
 
 </script>
@@ -198,6 +241,12 @@ export default{
     .freshs{
       text-align: center;
        padding-top: 10px;
+    }
+    .list{
+        overflow:hidden;
+        width:100%;
+        height:100%;
+        /* padding-bottom:100%; */
     }
     .recommend{
         width:100%;

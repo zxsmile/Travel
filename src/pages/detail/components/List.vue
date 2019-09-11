@@ -95,14 +95,7 @@ export default {
 </script>
 
 <style scoped>
-   .wrapper{
-       /* overflow: hidden;
-       position:absolute;
-       top:43px;
-       left:0;
-       right:0;
-       bottom: 0; */
-   }
+   
    .list{
        margin-top: 10px;
        position: relative;

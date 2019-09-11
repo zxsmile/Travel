@@ -242,7 +242,6 @@ module.exports=function(){
                           swiperList.push(list)
                           swiperList.push(title)
                           lists['上海']=swiperList
-                          console.log(lists)
                           res.send(lists).end()
                     }
                 })

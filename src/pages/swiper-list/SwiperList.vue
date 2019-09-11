@@ -24,6 +24,7 @@ import axios from 'axios'
                num:0
            }
        },
+
        methods:{
            getSwiperListInfo:function(){
                axios.post('/api/swiper-list',{

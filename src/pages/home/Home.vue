@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class='wrapper' ref='wrapper'>
+      <div class='content'>
         <home-header :cityId='cityId' :scenic="scenic"></home-header>
         <home-swiper :SwiperList='SwiperList'></home-swiper>
         <home-icons :IconsList='IconsList' :cityId='cityId'></home-icons>
         <home-recommend :recommandList='recommandList' :cityId='cityId'></home-recommend>
         <home-weekend :weekendList='weekendList' :cityId='cityId'></home-weekend>
+      </div>
     </div>
 </template>
 
@@ -15,6 +17,7 @@ import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
 import axios from 'axios'
+import BScroll from 'better-scroll'
 export default {
   name: 'Home',
   components: {
@@ -65,17 +68,53 @@ export default {
   mounted:function(){
      this.lastCity = this.$store.state.city
     this.getHomeInfo()
+     this.$nextTick(()=>{
+                if (!this.scroll) {
+                     this.scroll = new BScroll(this.$refs.wrapper, {
+                            click: true,
+                            
+                    })
+                
+                } else {
+                    this.scroll.refresh();
+                  }
+
+               
+                 
+               })
   },
   activated:function(){
     if(this.lastCity!==this.$store.state.city){
           this.lastCity = this.$store.state.city
         this.getHomeInfo()
     }
+    this.$nextTick(()=>{
+                if (!this.scroll) {
+                     this.scroll = new BScroll(this.$refs.wrapper, {
+                            click: true,
+                            
+                    })
+                
+                } else {
+                    this.scroll.refresh();
+                  }
+
+               
+                 
+               })
   }
 }
 </script>
 
 <style>
+ .wrapper{
+       overflow: hidden;
+       position:absolute;
+       top:0;
+       left:0;
+       right:0;
+       bottom: 0;
+   }
     /* *{
         margin:0;
         font-size:14px;
