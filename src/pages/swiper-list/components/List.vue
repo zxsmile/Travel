@@ -33,7 +33,7 @@ export default{
    },
    data:function(){
        return {
-           parentIdchange:this.parentId,
+            parentIdchange:this.parentId,
             num:1,
             recommandList:[],
            
@@ -70,6 +70,7 @@ export default{
                       fresh.innerHTML = '~~上拉刷新~~'
                   }
                   this.recommandList =data.recommandList
+
               },
            getpullingDownInfo:function(){
                axios.post('/api/swiper-list-pull',{
@@ -142,12 +143,9 @@ export default{
               }
    },
    watch: {
-      num() {
-        
-      }
    },
    mounted:function() { 
-   this.getSwiperListInfo()
+   //this.getSwiperListInfo()
       this.$nextTick(()=>{
                 if (!this.scroll) {
                      this.scroll = new BScroll(this.$refs.wrapper, {
@@ -209,7 +207,7 @@ export default{
                })
     },
 
-   activated:function() { 
+activated:function() {
    this.getSwiperListInfo()
     // this.$nextTick(()=>{
     //    setTimeout(_ => {

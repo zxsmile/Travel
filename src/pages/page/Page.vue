@@ -78,7 +78,6 @@ export default {
    }else{
     window.sessionStorage.setItem('greenPath',1);
    }
- console.log(window.sessionStorage.getItem('msg'))
   },
   activated:function(){
      this.changeMassage()

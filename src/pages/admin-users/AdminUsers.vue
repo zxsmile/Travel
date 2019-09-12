@@ -107,17 +107,12 @@
             </div>
         </div>
       </div>
-      <!-- <common-animation> 
-        <add-user v-show='showAddUser' @hiddenUser='hiddenUser'></add-user>
-    </common-animation> -->
   </div>      
     
 </template>
 
 <script>
 import axios from 'axios'
-import AddUser from 'common/add-user/AddUser'
- import CommonAnimation from 'common/animation/Animation'
 
 export default {
   name: 'AdminUsers',
@@ -148,8 +143,7 @@ export default {
      } 
     },
   components:{
-        AddUser,
-        CommonAnimation
+
        },
   methods:{
     handleShowInput(e) {

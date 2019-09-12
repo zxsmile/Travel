@@ -1,7 +1,7 @@
 <template>
     <div class="container" @click="handleGallaryClick">
-        <div class='wrapper'>
-             <swiper :options="swiperOption" >
+        <div class='wrappers'>
+             <swiper :options="swiperOptions" >
              <!-- slides -->
              <swiper-slide v-for='(item,index) in imgs' :key='index'>
                 <img class="img" :src='item'>
@@ -21,11 +21,11 @@
        name:'CommonGallary',
        data(){
            return {
-               swiperOption:{
+               swiperOptions:{
                    pagination:'.swiper-pagination',
                    paginationType:'fraction',
                    observeParents:true,
-                   observer:true
+                   observer:true,
                }
            }
        },
@@ -60,7 +60,7 @@
         justify-content: center;
         z-index:100;
     }
-    .wrapper{
+    .wrappers{
          width:100%;
          height:0;
          padding-bottom:100%;

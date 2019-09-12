@@ -66,22 +66,22 @@ export default {
      }
   },
   mounted:function(){
-     this.lastCity = this.$store.state.city
+    this.lastCity = this.$store.state.city
     this.getHomeInfo()
-     this.$nextTick(()=>{
-                if (!this.scroll) {
-                     this.scroll = new BScroll(this.$refs.wrapper, {
-                            click: true,
-                            
-                    })
+    // this.$nextTick(()=>{
+    //             if (!this.scroll) {
+    //                  this.scroll = new BScroll(this.$refs.wrapper, {
+    //                         click: true,
+    //                         probeType: 3
+    //                 })
                 
-                } else {
-                    this.scroll.refresh();
-                  }
+    //             } else {
+    //                 this.scroll.refresh();
+    //               }
 
                
                  
-               })
+    //            })
   },
   activated:function(){
     if(this.lastCity!==this.$store.state.city){
@@ -92,7 +92,7 @@ export default {
                 if (!this.scroll) {
                      this.scroll = new BScroll(this.$refs.wrapper, {
                             click: true,
-                            
+                            probeType: 3
                     })
                 
                 } else {
@@ -108,12 +108,12 @@ export default {
 
 <style>
  .wrapper{
-       overflow: hidden;
+       /* overflow: hidden;
        position:absolute;
        top:0;
        left:0;
        right:0;
-       bottom: 0;
+       bottom: 0; */
    }
     /* *{
         margin:0;

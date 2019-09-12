@@ -51,10 +51,11 @@ import axios from 'axios'
 
        },
        mounted:function(){
-           this.getSwiperListInfo()
+           //this.getSwiperListInfo()
        },
         activated:function(){
-           this.getSwiperListInfo()
+          this.title=''
+          this.getSwiperListInfo()
        }
         
    }

@@ -1,5 +1,5 @@
 <template>
-    <div class='wrapper' ref='wrapper'>
+    <div>
         <div class="list border-bottom-content">
             <div v-for="(item,index) of list" :key='index' class="list-content">
                     <div class="list-title border-bottom">

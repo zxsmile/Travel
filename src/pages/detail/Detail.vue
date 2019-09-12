@@ -74,10 +74,15 @@ import axios from 'axios'
            
        },
        mounted:function(){
-           this.getDetailInfo()
+           //this.getDetailInfo()
 
         },
         activated:function(){
+            this.bannerImg = ''
+            this.gallaryImgs =[]
+            this.address = ''
+            this.list = []
+            this.bannnerName = ''
             this.getDetailInfo()
         
         }

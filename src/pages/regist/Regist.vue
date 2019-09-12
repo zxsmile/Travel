@@ -75,15 +75,6 @@ export default {
       uploadImg:true
      } 
   },
-  // computed:{
-  //   img:function(){
-  //      let imgFile = document.getElementById('input')
-  //      console.log(imgFile)
-  //      if(imgFile){
-  //        return imgFile.name
-  //      }
-  //   }
-  // },
   methods:{
     clearForm() {
         this.userName=''
