@@ -14,128 +14,126 @@
     ├── build ------------------------------构建脚本目录<br/>
     │   ├── build-server.js ---------------运行本地构建服务器，可以访问构建后的页面<br/>
     │   ├── build.js  ------------------------生产环境构建脚本<br/>
-    │   ├── dev-client.js  ------------------开发服务器热重载脚本，主要用来实现开发阶段的页面自动刷新<br/>
-    │   ├── dev-server.js ----------------运行本地开发服务器<br/>
-    │   ├── utils.js -------------------------构建相关工具方法
-    │   ├── webpack.base.conf.js -----wabpack基础配置
-    │   ├── webpack.dev.conf.js  -------wabpack开发环境配置
-    │   └── webpack.prod.conf.js ------wabpack生产环境配置
-    ├── config -----------------------------项目配置
-    │   ├── dev.env.js  ---------------------开发环境变量
-    │   ├── index.js  ------------------------项目配置文件
-    │   ├── prod.env.js --------------------生产环境变量 
-    ├── node_modules ------------------依赖包                          
-    ├── src ---------------------------------项目源码目录 
-    │   ├── assets---------------------------资源目录，这里的资源会被wabpack构建
-    │   │   └── images -----------------------用户和管理员的头像
-    │   │   │   └── admin 
-    │   │   │   └── covers3.jpg
-    │   │   └── styles
-    │   │   │   └── iconfont
-    │   │   │   └──border.css
-    │   │   │    └──iconfont.css
-    │   │   │    └──reset.css
-    │   ├── common ------------------------公共组件目录
-    │   │   └── animation
-    │   │    │   └── Animation.vue
-    │   │   └──gallary
-    │   │     │  └── Gallary.vue
-    │   └── pages ---------------------------页面目录
-    │   │   └── admin -------------------------管理员登录页面
-    │   │    │  └── Admin.vue
-    │   │   └── admin-users -----------------管理用户页面
-    │   │    │  └── AdminUsers.vue
-    │   │   └── city ----------------------------城市选择页面
-    │   │    │  └── components
-    │   │    │   │  └── Alphabet.vue
-    │   │    │   │   └── Header.vue
-    │   │    │   │   └── List.vue
-    │   │    │   │   └── Search.vue
-    │   │    │  └── City.vue
-    │   │   └── detail ------------------------热销推荐详情页面
-    │   │   │ └── components
-    │   │   │   │  └── Banner.vue
-    │   │   │   │        └── Content.vue
-    │   │   │   │        └── Header.vue
-    │   │   │   │        └── List.vue
-    │   │   │   │        └── Order.vue
-    │   │   │   └── Detail.vue
-    │   │   └── home ------------------------景点展示首页
-    │   │   │ └── components
-    │   │   │   │  └── Header.vue
-    │   │   │   │  └── Icons.vue
-    │   │   │   │  └── Recommend.vue
-    │   │   │   │  └── Swiper.vue
-    │   │   │   │  └── Weekend.vue
-    │   │   │   └── Home.vue
-    │   │   └── introduce ------------------icons景点有关事项介绍
-    │   │    │  └── components
-    │   │    │   │  └── Header.vue
-    │   │    │   │ └── Content.vue
-    │   │    │  └── Introduce.vue
-    │   │    └── list-introduce --------------热销推荐景点有关事项介绍页面
-    │   │    │  └── ListIntroduce.vue
-    │   │   └── login ------------------------用户登陆页面
-    │   │   │ └── components
-    │   │   │   │  └── Header.vue
-    │   │   │   │  └── Login.vue
-    │   │   └── order-information --------------icons订单信息页面
-    │   │    │  └── OrderInformation.vue
-    │   │   └── page ------------------------------首页
-    │   │   │  └── Page.vue
-    │   │   └── recommend-date ---------------热销推荐日期选择页面
-    │   │   │ └── RecommendDate.vue
-    │   │   └── recommend-map-address-----热销推荐地图页面
-    │   │   │ └── RecommendMapAddress.vue
-    │   │   └── recommend-order-information---热销推荐订单信息页面
-    │   │    │ └── RecommendOrderInformation.vue
-    │   │   └── regist ---------------------------------用户注册页面
-    │   │    │  └── components
-    │   │    │   │ └── Header.vue
-    │   │    │   │  └── Img.vue
-    │   │    │   └── Regist.vue
-    │   │   └── search-date -----------------------搜索日期选择页面
-    │   │    │   └── SearchDate.vue
-    │   │   └── search-detail ---------------------搜索详情页面
-    │   │   │  └── SearchDetail.vue
-    │   │   └── search-introduce ---------------搜索景点有关事项介绍页面
-    │   │   │ └── SearchIntroduce.vue
-    │   │   └── search-map-address ----------搜索地图页面
-    │   │   │ └── SearchMapAddress.vue
-    │   │   └── search-order-information -----搜索订单信息页面
-    │   │   │ └── SearchOrderInformation.vue
-    │   │   └── swiper-list ------------------------icons景点列表页面
-    │   │    │  └── components
-    │   │    │   │ └── Header.vue
-    │   │    │   │  └── List.vue
-    │   │   │ └── SwiperList.vue
-    │   │   └── swiper-list-date --------------icons日期选择页面
-    │   │    │   └── SwiperListDate.vue
-    │   │   └── swiper-list-detail -------------icons详情页面
-    │   │    │   └── SwiperListDetail.vue
-    │   │   └── swiper-list-map-address----icons地图页面
-    │   │    │   └── SwiperListMapAddress.vue
-    │   │   └── weekend-date ---------------周末去哪儿日期选择页面
-    │   │    │   └── WeekendDate.vue
-    │   │   └──  weekend-detail -------------周末去哪儿详情页面
-    │   │    │   └── WeekendDetail.vue
-    │   │   └── weekend-introduce --------周末去哪儿景点有关事项介绍页面
-    │   │   │ └── WeekendIntroduce.vue
-    │   │   └──  weekend-map-address ----周末去哪儿地图页面
-    │   │    │   └── WeekendMapAddress.vue
-    │   │   └── weekend-order-information -周末去哪儿订单信息页面
-    │   │   │ └── WeekendOrderInformation.vue
-    │   ├── router ------------------------前端路由
-    │   │   └── index.js
-    │   ├── store -------------------------应用级数据（state）
-    │   │   └── actions.js
-    │   │   └── index.js
-    │   │   └── mutations.js
-    │   │   └── state.js
-    │   ├── App.vue  ------------------- 根组件
-    │   ├── main.js  ---------------------入口js文件
-    ├── static                          纯静态资源，不会被wabpack构建。
-    ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
+    │   ├── utils.js -------------------------构建相关工具方法<br/>
+    │   ├── webpack.base.conf.js -----wabpack基础配置<br/>
+    │   ├── webpack.dev.conf.js  -------wabpack开发环境配置<br/>
+    │   └── webpack.prod.conf.js ------wabpack生产环境配置<br/>
+    ├── config -----------------------------项目配置<br/>
+    │   ├── dev.env.js  ---------------------开发环境变量<br/>
+    │   ├── index.js  ------------------------项目配置文件<br/>
+    │   ├── prod.env.js --------------------生产环境变量 <br/>
+    ├── node_modules ------------------依赖包     <br/>                     
+    ├── src ---------------------------------项目源码目录 <br/>
+    │   ├── assets---------------------------资源目录，这里的资源会被wabpack构建<br/>
+    │   │   └── images -----------------------用户和管理员的头像<br/>
+    │   │   │   └── admin <br/>
+    │   │   │   └── covers3.jpg<br/>
+    │   │   └── styles<br/>
+    │   │   │   └── iconfont<br/>
+    │   │   │   └──border.css<br/>
+    │   │   │    └──iconfont.css<br/>
+    │   │   │    └──reset.css<br/>
+    │   ├── common ------------------------公共组件目录<br/>
+    │   │   └── animation<br/>
+    │   │    │   └── Animation.vue<br/>
+    │   │   └──gallary<br/>
+    │   │     │  └── Gallary.vue<br/>
+    │   └── pages ---------------------------页面目录<br/>
+    │   │   └── admin -------------------------管理员登录页面<br/>
+    │   │    │  └── Admin.vue<br/>
+    │   │   └── admin-users -----------------管理用户页面<br/>
+    │   │    │  └── AdminUsers.vue<br/>
+    │   │   └── city ----------------------------城市选择页面<br/>
+    │   │    │  └── components<br/>
+    │   │    │   │  └── Alphabet.vue<br/>
+    │   │    │   │   └── Header.vue<br/>
+    │   │    │   │   └── List.vue<br/>
+    │   │    │   │   └── Search.vue<br/>
+    │   │    │  └── City.vue<br/>
+    │   │   └── detail ------------------------热销推荐详情页面<br/>
+    │   │   │ └── components<br/>
+    │   │   │   │  └── Banner.vue<br/>
+    │   │   │   │        └── Content.vue<br/>
+    │   │   │   │        └── Header.vue<br/>
+    │   │   │   │        └── List.vue<br/>
+    │   │   │   │        └── Order.vue<br/>
+    │   │   │   └── Detail.vue<br/>
+    │   │   └── home ------------------------景点展示首页<br/>
+    │   │   │ └── components<br/>
+    │   │   │   │  └── Header.vue<br/>
+    │   │   │   │  └── Icons.vue<br/>
+    │   │   │   │  └── Recommend.vue<br/>
+    │   │   │   │  └── Swiper.vue<br/>
+    │   │   │   │  └── Weekend.vue<br/>
+    │   │   │   └── Home.vue<br/>
+    │   │   └── introduce ------------------icons景点有关事项介绍<br/>
+    │   │    │  └── components<br/>
+    │   │    │   │  └── Header.vue<br/>
+    │   │    │   │ └── Content.vue<br/>
+    │   │    │  └── Introduce.vue<br/>
+    │   │    └── list-introduce --------------热销推荐景点有关事项介绍页面<br/>
+    │   │    │  └── ListIntroduce.vue<br/>
+    │   │   └── login ------------------------用户登陆页面<br/>
+    │   │   │ └── components<br/>
+    │   │   │   │  └── Header.vue<br/>
+    │   │   │   │  └── Login.vue<br/>
+    │   │   └── order-information --------------icons订单信息页面<br/>
+    │   │    │  └── OrderInformation.vue<br/>
+    │   │   └── page ------------------------------首页<br/>
+    │   │   │  └── Page.vue<br/>
+    │   │   └── recommend-date ---------------热销推荐日期选择页面<br/>
+    │   │   │ └── RecommendDate.vue<br/>
+    │   │   └── recommend-map-address-----热销推荐地图页面<br/>
+    │   │   │ └── RecommendMapAddress.vue<br/>
+    │   │   └── recommend-order-information---热销推荐订单信息页面<br/>
+    │   │    │ └── RecommendOrderInformation.vue<br/>
+    │   │   └── regist ---------------------------------用户注册页面<br/>
+    │   │    │  └── components<br/>
+    │   │    │   │ └── Header.vue<br/>
+    │   │    │   │  └── Img.vue<br/>
+    │   │    │   └── Regist.vue<br/>
+    │   │   └── search-date -----------------------搜索日期选择页面<br/>
+    │   │    │   └── SearchDate.vue<br/>
+    │   │   └── search-detail ---------------------搜索详情页面<br/>
+    │   │   │  └── SearchDetail.vue<br/>
+    │   │   └── search-introduce ---------------搜索景点有关事项介绍页面<br/>
+    │   │   │ └── SearchIntroduce.vue<br/>
+    │   │   └── search-map-address ----------搜索地图页面<br/>
+    │   │   │ └── SearchMapAddress.vue<br/>
+    │   │   └── search-order-information -----搜索订单信息页面<br/>
+    │   │   │ └── SearchOrderInformation.vue<br/>
+    │   │   └── swiper-list ------------------------icons景点列表页面<br/>
+    │   │    │  └── components<br/>
+    │   │    │   │ └── Header.vue<br/>
+    │   │    │   │  └── List.vue<br/>
+    │   │   │ └── SwiperList.vue<br/>
+    │   │   └── swiper-list-date --------------icons日期选择页面<br/>
+    │   │    │   └── SwiperListDate.vue<br/>
+    │   │   └── swiper-list-detail -------------icons详情页面<br/>
+    │   │    │   └── SwiperListDetail.vue<br/>
+    │   │   └── swiper-list-map-address----icons地图页面<br/>
+    │   │    │   └── SwiperListMapAddress.vue<br/>
+    │   │   └── weekend-date ---------------周末去哪儿日期选择页面<br/>
+    │   │    │   └── WeekendDate.vue<br/>
+    │   │   └──  weekend-detail -------------周末去哪儿详情页面<br/>
+    │   │    │   └── WeekendDetail.vue<br/>
+    │   │   └── weekend-introduce --------周末去哪儿景点有关事项介绍页面<br/>
+    │   │   │ └── WeekendIntroduce.vue<br/>
+    │   │   └──  weekend-map-address ----周末去哪儿地图页面<br/>
+    │   │    │   └── WeekendMapAddress.vue<br/>
+    │   │   └── weekend-order-information -周末去哪儿订单信息页面<br/>
+    │   │   │ └── WeekendOrderInformation.vue<br/>
+    │   ├── router ------------------------前端路由<br/>
+    │   │   └── index.js<br/>
+    │   ├── store -------------------------应用级数据（state）<br/>
+    │   │   └── actions.js<br/>
+    │   │   └── index.js<br/>
+    │   │   └── mutations.js<br/>
+    │   │   └── state.js<br/>
+    │   ├── App.vue  ------------------- 根组件<br/>
+    │   ├── main.js  ---------------------入口js文件<br/>
+    ├── static                          纯静态资源，不会被wabpack构建。<br/>
+    ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息<br/>
 ### 项目所用到的技术点
 1 使用iconfont图标管理
 * 使用better-scroll做页面滑动效果以及上拉刷新，下拉加载效果
