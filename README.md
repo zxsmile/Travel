@@ -275,7 +275,7 @@ mounted:function(){
                 this.imgChooseHeight=0
              }
        ```
-     * 在鼠标放开时(即touchend事件发生时),隐藏那两层div,并将矩形在原图的起始位置，以及昌都和宽度值获取到，然后利用canvas画图。
+  * 在鼠标放开时(即touchend事件发生时),隐藏那两层div,并将矩形在原图的起始位置，以及昌都和宽度值获取到，然后利用canvas画图。
        ```php
        var that = this
            this.scaleX=this.imgWidth/parseInt(img.style.width)
@@ -292,7 +292,7 @@ mounted:function(){
           }
       ```
   ctx.drawImage()有九个参数，第一个原图地址，第二个和第三个是从原图的(0,0)坐标开始截取的x,y坐标，注意是原图，第四个和第五个参数是截取的部分的宽高，这里注意也是相对于原图的宽高，这里很坑，由于我在截取之前将原图的宽高压缩了，导致我这块搞了好久才发现是相对原图，第六个和第七个参数表示在画布上开始画的位置，第八个和第九个表示在画布上展示的图片大小，相当于放缩图片。
-5 formdata+axios上传图片
+6 formdata+axios上传图片
 使用canvas.toDataURL('image/jpeg',0.92)，取出画布里面的图片，使用formdata+axios的post请求上传照片的时候又出现了问题，发现formdata里面的内容为空。最后发现，由于业务需要，axios配置了拦截器，在里面做了数据处理，导致formdata无法正常提交，解决方案就是 重新creat一个纯净的axios请求，挂载到vue原型里，然后重新请求。
 ```php
  const instance=axios.create({
@@ -320,7 +320,7 @@ mounted:function(){
 instance.all=axios.all;
 Vue.prototype.instance=instance;
 ```
-6 用户信息分页
+7 用户信息分页
 后台使用`SELECT SQL_CALC_FOUND_ROWS * FROM user_regist limit ${number*5},5`语句来控制数据的显示，通过点击不同页，改变number来达到分页效果。
 * 使用路由守卫来判断管理员登陆状态
 由于管理页面需要登陆才能进入，所以必须检查登录状态。用户登陆后，会通过sessionStorage设置一个took值，window.sessionStorage.setItem('took',took);，然后来判断如果有took值，则登陆了可以进管理页面，否则只能去管理员登录页面。
