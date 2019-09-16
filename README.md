@@ -274,7 +274,9 @@ mounted:function(){
                 this.imgChooseWidth=0
                 this.imgChooseHeight=0
              }
-       ```
+
+   ```
+
   * 在鼠标放开时(即touchend事件发生时),隐藏那两层div,并将矩形在原图的起始位置，以及昌都和宽度值获取到，然后利用canvas画图。
        ```php
        var that = this
