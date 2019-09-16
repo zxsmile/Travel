@@ -141,7 +141,7 @@ export default {
          let imgSrc = ''
          if(!this.uploadImg){
           var blob = this.dataURItoBlob(img.src);
-         formdata.append('file',img.src)
+            formdata.append('file',img.src)
          }
        
         //  formdata.append('imgfile',this.file)

@@ -136,7 +136,7 @@
     ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息<br/>
 ### 项目所用到的技术点
 1 使用iconfont图标管理
-* 使用better-scroll做页面滑动效果以及上拉刷新，下拉加载效果
+2 使用better-scroll做页面滑动效果以及上拉刷新，下拉加载效果
   下载：npm install better-scroll --save
   项目中引入：import BScroll from 'better-scroll'
 
@@ -187,7 +187,7 @@
     }
 
 
-2  实现图片的懒加载
+3  实现图片的懒加载
  先将img标签的src链接设为‘##’，然后给img标签设置自定义属性（比如 data-src）,然后将真正的图片地址存储在data-src中，当JS监听到该图片元素进入可视窗口时，将自定义属性中的地址存储到src属性中。达到懒加载的效果。
 ```php
          lazyLoad(pos) {
@@ -205,7 +205,7 @@
                      this.lazyLoad(-pos.y)
                 })
 ```
-3 使用sessionStorage,localStorage实现登陆过期
+4 使用sessionStorage,localStorage实现登陆过期
  登陆时，使用localStorage存入登录时间，sessionStorage将greenPath的值设为1
    window.localStorage.setItem("timestamp", new Date().getTime());
    window.sessionStorage.setItem('greenPath',1);
@@ -235,12 +235,12 @@ mounted:function(){
    }
   }
   ```
-  4 canvas实现截图
+  5 canvas实现截图
  当用户选择图片以后，要求展示在截取页面上的图片长和宽都要小于等于350px,所以先对图片的大小进行压缩，让图片顺利展示在截取页面。然后通过canvas进行截取想要上传的部分。
  截取部分说明：
    * 在原图的上面有两层div,一层是透明的，一层是标注截取部分。
-    * 在鼠标按下时(即touchstart事件发生时)，获取开始截取的位置，让第二层div的left为touch.clientX，top为touch.clientY，这样就会获取到了开始截取的位置。
-     * 在鼠标移动时(即touchmove事件发生时)要根据鼠标移动的方向画出截取的矩形部分。根据鼠标的移动方向(上，下，左，右，左上，左下，右上，右下)，计算出矩形的长和宽，以及确定图片的外边不能截取。
+   * 在鼠标按下时(即touchstart事件发生时)，获取开始截取的位置，让第二层div的left为touch.clientX，top为touch.clientY，这样就会获取到了开始截取的位置。
+   * 在鼠标移动时(即touchmove事件发生时)要根据鼠标移动的方向画出截取的矩形部分。根据鼠标的移动方向(上，下，左，右，左上，左下，右上，右下)，计算出矩形的长和宽，以及确定图片的外边不能截取。
    ```php
      if(this.imgChooseLeft>=touch.clientX&&this.imgChooseTop>=touch.clientY){
                 this.imgChooseWidth=this.imgChooseLeft-touch.clientX
@@ -275,7 +275,7 @@ mounted:function(){
                 this.imgChooseHeight=0
              }
        ```
-       * 在鼠标放开时(即touchend事件发生时),隐藏那两层div,并将矩形在原图的起始位置，以及昌都和宽度值获取到，然后利用canvas画图。
+     * 在鼠标放开时(即touchend事件发生时),隐藏那两层div,并将矩形在原图的起始位置，以及昌都和宽度值获取到，然后利用canvas画图。
        ```php
        var that = this
            this.scaleX=this.imgWidth/parseInt(img.style.width)
