@@ -136,8 +136,8 @@
     ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息<br/>
 ### 项目所用到的技术点
 1 使用iconfont图标管理<br/>
-2 使用better-scroll做页面滑动效果以及上拉刷新，下拉加载效果
-  下载：npm install better-scroll --save
+2 使用better-scroll做页面滑动效果以及上拉刷新，下拉加载效果<br/>
+  下载：npm install better-scroll --save<br/>
   项目中引入：import BScroll from 'better-scroll'
 
   ```php
