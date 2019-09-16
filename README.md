@@ -205,10 +205,10 @@
                      this.lazyLoad(-pos.y)
                 })
 ```
-4 使用sessionStorage,localStorage实现登陆过期
- 登陆时，使用localStorage存入登录时间，sessionStorage将greenPath的值设为1
-   window.localStorage.setItem("timestamp", new Date().getTime());
-   window.sessionStorage.setItem('greenPath',1);
+4 使用sessionStorage,localStorage实现登陆过期<br/>
+ 登陆时，使用localStorage存入登录时间，sessionStorage将greenPath的值设为1<br/>
+   window.localStorage.setItem("timestamp", new Date().getTime());<br/>
+   window.sessionStorage.setItem('greenPath',1);<br/>
   在刚进入首页时获取当前时间戳，如果当前时间戳> 前面存的时间戳+过期时间 表示已经过期，则提示用户“登陆已过期，请重新登陆”
 ```php
 mounted:function(){
